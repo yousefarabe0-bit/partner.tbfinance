@@ -1,8 +1,12 @@
 import { createContext, useContext, useState } from 'react';
 
+// Apenas admin — parceiros fictícios removidos
 const CREDENTIALS = [
-  { email: 'contato@tbfinance.com.br', password: 'Allahwahed1@', user: { name: 'Ricardo Silva', initials: 'RS', role: 'partner' } },
-  { email: 'admin@tb.com', password: 'admin2025', user: { name: 'Administrador', initials: 'AD', role: 'admin' } },
+  {
+    email: 'admin@tbfinance.com.br',
+    password: 'TBAdmin2025@',
+    user: { name: 'Yousef', initials: 'YS', role: 'admin' }
+  },
 ];
 
 const AuthContext = createContext(null);
@@ -16,7 +20,7 @@ export function AuthProvider({ children }) {
     );
     if (!match) return { success: false, error: 'E-mail ou senha inválidos.' };
     setUser(match.user);
-    return { success: true };
+    return { success: true, user: match.user };
   };
 
   const logout = () => setUser(null);
