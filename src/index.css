@@ -1,0 +1,33 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #E8440A;
+  --secondary: #111111;
+  --surface: #F8F8F7;
+  --surface-dark: #F0F0EF;
+  --border: #E5E5E3;
+  --error: #DC2626;
+  --success: #16A34A;
+  --warning: #D97706;
+  --orange-light: #FFF2EE;
+  --orange-border: #F8C4B4;
+  --whatsapp: #25D366;
+  --text-primary: #111111;
+  --text-secondary: #6B7280;
+  --text-muted: #9CA3AF;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #f0f0ef;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+button { font-family: inherit; cursor: pointer; }
+input { font-family: inherit; }
+.app-container {
+  max-width: 480px;
+  margin: 0 auto;
+  background: #fff;
+  min-height: 100vh;
+  box-shadow: 0 0 40px rgba(0,0,0,.08);
+}
