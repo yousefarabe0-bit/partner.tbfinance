@@ -1,11 +1,15 @@
 import { createContext, useContext, useState } from 'react';
 
-// Apenas admin — parceiros fictícios removidos
 const CREDENTIALS = [
   {
-    email: 'admin@tbfinance.com.br',
-    password: 'TBAdmin2025@',
+    email: 'contato@tbfinance.com.br',
+    password: 'Allahwahed1@',
     user: { name: 'Yousef', initials: 'YS', role: 'admin' }
+  },
+  {
+    email: 'yousefarabe0@gmail.com',
+    password: 'Allahwahed1@',
+    user: { name: 'Yousef Teste', initials: 'YT', role: 'partner' }
   },
 ];
 

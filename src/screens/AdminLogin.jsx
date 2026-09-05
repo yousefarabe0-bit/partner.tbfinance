@@ -40,8 +40,8 @@ export default function AdminLogin() {
             onChange={e => setEmail(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && doLogin()}
             type="email"
-            placeholder="admin@tbfinance.com.br"
-            style={{ width:'100%', background:'#1a1a1a', border:'1px solid #333', borderRadius:8, padding:'11px 14px', fontSize:14, color:'#fff', outline:'none' }}
+            placeholder="contato@tbfinance.com.br"
+            style={{ width:'100%', background:'#1a1a1a', border:'1px solid #333', borderRadius:8, padding:'11px 14px', fontSize:14, color:'#fff', outline:'none', boxSizing:'border-box' }}
           />
         </div>
 
@@ -62,12 +62,16 @@ export default function AdminLogin() {
           </div>
         </div>
 
-        {error && <div style={{ color:'#ef4444', fontSize:13, marginBottom:16, padding:'10px 14px', background:'rgba(239,68,68,0.1)', borderRadius:8 }}>{error}</div>}
+        {error && (
+          <div style={{ color:'#ef4444', fontSize:13, marginBottom:16, padding:'10px 14px', background:'rgba(239,68,68,0.1)', borderRadius:8 }}>
+            {error}
+          </div>
+        )}
 
         <button
           onClick={doLogin}
           disabled={loading}
-          style={{ width:'100%', background:'#E8440A', color:'#fff', padding:'13px', borderRadius:10, border:'none', fontSize:15, fontWeight:700, cursor:'pointer', opacity: loading ? 0.7 : 1 }}
+          style={{ width:'100%', background:'#E8440A', color:'#fff', padding:13, borderRadius:10, border:'none', fontSize:15, fontWeight:700, cursor:'pointer', opacity: loading ? 0.7 : 1 }}
         >
           {loading ? 'Entrando...' : 'Acessar Painel'}
         </button>
