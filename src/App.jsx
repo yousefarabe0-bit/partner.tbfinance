@@ -22,7 +22,7 @@ function AppRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/recomendacoes" element={<Recomendacoes />} />
         {/* Rota discreta de acesso admin */}
-        <Route path="/tbf-admin" element={<AdminLogin />} />
+        <Route path="/tbadmin" element={<AdminLogin />} />
         <Route path="/dashboard" element={
           <ProtectedRoute requiredRole="partner"><Dashboard /></ProtectedRoute>
         } />
