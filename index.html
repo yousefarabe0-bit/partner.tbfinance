@@ -2,7 +2,10 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <title>TB Finance — Parceiros</title>
 
     <!-- Favicon -->
@@ -14,8 +17,13 @@
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#E8440A" />
 
-    <!-- Fonts & Icons -->
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+      /* Prevent any horizontal scroll globally */
+      html, body { overflow-x: hidden; width: 100%; }
+    </style>
   </head>
   <body>
     <div id="root"></div>

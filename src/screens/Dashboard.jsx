@@ -13,7 +13,7 @@ export default function Dashboard() {
   return (
     <div style={{ background:'var(--surface)', minHeight:'100vh' }}>
       {/* HEADER */}
-      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', padding:16, position:'sticky', top:0, background:'var(--surface)', zIndex:50, borderBottom:'1px solid var(--border)' }}>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', padding:16, width:'100%', position:'sticky', top:0, background:'var(--surface)', zIndex:50, borderBottom:'1px solid var(--border)' }}>
         <div>
           <button onClick={doLogout} style={{ display:'flex', alignItems:'center', gap:6, color:'var(--text-secondary)', fontSize:13, background:'none', border:'none', marginBottom:4, cursor:'pointer' }}>
             <i className="mdi mdi-arrow-left" style={{ fontSize:16 }} /> Início
@@ -23,10 +23,10 @@ export default function Dashboard() {
             Bem-vindo, <span style={{ color:'var(--primary)', fontWeight:600 }}>{user?.name}</span>
           </div>
         </div>
-        <div style={{ display:'flex', alignItems:'center', gap:8, position:'relative' }}>
+        <div style={{ display:'flex', alignItems:'center', gap:8, position:'relative', flexShrink:0 }}>
           <div onClick={() => setShowMenu(!showMenu)} style={{ display:'flex', alignItems:'center', gap:6, background:'#fff', border:'1px solid var(--border)', borderRadius:12, padding:'6px 10px', cursor:'pointer' }}>
             <Avatar initials={user?.initials ?? 'YT'} color="var(--primary)" size={28} />
-            <span style={{ fontSize:13, fontWeight:500 }}>{user?.name}</span>
+            <span style={{ fontSize:13, fontWeight:500, maxWidth:80, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{user?.name}</span>
             <i className="mdi mdi-chevron-down" style={{ color:'var(--text-muted)', fontSize:16 }} />
           </div>
           {showMenu && (

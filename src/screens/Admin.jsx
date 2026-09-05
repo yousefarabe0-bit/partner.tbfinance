@@ -44,7 +44,7 @@ export default function Admin() {
       </div>
 
       {/* ACTIONS */}
-      <div style={{ display:'flex', gap:8, padding:'16px 16px 0', overflowX:'auto' }}>
+      <div style={{ display:'flex', gap:8, padding:'16px 16px 0', overflowX:'auto', WebkitOverflowScrolling:'touch' }}>
         {[
           { icon:'mdi-download', label:'Exportar CSV', type:'ghost' },
           { icon:'mdi-plus', label:'Novo Cliente', type:'primary' },
@@ -57,7 +57,7 @@ export default function Admin() {
       </div>
 
       {/* SUMMARY ZERADO */}
-      <div style={{ display:'flex', gap:10, padding:'16px', overflowX:'auto' }}>
+      <div style={{ display:'flex', gap:10, padding:'16px', overflowX:'auto', WebkitOverflowScrolling:'touch' }}>
         {[
           { label:'PARCEIROS ATIVOS', value:'0', sub:'Nenhum ainda' },
           { label:'CLIENTES TOTAIS', value:'0', sub:'Nenhum ainda' },

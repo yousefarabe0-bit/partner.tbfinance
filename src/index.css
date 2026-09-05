@@ -1,4 +1,5 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 :root {
   --primary: #E8440A;
   --secondary: #111111;
@@ -15,19 +16,40 @@
   --text-secondary: #6B7280;
   --text-muted: #9CA3AF;
 }
-html { scroll-behavior: smooth; }
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   font-family: 'Inter', system-ui, sans-serif;
   background: #f0f0ef;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
+
 button { font-family: inherit; cursor: pointer; }
-input { font-family: inherit; }
+input  { font-family: inherit; }
+
+/* App wrapper — nunca ultrapassa 480px, sempre cabe na tela */
 .app-container {
+  width: 100%;
   max-width: 480px;
   margin: 0 auto;
   background: #fff;
   min-height: 100vh;
-  box-shadow: 0 0 40px rgba(0,0,0,.08);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Garante que nada estoura o container */
+.app-container * {
+  max-width: 100%;
+}
+
+/* Grids sempre responsivos */
+.app-container [style*="grid-template-columns: 1fr 1fr"] {
+  min-width: 0;
 }
