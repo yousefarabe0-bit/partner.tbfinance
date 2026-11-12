@@ -6,7 +6,6 @@ export const LIVE = {
   dia: 'Quinta-feira',
   data: '19/11',
   horario: '20h30',
-  instagram: '@yousefameroficial',
 
   // Link de convite do grupo VIP no WhatsApp (destino após o cadastro)
   grupoWhatsApp: 'https://chat.whatsapp.com/EFnadkPpp1h4U5AtAqITUU',

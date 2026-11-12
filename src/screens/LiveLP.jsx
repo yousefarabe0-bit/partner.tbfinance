@@ -68,14 +68,16 @@ async function enviarLead(payload) {
 // ---------- Página ----------
 export default function LiveLP() {
   const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
   const [tel, setTel] = useState('');
-  const [divida, setDivida] = useState(null); // 'sim' | 'nao'
+  const [divida, setDivida] = useState(null); // cartão/empréstimo alto: 'sim' | 'nao'
+  const [credito, setCredito] = useState(null); // crédito disponível: 'sim' | 'nao'
   const [erro, setErro] = useState('');
   const [enviando, setEnviando] = useState(false);
   const formRef = useRef(null);
 
   useEffect(() => {
-    document.title = 'Destrava Financeiro | Live gratuita com Yousef Amer';
+    document.title = 'Método Destrava Financeiro | com Yousef Amer';
     document.body.style.background = BG;
     initPixel(LIVE.metaPixelId);
     return () => { document.body.style.background = ''; };
@@ -87,23 +89,27 @@ export default function LiveLP() {
     e.preventDefault();
     const digits = tel.replace(/\D/g, '');
     if (nome.trim().length < 2) return setErro('Digite seu nome.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim())) return setErro('Digite um e-mail válido.');
     if (digits.length < 10) return setErro('Digite um WhatsApp válido com DDD.');
-    if (!divida) return setErro('Responda se você tem dívidas hoje.');
+    if (!divida) return setErro('Responda se possui cartão ou empréstimo alto.');
+    if (!credito) return setErro('Responda se possui crédito disponível.');
     setErro('');
     setEnviando(true);
 
     const payload = {
       nome: nome.trim(),
+      email: email.trim().toLowerCase(),
       telefone: `55${digits}`,
-      tem_dividas: divida,
-      tag: divida === 'sim' ? 'live-destrava-com-divida' : 'live-destrava-sem-divida',
+      divida_alta: divida,
+      credito_disponivel: credito,
+      tags: ['live-destrava', `divida-alta-${divida}`, `credito-disponivel-${credito}`].join(','),
       origem: 'lp-live-destrava',
       data_live: `${LIVE.data} ${LIVE.horario}`,
       pagina: window.location.href,
       ...getUtms(),
     };
 
-    track('Lead', { content_name: 'Live Destrava Financeiro', tem_dividas: divida });
+    track('Lead', { content_name: 'Metodo Destrava Financeiro', divida_alta: divida, credito_disponivel: credito });
     await enviarLead(payload);
     window.location.href = LIVE.grupoWhatsApp;
   }
@@ -122,14 +128,14 @@ export default function LiveLP() {
       {/* HERO */}
       <section style={{ position: 'relative', padding: '8px 20px 0', textAlign: 'center' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: ORANGE, borderRadius: 999, padding: '7px 14px', fontSize: 11, fontWeight: 800, letterSpacing: 1.5 }}>
-          LIVE GRATUITA NO INSTAGRAM
+          <span style={{ fontSize: 9 }}>✦</span> MÉTODO <span style={{ fontSize: 9 }}>✦</span>
         </div>
 
         <h1 style={{ marginTop: 16, fontSize: 'clamp(30px, 9vw, 40px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: -1 }}>
           DESTRAVA<br /><span style={{ color: ORANGE }}>FINANCEIRO</span>
         </h1>
         <p style={{ marginTop: 12, fontSize: 17, lineHeight: 1.45, color: 'rgba(255,255,255,0.88)', fontWeight: 500 }}>
-          Aprenda a <b style={{ color: '#fff' }}>sair das dívidas</b> e a <b style={{ color: '#fff' }}>organizar seu dinheiro</b> de um jeito simples, ao vivo e de graça.
+          Aprenda a <b style={{ color: '#fff' }}>sair das dívidas</b> e a <b style={{ color: '#fff' }}>organizar seu dinheiro</b> com um passo a passo simples, ao vivo e 100% gratuito.
         </p>
 
         {/* data */}
@@ -137,7 +143,6 @@ export default function LiveLP() {
           {[
             ['mdi-calendar', `${LIVE.dia}, ${LIVE.data}`],
             ['mdi-clock-outline', LIVE.horario],
-            ['mdi-instagram', LIVE.instagram],
           ].map(([icon, txt]) => (
             <div key={icon} style={{ display: 'flex', alignItems: 'center', gap: 6, background: CARD, border: `1px solid ${LINE}`, borderRadius: 10, padding: '8px 12px', fontSize: 13, fontWeight: 700 }}>
               <i className={`mdi ${icon}`} style={{ color: ORANGE_SOFT, fontSize: 16 }} />{txt}
@@ -162,27 +167,21 @@ export default function LiveLP() {
       <section style={{ position: 'relative', padding: '0 16px' }}>
         <form ref={formRef} onSubmit={onSubmit} noValidate style={{ background: '#fff', color: '#111', borderRadius: 20, padding: '22px 18px', boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }}>
           <div style={{ fontSize: 19, fontWeight: 800, textAlign: 'center', lineHeight: 1.25 }}>
-            Entre no <span style={{ color: ORANGE }}>Grupo VIP</span> e receba o link da live
+            Entre no <span style={{ color: ORANGE }}>Grupo VIP</span> e receba seu acesso
           </div>
           <div style={{ fontSize: 13, color: '#6B7280', textAlign: 'center', marginTop: 6 }}>Leva 10 segundos. É 100% gratuito.</div>
 
           <label style={lbl}>Seu nome</label>
           <input value={nome} onChange={(e) => setNome(e.target.value)} placeholder="Como podemos te chamar?" autoComplete="given-name" style={inp} />
 
+          <label style={lbl}>Seu melhor e-mail</label>
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="seuemail@exemplo.com" inputMode="email" autoComplete="email" style={inp} />
+
           <label style={lbl}>Seu WhatsApp</label>
           <input value={tel} onChange={(e) => setTel(maskPhone(e.target.value))} placeholder="(00) 00000-0000" inputMode="numeric" autoComplete="tel-national" style={inp} />
 
-          <label style={lbl}>Você tem dívidas hoje?</label>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-            {[['sim', 'Sim, tenho'], ['nao', 'Não tenho']].map(([v, t]) => (
-              <button key={v} type="button" onClick={() => setDivida(v)} style={{
-                padding: '13px 8px', borderRadius: 12, fontSize: 15, fontWeight: 700,
-                border: `2px solid ${divida === v ? ORANGE : '#E5E5E3'}`,
-                background: divida === v ? '#FFF2EE' : '#fff',
-                color: divida === v ? ORANGE : '#111',
-              }}>{t}</button>
-            ))}
-          </div>
+          <SimNao label="Possui cartão ou empréstimo alto que incomoda o seu financeiro?" valor={divida} onChange={(v) => { setDivida(v); setErro(''); }} />
+          <SimNao label="Possui crédito disponível hoje?" valor={credito} onChange={(v) => { setCredito(v); setErro(''); }} />
 
           {erro && <div style={{ marginTop: 12, color: '#DC2626', fontSize: 13, fontWeight: 600, textAlign: 'center' }}>{erro}</div>}
 
@@ -203,7 +202,7 @@ export default function LiveLP() {
       {/* O QUE VAI APRENDER */}
       <section style={{ position: 'relative', padding: '36px 20px 0' }}>
         <h2 style={{ fontSize: 22, fontWeight: 800, textAlign: 'center', marginBottom: 16 }}>
-          Na live você vai <span style={{ color: ORANGE }}>aprender</span>:
+          No método você vai <span style={{ color: ORANGE }}>aprender</span>:
         </h2>
         {aprendizados.map((a) => (
           <div key={a} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', background: CARD, border: `1px solid ${LINE}`, borderRadius: 14, padding: '14px 14px', marginBottom: 10 }}>
@@ -235,7 +234,7 @@ export default function LiveLP() {
       {/* CTA FINAL */}
       <section style={{ position: 'relative', padding: '28px 20px 40px', textAlign: 'center' }}>
         <button onClick={irProForm} style={{ width: '100%', border: 'none', borderRadius: 14, padding: '16px 12px', background: ORANGE, color: '#fff', fontSize: 16, fontWeight: 800 }}>
-          QUERO PARTICIPAR DA LIVE
+          QUERO APRENDER O MÉTODO
         </button>
         <div style={{ marginTop: 28, fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>
           © {new Date().getFullYear()} TB Finance. Todos os direitos reservados.
@@ -250,6 +249,24 @@ export default function LiveLP() {
         input:focus { outline: none; border-color: ${ORANGE} !important; box-shadow: 0 0 0 3px rgba(232,68,10,.15) }
       `}</style>
     </div>
+  );
+}
+
+function SimNao({ label, valor, onChange }) {
+  return (
+    <>
+      <label style={lbl}>{label}</label>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+        {[['sim', 'Sim'], ['nao', 'Não']].map(([v, t]) => (
+          <button key={v} type="button" onClick={() => onChange(v)} style={{
+            padding: '13px 8px', borderRadius: 12, fontSize: 15, fontWeight: 700,
+            border: `2px solid ${valor === v ? ORANGE : '#E5E5E3'}`,
+            background: valor === v ? '#FFF2EE' : '#fff',
+            color: valor === v ? ORANGE : '#111',
+          }}>{t}</button>
+        ))}
+      </div>
+    </>
   );
 }
 
