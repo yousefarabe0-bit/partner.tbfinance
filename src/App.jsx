@@ -6,6 +6,7 @@ import Dashboard from './screens/Dashboard';
 import Admin from './screens/Admin';
 import AdminLogin from './screens/AdminLogin';
 import Recomendacoes from './screens/Recomendacoes';
+import LiveLP from './screens/LiveLP';
 
 function ProtectedRoute({ children, requiredRole }) {
   const { isAuthenticated, role } = useAuth();
@@ -21,6 +22,7 @@ function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/recomendacoes" element={<Recomendacoes />} />
+        <Route path="/live" element={<LiveLP />} />
         {/* Rota discreta de acesso admin */}
         <Route path="/tbadmin" element={<AdminLogin />} />
         <Route path="/dashboard" element={
