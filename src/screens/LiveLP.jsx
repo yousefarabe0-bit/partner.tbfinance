@@ -104,7 +104,7 @@ export default function LiveLP() {
       credito_disponivel: credito,
       tags: ['live-destrava', `divida-alta-${divida}`, `credito-disponivel-${credito}`].join(','),
       origem: 'lp-live-destrava',
-      data_live: `${LIVE.data} ${LIVE.horario}`,
+      data_live: `${LIVE.dia} ${LIVE.horario}`,
       pagina: window.location.href,
       ...getUtms(),
     };
@@ -141,7 +141,7 @@ export default function LiveLP() {
         {/* data */}
         <div style={{ marginTop: 18, display: 'flex', justifyContent: 'center', gap: 8, flexWrap: 'wrap' }}>
           {[
-            ['mdi-calendar', `${LIVE.dia}, ${LIVE.data}`],
+            ['mdi-calendar', LIVE.dia],
             ['mdi-clock-outline', LIVE.horario],
           ].map(([icon, txt]) => (
             <div key={icon} style={{ display: 'flex', alignItems: 'center', gap: 6, background: CARD, border: `1px solid ${LINE}`, borderRadius: 10, padding: '8px 12px', fontSize: 13, fontWeight: 700 }}>

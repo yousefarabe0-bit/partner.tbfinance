@@ -3,8 +3,7 @@
 
 export const LIVE = {
   // Texto que aparece na LP sobre a próxima live
-  dia: 'Quinta-feira',
-  data: '19/11',
+  dia: 'Toda quinta-feira',
   horario: '20h30',
 
   // Link de convite do grupo VIP no WhatsApp (destino após o cadastro)
