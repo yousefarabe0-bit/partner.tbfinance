@@ -122,7 +122,6 @@ export default function LiveLP() {
       {/* HERO */}
       <section style={{ position: 'relative', padding: '8px 20px 0', textAlign: 'center' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: ORANGE, borderRadius: 999, padding: '7px 14px', fontSize: 11, fontWeight: 800, letterSpacing: 1.5 }}>
-          <span className="live-dot" style={{ width: 8, height: 8, borderRadius: '50%', background: '#fff' }} />
           LIVE GRATUITA NO INSTAGRAM
         </div>
 

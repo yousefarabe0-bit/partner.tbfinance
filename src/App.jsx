@@ -22,7 +22,7 @@ function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/recomendacoes" element={<Recomendacoes />} />
-        <Route path="/live" element={<LiveLP />} />
+        <Route path="/captura/live" element={<LiveLP />} />
         {/* Rota discreta de acesso admin */}
         <Route path="/tbadmin" element={<AdminLogin />} />
         <Route path="/dashboard" element={
