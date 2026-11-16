@@ -17,7 +17,11 @@
 //   node automation/instagram/publish.mjs --only=<id>  restringe a um post
 //   node automation/instagram/publish.mjs --now=<ISO>  simula outro "agora"
 
-import { readFile, writeFile } from 'node:fs/promises'
+import { readFile, writeFile, stat, mkdtemp, rm } from 'node:fs/promises'
+import { createReadStream } from 'node:fs'
+import { execFile } from 'node:child_process'
+import { promisify } from 'node:util'
+import os from 'node:os'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 
@@ -75,6 +79,12 @@ function normalizeMedia(media) {
   const list = Array.isArray(media) ? media : [media]
   return list.map((m) => {
     const item = typeof m === 'string' ? { url: m } : { ...m }
+    if (item.drive) {
+      // vídeo guardado no Google Drive (pasta compartilhada por link): o robô baixa e envia
+      item.url = `https://drive.usercontent.google.com/download?id=${item.drive}&export=download&confirm=t`
+      item.type = 'video'
+      return item
+    }
     item.url = resolveUrl(item.url)
     item.type = item.type || (VIDEO_EXT.test(item.url) ? 'video' : 'image')
     return item
@@ -171,6 +181,7 @@ function validatePosts(posts) {
     if (p.type === 'image' && media[0]?.type === 'video') {
       errors.push(`${where}: para vídeo use "type": "reel"`)
     }
+    if (p.collab && !Array.isArray(p.collab)) errors.push(`${where}: "collab" deve ser uma lista de @`)
     if (p.type === 'reel' && media[0] && media[0].type !== 'video') {
       errors.push(`${where}: reel precisa de um vídeo (.mp4/.mov)`)
     }
@@ -232,14 +243,18 @@ async function createContainer(post, account, { userId, token }) {
     case 'image':
       return graph('POST', `${userId}/media`, token, { image_url: media[0].url, caption })
 
-    case 'reel':
-      return graph('POST', `${userId}/media`, token, {
+    case 'reel': {
+      const params = {
         media_type: 'REELS',
-        video_url: media[0].url,
         caption,
         share_to_feed: post.shareToFeed ?? true,
         thumb_offset: post.thumbOffsetMs,
-      })
+        cover_url: post.cover ? resolveUrl(post.cover) : undefined,
+        collaborators: collaboratorsFor(post, account),
+      }
+      if (media[0].drive) return uploadReelFromDrive(userId, token, media[0], params)
+      return graph('POST', `${userId}/media`, token, { ...params, video_url: media[0].url })
+    }
 
     case 'story':
       return graph('POST', `${userId}/media`, token, mediaParams(media[0], { media_type: 'STORIES' }))
@@ -259,6 +274,53 @@ async function createContainer(post, account, { userId, token }) {
     }
   }
   throw new Error(`Tipo desconhecido: ${post.type}`)
+}
+
+const run = promisify(execFile)
+const MAX_REEL_BYTES = 280 * 1024 * 1024
+
+// Collab: os outros @ do post viram colaboradores (o perfil convidado precisa aceitar no app).
+function collaboratorsFor(post, account) {
+  if (!post.collab) return undefined
+  const others = post.collab.map((a) => ACCOUNTS[resolveAccount(a)]?.handle || String(a).replace(/^@/, ''))
+    .filter((h) => h && h !== ACCOUNTS[account]?.handle)
+  return others.length ? JSON.stringify(others) : undefined
+}
+
+// Baixa o vídeo do Drive, recomprime se for grande ou fora do padrão e envia
+// ao Instagram por upload direto (não precisa de link público para o vídeo).
+async function uploadReelFromDrive(userId, token, item, params) {
+  const dir = await mkdtemp(path.join(os.tmpdir(), 'reel-'))
+  try {
+    const src = path.join(dir, 'src')
+    log(`   baixando vídeo do Drive (${item.drive})...`)
+    const res = await fetch(item.url)
+    if (!res.ok) throw new Error(`download do Drive falhou: HTTP ${res.status}`)
+    await writeFile(src, Buffer.from(await res.arrayBuffer()))
+    let file = src
+    const { stdout } = await run('ffprobe', ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=codec_name', '-of', 'csv=p=0', src])
+    const size = (await stat(src)).size
+    if (size > MAX_REEL_BYTES || !/h264/.test(stdout)) {
+      log(`   recomprimindo (${Math.round(size / 1e6)} MB, codec ${stdout.trim() || '?'})...`)
+      file = path.join(dir, 'out.mp4')
+      await run('ffmpeg', ['-y', '-loglevel', 'error', '-i', src, '-vf', "scale='min(1080,iw)':-2", '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '23', '-maxrate', '8M', '-bufsize', '16M', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', file], { maxBuffer: 1 << 26 })
+    }
+    const bytes = (await stat(file)).size
+    const container = await graph('POST', `${userId}/media`, token, { ...params, upload_type: 'resumable' })
+    const uri = container.uri || `https://rupload.facebook.com/ig-api-upload/${API_VERSION}/${container.id}`
+    log(`   enviando ${Math.round(bytes / 1e6)} MB ao Instagram...`)
+    const up = await fetch(uri, {
+      method: 'POST',
+      headers: { Authorization: `OAuth ${token}`, offset: '0', file_size: String(bytes) },
+      body: createReadStream(file),
+      duplex: 'half',
+    })
+    const upBody = await up.json().catch(() => ({}))
+    if (!up.ok || upBody.success === false) throw new Error(`upload do vídeo falhou: ${upBody.debug_info?.message || up.status}`)
+    return { id: container.id }
+  } finally {
+    await rm(dir, { recursive: true, force: true })
+  }
 }
 
 async function publish(post, account, creds) {
