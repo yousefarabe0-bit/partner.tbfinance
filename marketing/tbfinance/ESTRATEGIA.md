@@ -219,3 +219,10 @@ O "link na bio" passa a ser só complemento, não a chamada principal.
 2. Eu transcrevo **todos** os vídeos da TB e escrevo legenda e capa de cada um.
 3. Monto o cronograma de 4 semanas com o que já existe no Drive e com os estáticos que eu vou criar.
 4. Quando os tokens estiverem prontos, entra tudo na fila de postagem automática.
+
+---
+
+## 10. Pendências de design (fazer só na hora de postar)
+
+- ✅ Capas com foto editorial aprovadas: manter o estilo.
+- ⚠️ **Fotos de fundo dos slides internos:** melhorar a qualidade antes de cada postagem. Os quadros de vídeo em 720p ficam ruins; usar fotos em alta resolução do Yousef ou imagens licenciadas melhores.
