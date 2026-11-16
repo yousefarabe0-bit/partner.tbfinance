@@ -90,7 +90,7 @@ for k in ('Y','T'):
     H.append('</div></div>')
 H.append('</div>')
 H.append('''<h2>📦 Estoque de vídeos depois desta semana</h2><div class="nt">
-<b>Collab:</b> Fala Founder V037, V038, V039 e V040; Entrevista 4; VIDEO 03, 05 e 06; copy_DC5C97F9 (cortar a fala "certificada pelo Banco Central"). <b>Só TB:</b> depoimentos VIDEO 15, 16, 18 e 19, Mauricio e André; Influenciadores copy_7DB4, VIDEO 21, IMG_9054 e IMG_8583 <i>ou</i> Conteúdo.mov. <b>Só Yousef:</b> Caixinha VIDEO 10, 11, 12 e "peguei empréstimo".<br><br>
+<b>Collab:</b> Fala Founder V037, V038, V039 e V040; Entrevista 4; VIDEO 03, 05 e 06; copy_DC5C97F9 (cortar a fala "certificada pelo Banco Central"). <b>Só TB:</b> depoimentos VIDEO 15, 16, 18 e 19, Mauricio e Carlos Eduardo; Influenciadores copy_7DB4, VIDEO 21, IMG_9054 e IMG_8583 <i>ou</i> Conteúdo.mov. <b>Só Yousef:</b> Caixinha VIDEO 10, 11, 12 e "peguei empréstimo".<br><br>
 Com 4 vídeos por semana na TB e 3 no Yousef, o estoque dá para cerca de 4 semanas. O que você gravar e jogar no Drive eu encaixo nas próximas.<br>⛔ V041 "limpa nome" continua fora. ❓ copy_375770EA está sem fala: o que é?</div>''')
 H.append('</div></body></html>')
 open(OUT+'/cronograma.html','w').write('\n'.join(H)); print('ok', len(P), cnt, crt)

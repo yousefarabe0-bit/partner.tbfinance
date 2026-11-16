@@ -30,14 +30,14 @@ Observação sobre os collabs: 6 vídeos de pastas compartilhadas saíram só em
 | Influenciadores/Nov: TBfinance 1, IMG_2886, IMG_0955 | "R$ 800 que sumiam", @tbfinance_ 04/11 (a versão postada é outra tomada) | descartar ou guardar como reserva |
 | Influenciadores/Nov: IMG_2286 | "ganho 12 mil e no dia 20…", @tbfinance_ 14/10 | descartar ou reserva |
 | Influenciadores: VIDEO 17 | "cartão não é complemento de renda", @tbfinance_ 19/09 | reserva |
-| Depoimentos: Vinicius Louzada.mov | mesmo texto do depoimento da Bruna (versão masculina) | ver alerta abaixo |
+| Depoimentos: arquivo .mov masculino | mesmo texto do depoimento da Bruna (versão masculina) | ver alerta abaixo |
 | Vídeo com conteúdo: V001 FOFOCA | versão longa da V003 (postada) | descartar |
 | Vídeo com conteúdo: cartões sugando / se vc deve o roxinho | roteiro regravado e postado no @yousefameroficial 28/09 | reserva |
 | Vídeo com conteúdo: VIDEO 04 | tema parecido com o reel de 25/09 do @yousefameroficial | pode postar |
 
 ## 🆕 Nunca postados (prontos para o cronograma)
 
-- **Depoimentos (só TB):** VIDEO 15 (André, diretor), VIDEO 16 (Gabriela, dev), VIDEO 18 (Beatriz, nutricionista), VIDEO 19 (Renata, médica), Depoimento loira (R$ 550 mil → R$ 150 mil), Mauricio.mp4, Carlos Eduardo.mp4 (na verdade é o André, analista)
+- **Depoimentos (só TB):** VIDEO 15 (diretor de operações), VIDEO 16 (dev), VIDEO 18 (nutricionista), VIDEO 19 (médica), Depoimento loira (R$ 550 mil → R$ 150 mil), Mauricio.mp4, Carlos Eduardo.mp4 (o nome não bate com o cliente do vídeo)
 - **Influenciadores (só TB):** copy_7DB4628E / E-book 01, copy_22975553 / E-book 02, VIDEO 21 (Europa), Nov: IMG_8583 e Conteúdo.mov (duas tomadas do "anotei tudo por um mês"), IMG_9054 (5 cartões)
 - **Caixinha de perguntas (só Yousef):** VIDEO 10, 11, 12, "ganho 3k e tenho dívida de 60k", "Peguei empréstimo para quitar dívidas"
 - **Fala Founder (collab):** V037, V038, V039, V040, V041 ⚠️

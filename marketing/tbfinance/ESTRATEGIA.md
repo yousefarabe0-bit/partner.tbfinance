@@ -35,8 +35,8 @@ Não é "só renegociar": é organizar, renegociar e depois construir patrimôni
 | Parcerias com CREA, CRO (e antes CRM) | call | ótimo para autoridade |
 
 **Quem é o cliente (pelos depoimentos):**
-- A Bruna (arquiteta) e o André (analista de sistemas) ganham **acima de R$ 8 mil** e estavam endividados.
-- O casal da call ganha cerca de R$ 53 mil por mês e tem mais de R$ 250 mil em dívidas.
+- Os clientes dos depoimentos (arquiteta, analista de sistemas) ganham **acima de R$ 8 mil** e estavam endividados.
+- Nas calls comerciais aparecem famílias com renda alta e dívidas de seis dígitos.
 - **Insight central: o cliente da TB não é "quem ganha pouco", é quem ganha bem e perdeu o controle.**
   Ganhar bem não protege de dívida. Esse é o ângulo que diferencia vocês.
 
@@ -207,7 +207,7 @@ O "link na bio" passa a ser só complemento, não a chamada principal.
 
 ## 8. Achados nos vídeos do Drive
 
-- O arquivo **"Carlos Eduardo.mp4"** é na verdade o depoimento do **André** (analista de sistemas). ⚠️ renomear?
+- O arquivo **"Carlos Eduardo.mp4"** é de outro cliente (o nome no arquivo não bate com o vídeo). ⚠️ renomear?
 - "cartões sugando a sua renda" diz **"até 80%"**, enquanto a call diz **"até 70%"**. Isso precisa ser unificado.
 - Os depoimentos de profissionais com renda acima de R$ 8 mil são ouro para o perfil B.
 
