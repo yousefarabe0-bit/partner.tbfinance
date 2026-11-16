@@ -222,7 +222,12 @@ O "link na bio" passa a ser só complemento, não a chamada principal.
 
 ---
 
-## 10. Pendências de design (fazer só na hora de postar)
+## 10. Regra de formato (definida em 16/11)
+
+- **Todo post de imagem é carrossel.** Não existe post de imagem única.
+- **O último slide é sempre o CTA**, com a palavra da vez (DESTRAVA, EBOOK ou PLANILHA).
+
+## 11. Pendências de design (fazer só na hora de postar)
 
 - ✅ Capas com foto editorial aprovadas: manter o estilo.
 - ⚠️ **Fotos de fundo dos slides internos:** melhorar a qualidade antes de cada postagem. Os quadros de vídeo em 720p ficam ruins; usar fotos em alta resolução do Yousef ou imagens licenciadas melhores.
