@@ -1,0 +1,34 @@
+name: Instagram – inventário dos perfis
+
+# Lista todos os posts dos perfis (via API oficial) para cruzar com os vídeos do Drive.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'automation/instagram/inventory.request'
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Listar posts
+        env:
+          IG_PESSOAL_TOKEN: ${{ secrets.IG_PESSOAL_TOKEN }}
+          IG_PESSOAL_USER_ID: ${{ secrets.IG_PESSOAL_USER_ID }}
+          IG_EMPRESA_TOKEN: ${{ secrets.IG_EMPRESA_TOKEN }}
+          IG_EMPRESA_USER_ID: ${{ secrets.IG_EMPRESA_USER_ID }}
+        run: node automation/instagram/inventory.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: instagram-inventory
+          path: automation/instagram/inventory.json
+          retention-days: 7

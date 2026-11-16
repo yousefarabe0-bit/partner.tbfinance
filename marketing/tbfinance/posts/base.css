@@ -1,0 +1,9 @@
+@font-face{font-family:Inter;src:local('Inter')}
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:1350px;font-family:Inter,sans-serif;overflow:hidden;position:relative}
+.pad{position:absolute;inset:80px}
+.tag{display:inline-block;font-weight:800;font-size:26px;letter-spacing:.14em;padding:12px 22px;border-radius:999px}
+.foot{position:absolute;left:80px;right:80px;bottom:70px;display:flex;justify-content:space-between;align-items:flex-end}
+.foot img{height:80px}
+.small{font-size:22px;line-height:1.35;max-width:620px}
+.or{color:#E8440A}
