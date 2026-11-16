@@ -157,6 +157,8 @@ Modelos:
 
 O "link na bio" passa a ser só complemento, não a chamada principal.
 
+**Entrega:** as respostas automáticas já rodam no Meta Business Suite. A palavra da legenda precisa ser **exatamente** a mesma configurada lá.
+
 ### Exemplos prontos
 
 **Reels — depoimento da Bruna**
