@@ -9,26 +9,23 @@ CAR={'nv':'/home/user/partner.tbfinance/marketing/yousef/carrosseis/2026-11-nvid
      'tb':'/home/user/partner.tbfinance/marketing/tbfinance/carrosseis/2026-11-recorde-inadimplencia/png/01.png',
      'bf':'/home/user/partner.tbfinance/marketing/yousef/carrosseis/2026-11-black-friday/png/01.png'}
 # (data, hora, perfil[T=TB, Y=Yousef, C=collab], formato, pasta/arquivo, capa (com *destaque*), CTA, status)
-P=[
-('Qua 18/11','9h','Y','Carrossel','Notícia + analogia: Nvidia perde US$ 1 tri com a saída do CEO → risco de pessoa-chave na sua renda','car:nv','DESTRAVA','pronto'),
-('Qua 18/11','12h','T','Carrossel','Notícia + analogia: lucro do Banco do Brasil cai 66% por inadimplência','car:bb','EBOOK','pronto'),
-('Qua 18/11','19h','T','Carrossel','Notícia: recorde de 84,2 mi inadimplentes (Serasa)','car:tb','DESTRAVA','pronto'),
-('Qui 19/11','9h','C','Reel','Vídeo c/ conteúdo · VIDEO 09','Ganha R$ 8 mil e diz que *ganha mal*?','DESTRAVA','pronto'),
-('Qui 19/11','19h','T','Carrossel','Dado: juro do rotativo a 451,7% ao ano (BC)','Pagar o mínimo custa *451% ao ano*','EBOOK','criar'),
-('Sex 20/11','9h','Y','Carrossel','Notícia + analogia: pacote fiscal de R$ 60 bi → o ajuste fiscal da sua casa','car:pf','EBOOK','pronto'),
-('Sex 20/11','12h','T','Carrossel','Notícia: 20,3 mi em endividamento de risco, +75% em 5 anos (BC)','*20 milhões* no endividamento de risco','DESTRAVA','criar'),
-('Sex 20/11','19h','T','Reel','Depoimentos · Depoimento loira','*R$ 550 mil* viraram R$ 150 mil','EBOOK','pronto'),
-('Sáb 21/11','10h','Y','Reel','Caixinha · ganho 3k e devo 60k','Ganho R$ 3 mil e devo *R$ 60 mil*','PLANILHA','pronto'),
-('Sáb 21/11','12h','T','Carrossel','Notícia: golpes na Black Friday (86% já desistiram por medo)','*86%* já fugiram de promoção por medo','DESTRAVA','criar'),
-('Sáb 21/11','19h','T','Carrossel','Indicação: indique e ganhe desconto, vire parceiro (7%)','Indicou, *ganhou*.','EBOOK','criar'),
-('Dom 22/11','9h','Y','Carrossel','Notícia: Black Friday + 13º','car:bf','PLANILHA','pronto'),
-('Dom 22/11','12h','T','Carrossel','Checklist: antes de comprar na Black Friday','Black Friday: *desconto* ou dívida?','DESTRAVA','criar'),
-('Dom 22/11','19h','T','Reel','Influenciadores · copy_22975553','Gastou seu dinheiro *com o quê?*','EBOOK','pronto'),
-('Seg 23/11','12h','T','Carrossel','Notícia + analogia: Ri Happy e Chilli Beans renegociam R$ 1,1 bi','car:rh','PLANILHA','pronto'),
-('Seg 23/11','19h','T','Carrossel','Produto: como funciona o Teu Bolso','Seu dinheiro *num só lugar*','DESTRAVA','criar'),
-('Ter 24/11','9h','C','Reel','Vídeo c/ conteúdo · VIDEO 04','Você ganha bem, mas a *fatura* assusta?','EBOOK','pronto'),
-('Ter 24/11','19h','T','Carrossel','Mito x Verdade: "depois de 5 anos a dívida some"','Depois de 5 anos a dívida *some?*','PLANILHA','criar'),
-]
+import datetime, glob as _g
+R='/home/user/partner.tbfinance/'
+Q=json.load(open(R+'automation/instagram/posts.json'))
+DIAS=['Seg','Ter','Qua','Qui','Sex','Sáb','Dom']
+P=[]
+for x in Q:
+    t=datetime.datetime.fromisoformat(x['publishAt'])
+    if not ('2026-11-18'<=x['publishAt'][:10]<='2026-11-24'): continue
+    who='C' if x.get('collab') else ('T' if x['accounts']==['@tbfinance_'] else 'Y')
+    cta=[k for k in ('DESTRAVA','EBOOK','PLANILHA') if 'Comenta '+k in x['caption']][0]
+    if x['type']=='carousel':
+        fmt='Carrossel'; img=R+x['media'][0].replace('/jpg/','/png/').replace('.jpg','.png')
+    else:
+        fmt='Reel'; img=R+x['cover']
+    tema=x['caption'].split('\n')[0][:90]
+    src=('Drive · '+x['media']['drive'][:8]+'… · ' if fmt=='Reel' else '')+tema
+    P.append((f"{DIAS[t.weekday()]} {t:%d/%m}", f"{t.hour}h", who, fmt, src, 'img:'+img, cta, 'pronto'))
 def b64(path,w=300):
     im=Image.open(path).convert('RGB'); W,H=im.size; th=int(W*4/3)
     if th<H: t=(H-th)//2; im=im.crop((0,t,W,t+th))
@@ -41,8 +38,9 @@ def tile(p, mine):
     icon={'Reel':'🎬','Carrossel':'❐','Carrossel':''}[fmt]
     lab=f'<span class="d">{d.split()[1]} · {h}</span><span class="ty">{icon}</span>'
     badge='<span class="cb">COLLAB</span>' if who=='C' else ''
-    if cv.startswith('car:'):
-        return f'<div class="t new" style="background-image:url(data:image/jpeg;base64,{b64(CAR[cv[4:]])})">{lab}{badge}</div>'
+    if cv.startswith('car:') or cv.startswith('img:'):
+        path = CAR[cv[4:]] if cv.startswith('car:') else cv[4:]
+        return f'<div class="t new" style="background-image:url(data:image/jpeg;base64,{b64(path)})">{lab}{badge}</div>'
     crt=' crt' if stt=='criar' else ''
     return f'<div class="t new mock{crt}">{lab}{badge}<div class="ct">{capa(cv)}</div><div class="src">{html.escape(src)}</div></div>'
 css='''*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,-apple-system,sans-serif;background:#f4f2ee;color:#111}
@@ -65,18 +63,19 @@ td{padding:9px 10px;border-bottom:1px solid #eee;vertical-align:top}tr.wk td{bac
 .old{filter:grayscale(.15);opacity:.85}
 .nt{background:#fff;border-radius:14px;padding:16px;font-size:13.5px;line-height:1.6;margin-top:12px}.nt b{color:#111}
 '''
+NREELS=sum(1 for p in P if p[3]=='Reel')
 cnt={'T':0,'Y':0,'C':0}; crt=sum(1 for p in P if p[7]=='criar')
 for p in P: cnt[p[2]]+=1
 H=['<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Semana 1 · 18 a 24/11</title><style>'+css+'</style></head><body><div class="w">',
 '<h1>Semana 1 · qua 18/11 a ter 24/11</h1><div class="sub">Cronograma semanal com as notícias da semana. Toda terça eu monto a próxima. Nada repetido, nada já postado.</div>',
-f'<div class="kp"><div class="k"><b>14</b><span>@tbfinance_ · 4 vídeos + 10 posts</span></div><div class="k"><b>6</b><span>@yousefameroficial · 3 vídeos + 3 posts</span></div><div class="k"><b>{len(P)-crt}</b><span>já prontos</span></div><div class="k"><b>{crt}</b><span>eu crio (temas da semana)</span></div></div>',
+f'<div class="kp"><div class="k"><b>14</b><span>@tbfinance_ · 4 vídeos + 10 posts</span></div><div class="k"><b>6</b><span>@yousefameroficial · 3 vídeos + 3 posts</span></div><div class="k"><b>{len(P)}</b><span>posts na fila (todos prontos)</span></div><div class="k"><b>{NREELS}</b><span>reels vindos do Drive</span></div></div>',
 '<div class="nt"><b>Ritmo:</b> TB com <b>2 posts por dia</b> (12h e 19h; quando há collab de manhã, ele conta como um dos 2). Yousef com 6 por semana, de manhã, sem post na segunda (é o pior dia dele). <b>Collab:</b> o autor é o @yousefameroficial e a @tbfinance_ entra como colaboradora; é assim que a TB pega o alcance do Yousef. <b>Horários:</b> o Yousef às 9h/10h; a TB às 12h e às 19h. <b>CTA:</b> DESTRAVA, EBOOK e PLANILHA em rodízio, nunca o mesmo duas vezes seguidas.</div>',
 '<h2>📅 Calendário</h2><table><tr><th>HORA</th><th>PERFIL</th><th>FORMATO</th><th>CONTEÚDO / ARQUIVO</th><th>CAPA</th><th>CTA</th></tr>']
 lab={'T':'TB','Y':'YOUSEF','C':'COLLAB'}
 for i,p in enumerate(P):
     if i==0 or P[i-1][0]!=p[0]: H.append(f'<tr class="wk"><td colspan="6">{p[0].upper()}</td></tr>')
     d,h,who,fmt,src,cv,cta,stt=p
-    cvt='(capa pronta)' if cv.startswith('car:') else capa(cv).replace('<span class="o">','<b>').replace('</span>','</b>')
+    cvt='(capa pronta)' if cv.startswith(('car:','img:')) else capa(cv).replace('<span class="o">','<b>').replace('</span>','</b>')
     tag=' <span class="cr">EU CRIO</span>' if stt=='criar' else ''
     H.append(f'<tr><td><b>{h}</b></td><td><span class="pf {who}">{lab[who]}</span></td><td>{fmt}</td><td>{html.escape(src)}{tag}</td><td>{cvt}</td><td class="cta">{cta}</td></tr>')
 H.append('</table>')

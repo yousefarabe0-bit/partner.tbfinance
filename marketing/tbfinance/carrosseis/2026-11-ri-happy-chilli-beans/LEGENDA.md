@@ -1,4 +1,4 @@
-# Ri Happy e Chilli Beans renegociam · @tbfinance_ · seg 23/11 12h · CTA PLANILHA
+# Ri Happy e Chilli Beans renegociam · @tbfinance_ · seg 23/11 12h · CTA DESTRAVA
 
 Duas marcas famosas estão renegociando R$ 1,1 bilhão em dívidas. E não tem vergonha nenhuma nisso.
 
@@ -10,7 +10,7 @@ A diferença é que empresa grande não espera o nome sujar para agir: mapeia to
 
 Na pessoa física é a mesma lógica. O problema é que muita gente tenta sozinha e no desespero.
 
-💬 Comenta PLANILHA e receba a planilha de organização financeira e negociação de dívidas.
+💬 Comenta DESTRAVA e receba a aula gratuita: como organizar as finanças e negociar dívidas com até 90% de desconto.
 
 Fontes: TJSP, Gazeta do Povo, Mercado & Consumo, Times Brasil, Obre (out–nov/2026).
 

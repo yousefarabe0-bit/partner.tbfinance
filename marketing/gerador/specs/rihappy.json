@@ -1,10 +1,71 @@
-{"tag":"NOTÍCIA · @TBFINANCE_","data":"NOV · 2026","copiar":[],
-"slides":[
-{"tipo":"capa","kicker":"RI HAPPY E CHILLI BEANS","titulo":"Duas marcas famosas estão renegociando *R$ 1,1 bilhão* em dívidas. E não tem vergonha nenhuma nisso.","fs":72},
-{"tipo":"texto","kicker":"RI HAPPY","titulo":"Pediu recuperação extrajudicial para renegociar R$ 827 milhões.","paragrafos":["O pedido foi feito em 18/10. A Justiça aceitou e **suspendeu as cobranças por 180 dias**.","A empresa citou os efeitos da pandemia e os **juros altos**."],"fonte":"Fontes: TJSP, Gazeta do Povo, Meio & Mensagem (out–nov/2026)."},
-{"tipo":"texto","kicker":"CHILLI BEANS","titulo":"Atrasou R$ 16,5 mi em parcelas, e a dívida inteira venceu de uma vez.","paragrafos":["Em julho e agosto, a rede deixou de pagar parcelas. O credor então declarou o **vencimento antecipado** de toda a dívida.","Em 30/10, pediu recuperação extrajudicial para renegociar **R$ 340 milhões**, com um aporte previsto de até R$ 50 mi."],"fonte":"Fontes: Mercado & Consumo, Times Brasil, BPMoney (out/2026)."},
-{"tipo":"texto","kicker":"NÃO ESTÃO SOZINHAS","titulo":"Os pedidos de recuperação extrajudicial já somam *R$ 312 bilhões* em 2026.","paragrafos":["A maior parte vem de gigantes como Braskem e Raízen. Renegociar dívida virou rotina até para quem é grande."],"fonte":"Fonte: Observatório de Recuperação Extrajudicial (Obre), até 11/11/2026."},
-{"tipo":"texto","escuro":true,"kicker":"A ANALOGIA","titulo":"Empresa grande não espera o nome sujar para agir.","lista":["Mapeia **todas** as dívidas","Calcula quanto **cabe** pagar","Negocia **em bloco**, com plano e prazo","Continua funcionando enquanto isso"],"destaque":"Na pessoa física é a mesma lógica, só que muita gente tenta sozinha e no desespero."},
-{"tipo":"texto","kicker":"A LIÇÃO DA CHILLI BEANS","titulo":"Atrasar sem plano pode fazer a dívida *inteira* vencer de uma vez.","paragrafos":["Em muitos contratos, o atraso de parcelas permite ao credor cobrar **todo o saldo de uma vez**.","Por isso, a ordem certa é: **organizar, negociar e só então pagar**. Nunca no improviso."]},
-{"tipo":"cta","kicker":"RENEGOCIAR É ESTRATÉGIA","titulo":"Faça o seu plano antes do credor fazer por você.","palavra":"PLANILHA","assinatura":"TB Finance · desde 2019 tirando brasileiros do vermelho"}
-]}
+{
+ "tag": "NOTÍCIA · @TBFINANCE_",
+ "data": "NOV · 2026",
+ "copiar": [],
+ "slides": [
+  {
+   "tipo": "capa",
+   "kicker": "RI HAPPY E CHILLI BEANS",
+   "titulo": "Duas marcas famosas estão renegociando *R$ 1,1 bilhão* em dívidas. E não tem vergonha nenhuma nisso.",
+   "fs": 72
+  },
+  {
+   "tipo": "texto",
+   "kicker": "RI HAPPY",
+   "titulo": "Pediu recuperação extrajudicial para renegociar R$ 827 milhões.",
+   "paragrafos": [
+    "O pedido foi feito em 18/10. A Justiça aceitou e **suspendeu as cobranças por 180 dias**.",
+    "A empresa citou os efeitos da pandemia e os **juros altos**."
+   ],
+   "fonte": "Fontes: TJSP, Gazeta do Povo, Meio & Mensagem (out–nov/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "CHILLI BEANS",
+   "titulo": "Atrasou R$ 16,5 mi em parcelas, e a dívida inteira venceu de uma vez.",
+   "paragrafos": [
+    "Em julho e agosto, a rede deixou de pagar parcelas. O credor então declarou o **vencimento antecipado** de toda a dívida.",
+    "Em 30/10, pediu recuperação extrajudicial para renegociar **R$ 340 milhões**, com um aporte previsto de até R$ 50 mi."
+   ],
+   "fonte": "Fontes: Mercado & Consumo, Times Brasil, BPMoney (out/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "NÃO ESTÃO SOZINHAS",
+   "titulo": "Os pedidos de recuperação extrajudicial já somam *R$ 312 bilhões* em 2026.",
+   "paragrafos": [
+    "A maior parte vem de gigantes como Braskem e Raízen. Renegociar dívida virou rotina até para quem é grande."
+   ],
+   "fonte": "Fonte: Observatório de Recuperação Extrajudicial (Obre), até 11/11/2026."
+  },
+  {
+   "tipo": "texto",
+   "escuro": true,
+   "kicker": "A ANALOGIA",
+   "titulo": "Empresa grande não espera o nome sujar para agir.",
+   "lista": [
+    "Mapeia **todas** as dívidas",
+    "Calcula quanto **cabe** pagar",
+    "Negocia **em bloco**, com plano e prazo",
+    "Continua funcionando enquanto isso"
+   ],
+   "destaque": "Na pessoa física é a mesma lógica, só que muita gente tenta sozinha e no desespero."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "A LIÇÃO DA CHILLI BEANS",
+   "titulo": "Atrasar sem plano pode fazer a dívida *inteira* vencer de uma vez.",
+   "paragrafos": [
+    "Em muitos contratos, o atraso de parcelas permite ao credor cobrar **todo o saldo de uma vez**.",
+    "Por isso, a ordem certa é: **organizar, negociar e só então pagar**. Nunca no improviso."
+   ]
+  },
+  {
+   "tipo": "cta",
+   "kicker": "RENEGOCIAR É ESTRATÉGIA",
+   "titulo": "Faça o seu plano antes do credor fazer por você.",
+   "palavra": "DESTRAVA",
+   "assinatura": "TB Finance · desde 2019 tirando brasileiros do vermelho"
+  }
+ ]
+}
