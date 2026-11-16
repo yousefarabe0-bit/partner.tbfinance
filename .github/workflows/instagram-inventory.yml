@@ -22,7 +22,9 @@ jobs:
       - name: Listar posts
         env:
           IG_PESSOAL_TOKEN: ${{ secrets.IG_PESSOAL_TOKEN }}
+          IG_PESSOAL_USER_ID: ${{ secrets.IG_PESSOAL_USER_ID }}
           IG_EMPRESA_TOKEN: ${{ secrets.IG_EMPRESA_TOKEN }}
+          IG_EMPRESA_USER_ID: ${{ secrets.IG_EMPRESA_USER_ID }}
         run: node automation/instagram/inventory.mjs
       - uses: actions/upload-artifact@v4
         if: always()

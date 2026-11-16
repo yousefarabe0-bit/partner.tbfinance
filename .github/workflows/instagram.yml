@@ -38,7 +38,9 @@ jobs:
       - name: Publicar posts vencidos
         env:
           IG_PESSOAL_TOKEN: ${{ secrets.IG_PESSOAL_TOKEN }}
+          IG_PESSOAL_USER_ID: ${{ secrets.IG_PESSOAL_USER_ID }}
           IG_EMPRESA_TOKEN: ${{ secrets.IG_EMPRESA_TOKEN }}
+          IG_EMPRESA_USER_ID: ${{ secrets.IG_EMPRESA_USER_ID }}
           MEDIA_BASE_URL: ${{ vars.MEDIA_BASE_URL }}
           IG_DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
         run: node automation/instagram/publish.mjs
