@@ -140,6 +140,23 @@ Números concretos sempre que possível. Zero "economês".
 [3 a 5 hashtags]
 ```
 
+### CTA de comentário (obrigatório em toda legenda, alternando)
+
+Toda legenda termina com **um** destes CTAs. Eles vão alternando, sem repetir o mesmo dois posts seguidos:
+
+| Palavra | O que a pessoa recebe | Quando usar melhor |
+|---|---|---|
+| **DESTRAVA** | aula grátis sobre organização financeira e como negociar dívidas com até 90% de desconto | notícias, casos reais, posts sobre juros e descontos |
+| **EBOOK** | e-book de organização financeira e liquidação de dívidas | carrosséis educativos, "passo a passo" |
+| **PLANILHA** | planilha de organização financeira pessoal e negociação de dívidas | posts sobre orçamento, gastos, "pra onde vai meu dinheiro" |
+
+Modelos:
+- "Comenta **DESTRAVA** que eu te mando o link da aula gratuita: como organizar as finanças e negociar dívidas com até 90% de desconto."
+- "Comenta **EBOOK** e receba no direct o nosso e-book de organização financeira e liquidação de dívidas."
+- "Comenta **PLANILHA** que a gente te envia a planilha de organização financeira e negociação de dívidas."
+
+O "link na bio" passa a ser só complemento, não a chamada principal.
+
 ### Exemplos prontos
 
 **Reels — depoimento da Bruna**
