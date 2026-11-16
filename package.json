@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "instagram:publish": "node automation/instagram/publish.mjs",
+    "instagram:dry-run": "node automation/instagram/publish.mjs --dry-run",
+    "instagram:validate": "node automation/instagram/publish.mjs --validate"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",

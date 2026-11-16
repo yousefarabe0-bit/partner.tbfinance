@@ -1,0 +1,42 @@
+[
+  {
+    "id": "dica-financeira-01",
+    "accounts": ["pessoal", "empresa"],
+    "publishAt": "2026-11-20T12:00:00-03:00",
+    "type": "image",
+    "media": "https://exemplo.com/ig/dica-01.jpg",
+    "caption": "3 hábitos que mudam sua vida financeira 💰 #financas #tbfinance",
+    "captions": {
+      "empresa": "Na TB Finance, a gente acredita em 3 hábitos simples 💼 Fale com a gente! #tbfinance"
+    }
+  },
+  {
+    "id": "carrossel-servicos",
+    "accounts": ["empresa"],
+    "publishAt": "2026-11-21T18:30:00-03:00",
+    "type": "carousel",
+    "media": [
+      "https://exemplo.com/ig/servicos-1.jpg",
+      "https://exemplo.com/ig/servicos-2.jpg",
+      "https://exemplo.com/ig/servicos-3.jpg"
+    ],
+    "caption": "Conheça nossos serviços 👉 arraste para o lado"
+  },
+  {
+    "id": "reel-bastidores",
+    "accounts": ["pessoal"],
+    "publishAt": "2026-11-22T19:00:00-03:00",
+    "type": "reel",
+    "media": "https://exemplo.com/ig/bastidores.mp4",
+    "caption": "Bastidores da semana 🎬",
+    "shareToFeed": true
+  },
+  {
+    "id": "story-lembrete",
+    "accounts": ["pessoal", "empresa"],
+    "publishAt": "2026-11-23T09:00:00-03:00",
+    "type": "story",
+    "media": "https://exemplo.com/ig/lembrete-story.jpg",
+    "enabled": false
+  }
+]
