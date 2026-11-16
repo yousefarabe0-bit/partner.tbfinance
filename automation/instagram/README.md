@@ -47,14 +47,15 @@ A API oficial **só funciona com contas profissionais**. Para cada perfil (@yous
 
 ## 3. Cadastrar os secrets no GitHub
 
-No repositório: *Settings → Secrets and variables → Actions → New repository secret*:
+Cada conta usa o token de um **usuário do sistema** do seu próprio portfólio (expiração "Nunca"):
 
-| Secret               | Valor                                   |
-|----------------------|-----------------------------------------|
-| `IG_PESSOAL_USER_ID` | ID da conta **@yousefameroficial**              |
-| `IG_PESSOAL_TOKEN`   | token da página ligada a @yousefameroficial     |
-| `IG_EMPRESA_USER_ID` | ID da conta **@tbfinance_**                     |
-| `IG_EMPRESA_TOKEN`   | token da página ligada a @tbfinance_            |
+| Secret             | Token gerado no portfólio | Dá acesso a          |
+|--------------------|---------------------------|----------------------|
+| `IG_PESSOAL_TOKEN` | **BM - Yousef**           | @yousefameroficial   |
+| `IG_EMPRESA_TOKEN` | **BM - TB Finance**       | @tbfinance_          |
+
+No repositório: *Settings → Secrets and variables → Actions → New repository secret*.
+O ID de cada conta é descoberto automaticamente a partir do token (não precisa cadastrar).
 
 🔒 Antes de publicar, o robô confere se cada token pertence mesmo ao @ esperado. Se os secrets
 estiverem trocados, ele **não publica** e mostra o erro.
@@ -62,7 +63,7 @@ estiverem trocados, ele **não publica** e mostra o erro.
 Opcional (*Variables*, não Secret): `MEDIA_BASE_URL` — veja a seção 5.
 
 Para adicionar uma terceira conta: inclua em `accounts.json` (ex.: `"loja": { "handle": "minhaloja", "env": "LOJA" }`),
-crie os secrets `IG_LOJA_USER_ID` / `IG_LOJA_TOKEN` e acrescente essas duas linhas no `env:` do workflow.
+crie o secret `IG_LOJA_TOKEN` e acrescente essa linha no `env:` dos workflows.
 
 ## 4. Agendar posts
 
@@ -109,7 +110,12 @@ A Meta **baixa a mídia de uma URL pública** — não dá para enviar arquivo d
 
 Formatos: imagem **JPEG**; reels MP4 (H.264), 3 s a 15 min, 9:16 recomendado.
 
-## 6. Testar
+## 6. Inventário dos perfis
+
+O workflow **Instagram – inventário dos perfis** lista todos os posts das duas contas
+(data, legenda, link e vídeo), usado para cruzar com o que está no Drive.
+
+## 7. Testar
 
 ```bash
 npm run instagram:validate   # confere se o posts.json está certo

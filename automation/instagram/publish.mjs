@@ -7,8 +7,8 @@
 //
 // Credenciais por conta (variáveis de ambiente), onde <CONTA> é o nome da
 // conta em maiúsculas (ex.: PESSOAL, EMPRESA):
-//   IG_<CONTA>_USER_ID   ID da conta profissional do Instagram
-//   IG_<CONTA>_TOKEN     token de acesso com instagram_content_publish
+//   IG_<CONTA>_TOKEN     token do usuário do sistema (o ID da conta é descoberto sozinho;
+//                        IG_<CONTA>_USER_ID é opcional)
 //
 // Uso:
 //   node automation/instagram/publish.mjs              publica o que estiver vencido
@@ -111,8 +111,22 @@ function credentials(account) {
   return {
     userId: process.env[`IG_${key}_USER_ID`],
     token: process.env[`IG_${key}_TOKEN`],
-    envNames: [`IG_${key}_USER_ID`, `IG_${key}_TOKEN`],
+    envNames: [`IG_${key}_TOKEN`],
   }
+}
+
+// Sem IG_<CONTA>_USER_ID, descobre o ID pela lista de páginas que o token enxerga.
+async function discoverUserId(account, token) {
+  const handle = ACCOUNTS[account]?.handle
+  if (!handle) return undefined
+  const res = await graph('GET', 'me/accounts', token, {
+    fields: 'name,instagram_business_account{id,username}',
+    limit: 100,
+  })
+  const hit = (res.data || []).find(
+    (p) => p.instagram_business_account?.username?.toLowerCase() === handle.toLowerCase(),
+  )
+  return hit?.instagram_business_account?.id
 }
 
 // ---------------------------------------------------------------- validação
@@ -318,7 +332,19 @@ async function main() {
       }
 
       const creds = credentials(account)
-      if (!creds.userId || !creds.token) {
+      if (creds.token && !creds.userId && !DRY_RUN) {
+        try {
+          creds.userId = await discoverUserId(account, creds.token)
+        } catch (err) {
+          log(`⚠️  ${key}: não consegui descobrir o ID da conta: ${err.message}`)
+        }
+        if (!creds.userId) {
+          log(`⚠️  ${key}: o token não dá acesso a @${ACCOUNTS[account]?.handle}. Confira os ativos do usuário do sistema.`)
+          failed++
+          continue
+        }
+      }
+      if (!creds.token || (!creds.userId && !DRY_RUN)) {
         log(`⚠️  ${key}: faltam as variáveis ${creds.envNames.join(' e ')}`)
         failed++
         continue
