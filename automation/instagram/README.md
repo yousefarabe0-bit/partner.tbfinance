@@ -1,11 +1,12 @@
-# Automação de postagens no Instagram (perfil pessoal + empresa)
+# Automação de postagens no Instagram — @yousefameroficial e @tbfinance_
 
-Publica posts agendados em **duas contas do Instagram** usando a API oficial da Meta
+Publica posts agendados nas contas **@yousefameroficial** (pessoal) e **@tbfinance_** (empresa) usando a API oficial da Meta
 (Instagram Graph API). Roda sozinho no GitHub Actions a cada 15 minutos.
 
 ```
 automation/instagram/
 ├── publish.mjs           # script que publica (Node 18+, sem dependências)
+├── accounts.json         # as contas (@) e o nome dos secrets de cada uma
 ├── posts.json            # SUA FILA DE POSTS — edite aqui
 ├── posts.example.json    # exemplos de cada tipo de post
 └── published.json        # histórico automático (não editar à mão)
@@ -18,7 +19,7 @@ Tipos suportados: **imagem**, **carrossel** (2–10 fotos/vídeos), **reel** e *
 
 ## 1. Pré-requisitos (uma vez só, para cada conta)
 
-A API oficial **só funciona com contas profissionais**. Para cada perfil (o seu e o da empresa):
+A API oficial **só funciona com contas profissionais**. Para cada perfil (@yousefameroficial e @tbfinance_):
 
 1. No app do Instagram: *Configurações → Tipo de conta e ferramentas → Mudar para conta profissional*
    (Criador de conteúdo ou Empresa — os dois servem).
@@ -50,15 +51,18 @@ No repositório: *Settings → Secrets and variables → Actions → New reposit
 
 | Secret               | Valor                                   |
 |----------------------|-----------------------------------------|
-| `IG_PESSOAL_USER_ID` | ID da conta do Instagram pessoal        |
-| `IG_PESSOAL_TOKEN`   | token da página ligada ao perfil pessoal |
-| `IG_EMPRESA_USER_ID` | ID da conta do Instagram da empresa     |
-| `IG_EMPRESA_TOKEN`   | token da página ligada à empresa        |
+| `IG_PESSOAL_USER_ID` | ID da conta **@yousefameroficial**              |
+| `IG_PESSOAL_TOKEN`   | token da página ligada a @yousefameroficial     |
+| `IG_EMPRESA_USER_ID` | ID da conta **@tbfinance_**                     |
+| `IG_EMPRESA_TOKEN`   | token da página ligada a @tbfinance_            |
+
+🔒 Antes de publicar, o robô confere se cada token pertence mesmo ao @ esperado. Se os secrets
+estiverem trocados, ele **não publica** e mostra o erro.
 
 Opcional (*Variables*, não Secret): `MEDIA_BASE_URL` — veja a seção 5.
 
-Para adicionar uma terceira conta, use outro nome (ex.: `loja`), crie `IG_LOJA_USER_ID` / `IG_LOJA_TOKEN`
-e acrescente essas duas linhas no `env:` do workflow.
+Para adicionar uma terceira conta: inclua em `accounts.json` (ex.: `"loja": { "handle": "minhaloja", "env": "LOJA" }`),
+crie os secrets `IG_LOJA_USER_ID` / `IG_LOJA_TOKEN` e acrescente essas duas linhas no `env:` do workflow.
 
 ## 4. Agendar posts
 
@@ -68,12 +72,12 @@ Edite `posts.json` (comece copiando de `posts.example.json`) e faça commit na `
 [
   {
     "id": "dica-financeira-01",
-    "accounts": ["pessoal", "empresa"],
+    "accounts": ["@yousefameroficial", "@tbfinance_"],
     "publishAt": "2026-11-20T12:00:00-03:00",
     "type": "image",
     "media": "https://seusite.com/ig/dica-01.jpg",
     "caption": "Legenda padrão #financas",
-    "captions": { "empresa": "Legenda diferente só para a empresa" }
+    "captions": { "@tbfinance_": "Legenda diferente só para a empresa" }
   }
 ]
 ```
@@ -81,12 +85,12 @@ Edite `posts.json` (comece copiando de `posts.example.json`) e faça commit na `
 | Campo         | Obrigatório | Descrição |
 |---------------|-------------|-----------|
 | `id`          | sim | Nome único do post (não reutilize — é o que evita duplicar) |
-| `accounts`    | sim | `["pessoal"]`, `["empresa"]` ou `["pessoal", "empresa"]` |
+| `accounts`    | sim | `["@yousefameroficial"]`, `["@tbfinance_"]` ou os dois (também aceita os apelidos `pessoal` / `empresa`) |
 | `publishAt`   | sim | Data/hora com fuso. Brasília: `-03:00` |
 | `type`        | sim | `image`, `carousel`, `reel` ou `story` |
 | `media`       | sim | URL (ou lista de URLs no carrossel). Vídeo = `.mp4`/`.mov` |
 | `caption`     | não | Legenda (máx. 2.200 caracteres, 30 hashtags) |
-| `captions`    | não | Legenda específica por conta, sobrescreve `caption` |
+| `captions`    | não | Legenda específica por conta (chave = @ da conta), sobrescreve `caption` |
 | `shareToFeed` | não | Reels: aparecer também no feed (padrão `true`) |
 | `enabled`     | não | `false` deixa o post pausado |
 

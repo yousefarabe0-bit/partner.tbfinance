@@ -24,6 +24,7 @@ import path from 'node:path'
 const DIR = path.dirname(fileURLToPath(import.meta.url))
 const POSTS_FILE = process.env.IG_POSTS_FILE || path.join(DIR, 'posts.json')
 const STATE_FILE = process.env.IG_STATE_FILE || path.join(DIR, 'published.json')
+const ACCOUNTS_FILE = process.env.IG_ACCOUNTS_FILE || path.join(DIR, 'accounts.json')
 const API_VERSION = process.env.GRAPH_API_VERSION || 'v23.0'
 const API_HOST = process.env.GRAPH_API_HOST || 'https://graph.facebook.com'
 const MEDIA_BASE_URL = process.env.MEDIA_BASE_URL || ''
@@ -80,8 +81,33 @@ function normalizeMedia(media) {
   })
 }
 
+// accounts.json: { "<apelido>": { "handle": "<@ sem arroba>", "env": "<PREFIXO>" } }
+// Nos posts, a conta pode ser citada pelo apelido ou pelo @.
+let ACCOUNTS = {}
+
+function resolveAccount(name) {
+  const n = String(name).trim().replace(/^@/, '').toLowerCase()
+  for (const [alias, cfg] of Object.entries(ACCOUNTS)) {
+    if (alias.toLowerCase() === n || cfg.handle?.toLowerCase() === n) return alias
+  }
+  return null
+}
+
+function knownAccounts() {
+  return Object.entries(ACCOUNTS)
+    .map(([alias, cfg]) => `@${cfg.handle} (${alias})`)
+    .join(', ')
+}
+
+function captionFor(post, account) {
+  for (const [k, v] of Object.entries(post.captions ?? {})) {
+    if (resolveAccount(k) === account) return v
+  }
+  return post.caption ?? ''
+}
+
 function credentials(account) {
-  const key = account.toUpperCase().replace(/[^A-Z0-9]/g, '_')
+  const key = (ACCOUNTS[account]?.env || account).toUpperCase().replace(/[^A-Z0-9]/g, '_')
   return {
     userId: process.env[`IG_${key}_USER_ID`],
     token: process.env[`IG_${key}_TOKEN`],
@@ -103,7 +129,14 @@ function validatePosts(posts) {
     else ids.add(p.id)
     if (!TYPES.has(p.type)) errors.push(`${where}: "type" deve ser um de ${[...TYPES].join(', ')}`)
     if (!Array.isArray(p.accounts) || p.accounts.length === 0) {
-      errors.push(`${where}: "accounts" deve ser uma lista, ex.: ["pessoal", "empresa"]`)
+      errors.push(`${where}: "accounts" deve ser uma lista, ex.: ["@yousefameroficial", "@tbfinance_"]`)
+    } else {
+      for (const a of p.accounts) {
+        if (!resolveAccount(a)) errors.push(`${where}: conta "${a}" desconhecida. Use: ${knownAccounts()}`)
+      }
+    }
+    for (const a of Object.keys(p.captions ?? {})) {
+      if (!resolveAccount(a)) errors.push(`${where}: "captions" cita conta desconhecida "${a}"`)
     }
     if (!p.publishAt || Number.isNaN(Date.parse(p.publishAt))) {
       errors.push(`${where}: "publishAt" inválido (use ex.: "2026-11-20T12:00:00-03:00")`)
@@ -179,7 +212,7 @@ function mediaParams(item, extra = {}) {
 
 async function createContainer(post, account, { userId, token }) {
   const media = normalizeMedia(post.media)
-  const caption = post.captions?.[account] ?? post.caption ?? ''
+  const caption = captionFor(post, account)
 
   switch (post.type) {
     case 'image':
@@ -231,7 +264,27 @@ async function publish(post, account, creds) {
 
 // ---------------------------------------------------------------- main
 
+// Confere se o token realmente pertence ao @ esperado (evita postar no perfil errado).
+const verified = new Map()
+async function verifyAccount(account, creds) {
+  if (!verified.has(account)) {
+    verified.set(
+      account,
+      (async () => {
+        const expected = ACCOUNTS[account]?.handle
+        if (!expected) return
+        const { username } = await graph('GET', creds.userId, creds.token, { fields: 'username' })
+        if (username?.toLowerCase() !== expected.toLowerCase()) {
+          throw new Error(`as credenciais de "${account}" são de @${username}, mas deveriam ser de @${expected}. Confira os secrets.`)
+        }
+      })(),
+    )
+  }
+  return verified.get(account)
+}
+
 async function main() {
+  ACCOUNTS = await readJson(ACCOUNTS_FILE, {})
   const posts = await readJson(POSTS_FILE, [])
   const errors = validatePosts(posts)
   if (errors.length) {
@@ -254,7 +307,8 @@ async function main() {
     .sort((a, b) => Date.parse(a.publishAt) - Date.parse(b.publishAt))
 
   for (const post of due) {
-    for (const account of post.accounts) {
+    for (const account of [...new Set(post.accounts.map(resolveAccount))]) {
+      const handle = ACCOUNTS[account]?.handle ? `@${ACCOUNTS[account].handle}` : account
       const key = `${post.id}:${account}`
       const entry = state[key] || {}
       if (entry.mediaId) continue
@@ -271,12 +325,13 @@ async function main() {
       }
 
       if (DRY_RUN) {
-        log(`[dry-run] publicaria ${post.type} "${post.id}" em ${account}`)
+        log(`[dry-run] publicaria ${post.type} "${post.id}" em ${handle}`)
         continue
       }
 
-      log(`→ publicando ${post.type} "${post.id}" em ${account}...`)
+      log(`→ publicando ${post.type} "${post.id}" em ${handle}...`)
       try {
+        await verifyAccount(account, creds)
         const result = await publish(post, account, creds)
         state[key] = { ...result, publishedAt: new Date().toISOString() }
         published++
