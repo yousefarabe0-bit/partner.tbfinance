@@ -33,6 +33,8 @@ jobs:
           node-version: 22
 
       - name: Validar fila
+        env:
+          MEDIA_BASE_URL: ${{ vars.MEDIA_BASE_URL || 'https://raw.githubusercontent.com/yousefarabe0-bit/partner.tbfinance/main/' }}
         run: node automation/instagram/publish.mjs --validate
 
       - name: Publicar posts vencidos
@@ -41,7 +43,7 @@ jobs:
           IG_PESSOAL_USER_ID: ${{ secrets.IG_PESSOAL_USER_ID }}
           IG_EMPRESA_TOKEN: ${{ secrets.IG_EMPRESA_TOKEN }}
           IG_EMPRESA_USER_ID: ${{ secrets.IG_EMPRESA_USER_ID }}
-          MEDIA_BASE_URL: ${{ vars.MEDIA_BASE_URL }}
+          MEDIA_BASE_URL: ${{ vars.MEDIA_BASE_URL || 'https://raw.githubusercontent.com/yousefarabe0-bit/partner.tbfinance/main/' }}
           IG_DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
         run: node automation/instagram/publish.mjs
 

@@ -1,0 +1,76 @@
+{
+ "tag": "YOUSEF AMER · @YOUSEFAMEROFICIAL",
+ "data": "NOV · 2026",
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/yousef/carrosseis/2026-11-black-friday/slides/y-estudio.jpg",
+  "/home/user/partner.tbfinance/marketing/yousef/carrosseis/2026-11-black-friday/slides/y-claro.jpg",
+  "/home/user/partner.tbfinance/marketing/yousef/carrosseis/2026-11-black-friday/slides/y-terno.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "foto": "y-estudio.jpg",
+   "pos": "center 30%",
+   "h": 900,
+   "brilho": 1.18,
+   "quem": "Yousef Amer · fundador da TB Finance",
+   "kicker": "PACOTE FISCAL",
+   "titulo": "O governo quer cortar até *R$ 60 bilhões* em gastos. E o ajuste fiscal da sua casa?",
+   "fs": 76
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O QUE ACONTECEU",
+   "titulo": "Em 11/11, o governo anunciou um projeto de corte de gastos para 2027.",
+   "lista": [
+    "Impacto de cerca de **R$ 60 bi** em 2027, e maior nos anos seguintes",
+    "Faz parte da meta de **superávit de 0,5% do PIB** (≈ R$ 73,2 bi)",
+    "Inclui um **gatilho** que reduz o crescimento das despesas de **2,5% para 2%**",
+    "E a revisão de benefícios e de supersalários"
+   ],
+   "fonte": "Fontes: B3 Bora Investir, Metrópoles, Times Brasil (11/11/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "POR QUE ISSO IMPORTA",
+   "titulo": "Quando o gasto cresce mais que a receita, *alguém paga a conta*.",
+   "paragrafos": [
+    "No país, essa conta aparece em **juros e dólar mais altos**. O mercado reagiu à notícia com dúvida sobre o tamanho real do corte.",
+    "Na sua casa, ela aparece em **juros do cartão**."
+   ]
+  },
+  {
+   "tipo": "texto",
+   "kicker": "A REGRA DE OURO",
+   "titulo": "Seus gastos não podem crescer mais rápido que a sua renda.",
+   "paragrafos": [
+    "É exatamente o \"gatilho\" do governo. Se o salário subiu 5%, o padrão de vida não pode subir 15%."
+   ],
+   "escuro": true
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O AJUSTE FISCAL DA SUA CASA",
+   "titulo": "Em 3 passos:",
+   "lista": [
+    "**Trava de gastos:** um teto mensal para o que é variável",
+    "**Revisão de \"benefícios\":** assinaturas, delivery, padrão que subiu sem perceber",
+    "**Superávit:** fechar o mês com sobra **antes** de pensar em consumo"
+   ]
+  },
+  {
+   "tipo": "texto",
+   "escuro": true,
+   "kicker": "O QUE EU VEJO TODO DIA",
+   "titulo": "Família não quebra por um gasto grande. Quebra por *vários gastos pequenos* que crescem sem trava.",
+   "destaque": "O governo pode votar o pacote. Você pode começar o seu hoje."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "COMECE PELO MAPA",
+   "titulo": "Antes de cortar, você precisa saber onde está o vazamento.",
+   "palavra": "EBOOK",
+   "assinatura": "Yousef Amer · fundador da @tbfinance_"
+  }
+ ]
+}

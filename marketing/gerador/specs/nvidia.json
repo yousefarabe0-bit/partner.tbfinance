@@ -1,0 +1,84 @@
+{
+ "tag": "YOUSEF AMER · @YOUSEFAMEROFICIAL",
+ "data": "NOV · 2026",
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/huang-stanford-033.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/huang-stanford-025.jpg",
+  "/home/user/partner.tbfinance/marketing/yousef/carrosseis/2026-11-black-friday/slides/y-terno.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "foto": "huang-stanford-033.jpg",
+   "pos": "center 12%",
+   "h": 980,
+   "quem": "Jensen Huang · ex-CEO da Nvidia",
+   "who_top": 640,
+   "kicker": "NVIDIA",
+   "titulo": "A saída de *uma pessoa* apagou mais de US$ 1 trilhão em valor de mercado.",
+   "fs": 76,
+   "credito": "Foto: Anders Eidesvik (CC BY 4.0)"
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O QUE ACONTECEU",
+   "titulo": "Em 12/11, Jensen Huang deixou o comando da Nvidia com efeito imediato.",
+   "paragrafos": [
+    "A diretora financeira, Colette Kress, assumiu de forma interina. As ações caíram, puxaram o setor de chips, e o Nasdaq entrou em **correção**.",
+    "Um analista da Wedbush estimou que a empresa pode valer **até 30% menos** sem ele no comando."
+   ],
+   "fonte": "Fontes: InfoMoney, Exame, CNBC, Yahoo Finance (nov/2026)."
+  },
+  {
+   "tipo": "texto",
+   "foto": "huang-stanford-025.jpg",
+   "pos": "center 35%",
+   "h": 600,
+   "kicker": "POR QUE O MERCADO TREMEU",
+   "titulo": "O nome disso é *risco de pessoa-chave*.",
+   "paragrafos": [
+    "Huang cofundou a Nvidia e foi o CEO por mais de 30 anos. Os investidores apostavam nele. Quando a peça central sai, **o valor inteiro balança**."
+   ],
+   "fonte": "Foto: Anders Eidesvik (CC BY 4.0)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "AGORA, A SUA CASA",
+   "titulo": "Na maioria das famílias, *o seu salário* é o Jensen Huang.",
+   "paragrafos": [
+    "Uma fonte de renda sustenta tudo. E o plano B, quase sempre, é o **limite do cartão**.",
+    "Se essa fonte para (demissão, doença, atraso de pagamento), a dívida começa no mês seguinte."
+   ]
+  },
+  {
+   "tipo": "texto",
+   "kicker": "SINAIS DE ALERTA",
+   "titulo": "Sua vida financeira tem risco de pessoa-chave se:",
+   "lista": [
+    "100% da renda vem de uma fonte só",
+    "você não aguenta 3 meses sem salário",
+    "o limite do cartão é a sua reserva",
+    "um imprevisto de R$ 2 mil já vira parcela"
+   ]
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O QUE EU FARIA",
+   "titulo": "Diversifique *antes* de precisar.",
+   "lista": [
+    "**Reserva de emergência:** de 3 a 6 meses do seu custo de vida",
+    "**Cartão é ferramenta**, não plano B",
+    "**Segunda fonte de renda**, mesmo que pequena",
+    "**Dívidas renegociadas** enquanto a renda ainda entra"
+   ],
+   "destaque": "A Nvidia vai sobreviver. Uma família sem reserva, muitas vezes, não."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "VOCÊ NÃO PRECISA SER A NVIDIA",
+   "titulo": "Monte o seu plano B antes do imprevisto.",
+   "palavra": "DESTRAVA",
+   "assinatura": "Yousef Amer · fundador da @tbfinance_"
+  }
+ ]
+}

@@ -2,16 +2,20 @@ import json, base64, io, html, sys
 from PIL import Image
 OUT=sys.argv[1]
 inv=json.load(open('inv.json'))['accounts']
-CAR={'tb':'/home/user/partner.tbfinance/marketing/tbfinance/carrosseis/2026-11-recorde-inadimplencia/png/01.png',
+CAR={'nv':'/home/user/partner.tbfinance/marketing/yousef/carrosseis/2026-11-nvidia-pessoa-chave/png/01.png',
+     'bb':'/home/user/partner.tbfinance/marketing/tbfinance/carrosseis/2026-11-banco-do-brasil/png/01.png',
+     'pf':'/home/user/partner.tbfinance/marketing/yousef/carrosseis/2026-11-pacote-fiscal/png/01.png',
+     'rh':'/home/user/partner.tbfinance/marketing/tbfinance/carrosseis/2026-11-ri-happy-chilli-beans/png/01.png',
+     'tb':'/home/user/partner.tbfinance/marketing/tbfinance/carrosseis/2026-11-recorde-inadimplencia/png/01.png',
      'bf':'/home/user/partner.tbfinance/marketing/yousef/carrosseis/2026-11-black-friday/png/01.png'}
 # (data, hora, perfil[T=TB, Y=Yousef, C=collab], formato, pasta/arquivo, capa (com *destaque*), CTA, status)
 P=[
-('Qua 18/11','9h','Y','Carrossel','Opinião do Yousef: Feirão Limpa Nome, quando vale e quando é armadilha','Feirão Limpa Nome: eu *recomendo?*','DESTRAVA','criar'),
-('Qua 18/11','12h','T','Carrossel','Autoridade: os números da TB','Sua dívida tem solução. *A gente prova.*','EBOOK','criar'),
-('Qua 18/11','19h','T','Carrossel','Notícia: recorde de 84,2 mi inadimplentes (Serasa)','car:tb','PLANILHA','pronto'),
+('Qua 18/11','9h','Y','Carrossel','Notícia + analogia: Nvidia perde US$ 1 tri com a saída do CEO → risco de pessoa-chave na sua renda','car:nv','DESTRAVA','pronto'),
+('Qua 18/11','12h','T','Carrossel','Notícia + analogia: lucro do Banco do Brasil cai 66% por inadimplência','car:bb','EBOOK','pronto'),
+('Qua 18/11','19h','T','Carrossel','Notícia: recorde de 84,2 mi inadimplentes (Serasa)','car:tb','DESTRAVA','pronto'),
 ('Qui 19/11','9h','C','Reel','Vídeo c/ conteúdo · VIDEO 09','Ganha R$ 8 mil e diz que *ganha mal*?','DESTRAVA','pronto'),
 ('Qui 19/11','19h','T','Carrossel','Dado: juro do rotativo a 451,7% ao ano (BC)','Pagar o mínimo custa *451% ao ano*','EBOOK','criar'),
-('Sex 20/11','9h','Y','Carrossel','Alerta: 5 sinais de golpe de quem promete "limpar seu nome"','5 sinais de *golpe* do limpa nome','PLANILHA','criar'),
+('Sex 20/11','9h','Y','Carrossel','Notícia + analogia: pacote fiscal de R$ 60 bi → o ajuste fiscal da sua casa','car:pf','EBOOK','pronto'),
 ('Sex 20/11','12h','T','Carrossel','Notícia: 20,3 mi em endividamento de risco, +75% em 5 anos (BC)','*20 milhões* no endividamento de risco','DESTRAVA','criar'),
 ('Sex 20/11','19h','T','Reel','Depoimentos · Depoimento loira','*R$ 550 mil* viraram R$ 150 mil','EBOOK','pronto'),
 ('Sáb 21/11','10h','Y','Reel','Caixinha · ganho 3k e devo 60k','Ganho R$ 3 mil e devo *R$ 60 mil*','PLANILHA','pronto'),
@@ -20,7 +24,7 @@ P=[
 ('Dom 22/11','9h','Y','Carrossel','Notícia: Black Friday + 13º','car:bf','PLANILHA','pronto'),
 ('Dom 22/11','12h','T','Carrossel','Checklist: antes de comprar na Black Friday','Black Friday: *desconto* ou dívida?','DESTRAVA','criar'),
 ('Dom 22/11','19h','T','Reel','Influenciadores · copy_22975553','Gastou seu dinheiro *com o quê?*','EBOOK','pronto'),
-('Seg 23/11','12h','T','Carrossel','Passo a passo: negociar no Feirão sem cair em armadilha','Feirão: o *passo a passo* seguro','PLANILHA','criar'),
+('Seg 23/11','12h','T','Carrossel','Notícia + analogia: Ri Happy e Chilli Beans renegociam R$ 1,1 bi','car:rh','PLANILHA','pronto'),
 ('Seg 23/11','19h','T','Carrossel','Produto: como funciona o Teu Bolso','Seu dinheiro *num só lugar*','DESTRAVA','criar'),
 ('Ter 24/11','9h','C','Reel','Vídeo c/ conteúdo · VIDEO 04','Você ganha bem, mas a *fatura* assusta?','EBOOK','pronto'),
 ('Ter 24/11','19h','T','Carrossel','Mito x Verdade: "depois de 5 anos a dívida some"','Depois de 5 anos a dívida *some?*','PLANILHA','criar'),
