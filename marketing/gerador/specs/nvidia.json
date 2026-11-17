@@ -2,18 +2,21 @@
  "tag": "YOUSEF AMER · @YOUSEFAMEROFICIAL",
  "data": "NOV · 2026",
  "copiar": [
-  "/home/user/partner.tbfinance/marketing/fotos-noticias/huang-stanford-033.jpg",
-  "/home/user/partner.tbfinance/marketing/fotos-noticias/huang-stanford-025.jpg",
-  "/home/user/partner.tbfinance/marketing/yousef/carrosseis/2026-11-black-friday/slides/y-terno.jpg"
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-huang-033.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-huang-025.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-nasdaq-tower.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-pagando-cartao.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-cartoes.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-cofrinho.jpg"
  ],
  "slides": [
   {
    "tipo": "capa",
-   "foto": "huang-stanford-033.jpg",
-   "pos": "center 12%",
-   "h": 980,
+   "foto": "hq-huang-033.jpg",
+   "pos": "center 15%",
+   "h": 1350,
    "quem": "Jensen Huang · ex-CEO da Nvidia",
-   "who_top": 640,
+   "who_top": 560,
    "kicker": "NVIDIA",
    "titulo": "A saída de *uma pessoa* apagou mais de US$ 1 trilhão em valor de mercado.",
    "fs": 76,
@@ -27,19 +30,22 @@
     "A diretora financeira, Colette Kress, assumiu de forma interina. As ações caíram, puxaram o setor de chips, e o Nasdaq entrou em **correção**.",
     "Um analista da Wedbush estimou que a empresa pode valer **até 30% menos** sem ele no comando."
    ],
-   "fonte": "Fontes: InfoMoney, Exame, CNBC, Yahoo Finance (nov/2026)."
+   "fonte": "Fontes: InfoMoney, Exame, CNBC, Yahoo Finance (nov/2026). Foto: Nielsoncaetanosalmeron (CC BY 4.0).",
+   "foto": "hq-nasdaq-tower.jpg",
+   "pos": "center 8%",
+   "fade": 26
   },
   {
    "tipo": "texto",
-   "foto": "huang-stanford-025.jpg",
-   "pos": "center 35%",
-   "h": 600,
+   "foto": "hq-huang-025.jpg",
+   "pos": "center 30%",
    "kicker": "POR QUE O MERCADO TREMEU",
    "titulo": "O nome disso é *risco de pessoa-chave*.",
    "paragrafos": [
     "Huang cofundou a Nvidia e foi o CEO por mais de 30 anos. Os investidores apostavam nele. Quando a peça central sai, **o valor inteiro balança**."
    ],
-   "fonte": "Foto: Anders Eidesvik (CC BY 4.0)."
+   "fonte": "Foto: Anders Eidesvik (CC BY 4.0).",
+   "fade": 34
   },
   {
    "tipo": "texto",
@@ -48,7 +54,11 @@
    "paragrafos": [
     "Uma fonte de renda sustenta tudo. E o plano B, quase sempre, é o **limite do cartão**.",
     "Se essa fonte para (demissão, doença, atraso de pagamento), a dívida começa no mês seguinte."
-   ]
+   ],
+   "foto": "hq-pagando-cartao.jpg",
+   "pos": "70% center",
+   "fade": 30,
+   "fonte": "Foto: Hloom Templates (CC BY 2.0)."
   },
   {
    "tipo": "texto",
@@ -59,7 +69,11 @@
     "você não aguenta 3 meses sem salário",
     "o limite do cartão é a sua reserva",
     "um imprevisto de R$ 2 mil já vira parcela"
-   ]
+   ],
+   "foto": "hq-cartoes.jpg",
+   "pos": "center 0%",
+   "fade": 22,
+   "fonte": "Foto: $5000 (CC BY-SA 4.0)."
   },
   {
    "tipo": "texto",
@@ -71,7 +85,12 @@
     "**Segunda fonte de renda**, mesmo que pequena",
     "**Dívidas renegociadas** enquanto a renda ainda entra"
    ],
-   "destaque": "A Nvidia vai sobreviver. Uma família sem reserva, muitas vezes, não."
+   "destaque": "A Nvidia vai sobreviver. Uma família sem reserva, muitas vezes, não.",
+   "foto": "hq-cofrinho.jpg",
+   "pos": "center 0%",
+   "fade": 12,
+   "fonte": "Foto: Ken Teegardin (CC BY-SA 2.0).",
+   "brilho": 0.95
   },
   {
    "tipo": "cta",
@@ -80,5 +99,6 @@
    "palavra": "DESTRAVA",
    "assinatura": "Yousef Amer · fundador da @tbfinance_"
   }
- ]
+ ],
+ "cheia": true
 }

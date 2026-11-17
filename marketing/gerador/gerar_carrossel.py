@@ -35,6 +35,7 @@ def page(spec, n, total, body, dark=False, extra_css=''):
 .dark .top{{color:#fff}}.dark .src{{color:#777}}.dark p{{color:#D4D4D4}}.dark p b{{color:#fff}}
 ul.l{{list-style:none;margin-top:34px}}ul.l li{{font-size:36px;line-height:1.35;font-weight:600;padding:16px 0 16px 54px;position:relative;border-bottom:1px solid rgba(0,0,0,.08)}}
 ul.l li:before{{content:'→';position:absolute;left:0;color:#E8440A;font-weight:900}}.dark ul.l li{{border-color:rgba(255,255,255,.12);color:#fff}}
+.grain{{position:absolute;inset:0;background:url(grain.png);opacity:.07;mix-blend-mode:overlay;pointer-events:none}}
 .big2{{font-size:150px;font-weight:900;letter-spacing:-.05em;line-height:.95;color:#E8440A}}
 </style></head><body{cls}>{top(spec)}{body}<div class="pg">{n}/{total}</div></body></html>'''
 
@@ -45,7 +46,7 @@ def slide_html(spec, s, n, total):
     if k == 'capa':
         foto = s.get('foto')
         pos = s.get('pos', 'center 20%')
-        bg = f'<div class="bg" style="position:absolute;left:0;right:0;top:0;height:{s.get("h", 900)}px;background:url({foto}) {pos}/cover;filter:brightness({s.get("brilho", 1)})"></div><div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,15,15,.5) 0%,rgba(15,15,15,0) 18%,rgba(15,15,15,0) 38%,rgba(15,15,15,.92) 56%,#0F0F0F 66%)"></div>' if foto else '<img src="' + LOGO_LIGHT.replace('logo-tb-light', 'seta') + '" style="position:absolute;right:-60px;top:330px;width:560px;opacity:.10">'
+        bg = f'<div class="bg" style="position:absolute;left:0;right:0;top:0;height:{s.get("h", 900)}px;background:url({foto}) {pos}/cover;filter:contrast(1.06) saturate(.92) brightness({s.get("brilho", 1)})"></div><div class="grain"></div><div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,15,15,.5) 0%,rgba(15,15,15,0) 18%,rgba(15,15,15,0) 38%,rgba(15,15,15,.92) 56%,#0F0F0F 66%)"></div>' if foto else '<img src="' + LOGO_LIGHT.replace('logo-tb-light', 'seta') + '" style="position:absolute;right:-60px;top:330px;width:560px;opacity:.10">'
         who = f'<div style="position:absolute;left:72px;top:{s.get("who_top", 560)}px;font-size:22px;font-weight:700;color:#fff;background:rgba(0,0,0,.55);padding:8px 14px;border-radius:10px;z-index:2">{esc(s["quem"])}</div>' if s.get('quem') else ''
         body = f'''{bg}{who}<div style="position:absolute;left:72px;right:72px;bottom:130px"><div class="kick" style="color:#FF6B3D">{esc(s["kicker"])}</div>
 <h1 style="color:#fff;font-size:{s.get("fs", 80)}px">{esc(s["titulo"])}</h1></div>
@@ -56,7 +57,13 @@ def slide_html(spec, s, n, total):
         dark = s.get('escuro', False)
         foto = ''
         wrap_top = 150
-        if s.get('foto'):
+        if s.get('foto') and s.get('cheia', spec.get('cheia')):
+            # Foto em tela cheia (padrão G4): degradê escuro só na metade de baixo, texto ancorado embaixo.
+            foto = (f'<div style="position:absolute;inset:0;background:url({s["foto"]}) {s.get("pos", "center 30%")}/cover;filter:contrast(1.06) saturate(.92) brightness({s.get("brilho", 1)})"></div>'
+                    f'<div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,15,15,.55) 0%,rgba(15,15,15,0) 14%,rgba(15,15,15,0) {s.get("fade", 30)}%,rgba(15,15,15,.88) {s.get("fade", 30) + 18}%,#0F0F0F {s.get("fade", 30) + 30}%)"></div>'
+                    '<div class="grain"></div>')
+            dark = True
+        elif s.get('foto'):
             foto = f'<div style="position:absolute;left:0;right:0;top:0;height:{s.get("h", 600)}px;background:url({s["foto"]}) {s.get("pos", "center 30%")}/cover"></div><div style="position:absolute;left:0;right:0;top:0;height:{s.get("h", 600)}px;background:linear-gradient(180deg,rgba(15,15,15,.45),rgba(15,15,15,0) 25%,rgba(15,15,15,0) 55%,#0F0F0F)"></div>'
             wrap_top = s.get('h', 600) - 60
             dark = True
@@ -66,6 +73,8 @@ def slide_html(spec, s, n, total):
         card = f'<div class="card" style="font-size:36px;font-weight:700;line-height:1.35{";background:#1c1c1c;color:#fff" if dark else ""}">{esc(s["destaque"])}</div>' if s.get('destaque') else ''
         h2c = ' style="color:#fff"' if dark else ''
         pos = f'top:{wrap_top}px' if (s.get('foto') or not dark) else 'top:50%;transform:translateY(-50%)'
+        if s.get('foto') and s.get('cheia', spec.get('cheia')):
+            pos = 'top:auto;bottom:110px'
         body = f'{foto}<div class="wrap" style="{pos}"><div class="kick">{esc(s["kicker"])}</div><h2{h2c}>{esc(s["titulo"])}</h2>{big}{ps}{lst}{card}</div>{src}'
         return page(spec, n, total, body, dark=dark)
     if k == 'cta':
@@ -87,6 +96,12 @@ def main():
     out = sys.argv[2]
     os.makedirs(out, exist_ok=True)
     shutil.copy(CSS, os.path.join(out, 'ed.css'))
+    grain = os.path.join(os.path.dirname(__file__), 'grain.png')
+    if not os.path.exists(grain):
+        import random
+        from PIL import Image
+        g = Image.new('L', (540, 675)); g.putdata([random.randint(0, 255) for _ in range(540 * 675)]); g.save(grain)
+    shutil.copy(grain, out)
     for f in spec.get('copiar', []):
         shutil.copy(os.path.join(os.path.dirname(sys.argv[1]), f) if not os.path.isabs(f) else f, out)
     total = len(spec['slides'])
