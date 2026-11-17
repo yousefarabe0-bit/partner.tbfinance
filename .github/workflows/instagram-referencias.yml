@@ -1,0 +1,32 @@
+name: Instagram – posts de referência
+
+# Lê posts públicos de perfis comerciais de referência (API oficial, Business Discovery).
+on:
+  workflow_dispatch:
+    inputs:
+      handles:
+        description: 'Perfis separados por vírgula'
+        default: 'g4educacao'
+      limit:
+        description: 'Quantos posts por perfil'
+        default: '25'
+
+permissions:
+  contents: read
+
+jobs:
+  reference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Ler posts de referência
+        env:
+          IG_PESSOAL_TOKEN: ${{ secrets.IG_PESSOAL_TOKEN }}
+          IG_PESSOAL_USER_ID: ${{ secrets.IG_PESSOAL_USER_ID }}
+          REF_HANDLES: ${{ inputs.handles }}
+          REF_LIMIT: ${{ inputs.limit }}
+        run: node automation/instagram/reference.mjs
