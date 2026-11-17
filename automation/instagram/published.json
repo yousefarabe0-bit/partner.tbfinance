@@ -1,1 +1,7 @@
-{}
+{
+  "2026-11-17-yousef-decimo-terceiro:pessoal": {
+    "attempts": 1,
+    "lastError": "upload do vídeo falhou: Invalid Header format: expected either both Content-Length and X-Entity-Length, or Transfer-Encoding alone",
+    "lastAttemptAt": "2026-11-17T14:06:17.146Z"
+  }
+}
