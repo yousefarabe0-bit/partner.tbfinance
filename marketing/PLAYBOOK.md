@@ -49,6 +49,18 @@ Não mexer no código do site (`src/`).
   `marketing/reels/2026-11-semana01/capas-html/`). Texto dentro da área central 3:4.
 - Sempre conferir a imagem renderizada antes de colocar na fila.
 
+### Padrão de qualidade das fotos (desde 17/11, pedido do Yousef: nível G4 Educação)
+- **Foto em tela cheia em todos os slides**, não só na capa: foto ocupando o slide inteiro, degradê escuro só onde fica o texto.
+  Slide só de tipografia apenas quando o slide for um número/gráfico.
+- **Resolução mínima:** a foto precisa ter pelo menos **1350 px de altura útil** depois do corte (nada de miniatura de 960 px
+  nem quadro de vídeo em 720p). Baixar o arquivo original do Wikimedia Commons, não a miniatura.
+- **Fontes com licença e boa qualidade**, nesta ordem: Agência Brasil (CC BY), Flickr oficial do governo (Planalto, Senado,
+  Câmara, STF, Fazenda), Wikimedia Commons (original), kits de imprensa das empresas (uso editorial), Unsplash/Pexels para cenas.
+  Nunca copiar fotos de outros perfis (G4 inclusive): eles pagam bancos de imagem.
+- **Uma foto diferente por slide** quando possível: pessoa, produto, lugar, contexto. Rosto nunca coberto pelo texto.
+- **Tratamento igual em todas:** leve correção de cor, nitidez, granulação sutil, para o carrossel parecer uma peça só.
+- Renderizar em 2x e reduzir para 1080x1350 (texto mais nítido). Conferir cada slide ampliado antes de pôr na fila.
+
 ## 6. Drive
 - Pasta raiz das pastas de vídeo: **"Pastas"** (id `1W3rI1OrH366tjGKmNqTMII6XXWK39UMU`), compartilhada por link.
   Subpastas: Depoimentos Clientes (só TB), Influenciadores (só TB), Caixinha de perguntas (só Yousef),
