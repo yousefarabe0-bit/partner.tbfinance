@@ -10,3 +10,7 @@
 | hq-pagando-cartao.jpg | Pagamento com cartão | Hloom Templates | CC BY 2.0 | File:Paying with a Credit Card (28886645201).jpg |
 | hq-cartoes.jpg | Cartões de crédito | $5000 | CC BY-SA 4.0 | File:Credit card logos (2015-12-1816-27-350044).jpg |
 | hq-cofrinho.jpg | Cofrinho | Ken Teegardin | CC BY-SA 2.0 | File:Hand Putting Deposit Into Piggy Bank (5737295175).jpg |
+| hq-bb-sede.jpg | Sede do Banco do Brasil, Brasília | Agência Senado | CC BY 2.0 | File:Fachada do edifício sede do Banco do Brasil em Brasília.jpg |
+| hq-bb-agencia.jpg | Agência do Banco do Brasil | Bruno Luiz | CC BY-SA 4.0 | File:Agência Banco do Brasil Avenida Felinto Muller.jpg |
+| hq-bb-edificio.jpg | Edifício do Banco do Brasil, Brasília | Willemarcel | CC BY-SA 3.0 | File:Edifício do Banco do Brasil, em Brasília.jpg |
+| hq-maquininha.jpg | Maquininha de cartão | Basile Morin | CC BY-SA 4.0 | File:Credit card terminal in Laos.jpg |
