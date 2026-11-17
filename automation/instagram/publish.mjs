@@ -18,7 +18,6 @@
 //   node automation/instagram/publish.mjs --now=<ISO>  simula outro "agora"
 
 import { readFile, writeFile, stat, mkdtemp, rm } from 'node:fs/promises'
-import { createReadStream } from 'node:fs'
 import { execFile } from 'node:child_process'
 import { promisify } from 'node:util'
 import os from 'node:os'
@@ -312,8 +311,7 @@ async function uploadReelFromDrive(userId, token, item, params) {
     const up = await fetch(uri, {
       method: 'POST',
       headers: { Authorization: `OAuth ${token}`, offset: '0', file_size: String(bytes) },
-      body: createReadStream(file),
-      duplex: 'half',
+      body: await readFile(file),
     })
     const upBody = await up.json().catch(() => ({}))
     if (!up.ok || upBody.success === false) throw new Error(`upload do vídeo falhou: ${upBody.debug_info?.message || up.status}`)
