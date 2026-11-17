@@ -299,23 +299,37 @@ async function uploadReelFromDrive(userId, token, item, params) {
     let file = src
     const { stdout } = await run('ffprobe', ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=codec_name', '-of', 'csv=p=0', src])
     const size = (await stat(src)).size
-    if (size > MAX_REEL_BYTES || !/h264/.test(stdout)) {
+    if (size > 60e6 || !/h264/.test(stdout)) {
       log(`   recomprimindo (${Math.round(size / 1e6)} MB, codec ${stdout.trim() || '?'})...`)
       file = path.join(dir, 'out.mp4')
-      await run('ffmpeg', ['-y', '-loglevel', 'error', '-i', src, '-vf', "scale='min(1080,iw)':-2", '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '23', '-maxrate', '8M', '-bufsize', '16M', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', file], { maxBuffer: 1 << 26 })
+      await run('ffmpeg', ['-y', '-loglevel', 'error', '-i', src, '-vf', "scale='min(1080,iw)':-2", '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '23', '-maxrate', '5M', '-bufsize', '10M', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', file], { maxBuffer: 1 << 26 })
     }
     const bytes = (await stat(file)).size
-    const container = await graph('POST', `${userId}/media`, token, { ...params, upload_type: 'resumable' })
-    const uri = container.uri || `https://rupload.facebook.com/ig-api-upload/${API_VERSION}/${container.id}`
-    log(`   enviando ${Math.round(bytes / 1e6)} MB ao Instagram...`)
-    const up = await fetch(uri, {
-      method: 'POST',
-      headers: { Authorization: `OAuth ${token}`, offset: '0', file_size: String(bytes) },
-      body: await readFile(file),
-    })
-    const upBody = await up.json().catch(() => ({}))
-    if (!up.ok || upBody.success === false) throw new Error(`upload do vídeo falhou: ${upBody.debug_info?.message || up.status}`)
-    return { id: container.id }
+    const data = await readFile(file)
+    let lastErr
+    for (let tryN = 1; tryN <= 2; tryN++) {
+      const container = await graph('POST', `${userId}/media`, token, { ...params, upload_type: 'resumable' })
+      const uri = container.uri || `https://rupload.facebook.com/ig-api-upload/${API_VERSION}/${container.id}`
+      log(`   enviando ${Math.round(bytes / 1e6)} MB ao Instagram (tentativa ${tryN})...`)
+      const up = await fetch(uri, {
+        method: 'POST',
+        headers: { Authorization: `OAuth ${token}`, offset: '0', file_size: String(bytes), 'Content-Type': 'application/octet-stream' },
+        body: data,
+      })
+      const text = await up.text()
+      let upBody = {}
+      try { upBody = JSON.parse(text) } catch {}
+      if (up.ok && upBody.success !== false) return { id: container.id }
+      lastErr = `HTTP ${up.status} ${text.slice(0, 400)}`
+      log(`   upload direto falhou: ${lastErr}`)
+    }
+    // Plano B: o Instagram baixa o vídeo direto do link público do Drive.
+    log('   tentando pelo link público do Drive (video_url)...')
+    try {
+      return await graph('POST', `${userId}/media`, token, { ...params, video_url: item.url })
+    } catch (e) {
+      throw new Error(`upload do vídeo falhou: ${lastErr} | video_url: ${e.message}`)
+    }
   } finally {
     await rm(dir, { recursive: true, force: true })
   }
