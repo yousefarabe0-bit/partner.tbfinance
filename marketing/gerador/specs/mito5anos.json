@@ -1,9 +1,82 @@
-{"tag":"@TBFINANCE_","data":"NOV · 2026","copiar":[],"slides":[
-{"tipo":"capa","kicker":"MITO OU VERDADE?","titulo":"\"Depois de 5 anos a dívida *some*.\"","fs":96},
-{"tipo":"texto","kicker":"A PARTE QUE É VERDADE","titulo":"Depois de 5 anos, a negativação sai do cadastro de devedores.","paragrafos":["O Código de Defesa do Consumidor proíbe que informações negativas fiquem **mais de 5 anos** nos cadastros de proteção ao crédito."],"fonte":"Fonte: Código de Defesa do Consumidor, art. 43, § 1º."},
-{"tipo":"texto","escuro":true,"kicker":"A PARTE QUE É MITO","titulo":"O nome sai da lista. A dívida *não some* da sua vida.","lista":["O banco credor **continua com o registro** e pode negar novos créditos","Você passa **5 anos com crédito travado**: sem cartão, financiamento ou empréstimo bom","Enquanto isso, o problema que causou a dívida **continua lá**"]},
-{"tipo":"texto","kicker":"A CONTA QUE NINGUÉM FAZ","titulo":"Esperar 5 anos sai caro.","paragrafos":["São 60 meses sem conseguir financiar um imóvel, trocar de carro ou ter um limite para emergências. E muita gente faz **dívidas novas** nesse tempo, porque não resolveu a raiz do problema."]},
-{"tipo":"texto","kicker":"O CAMINHO MAIS CURTO","titulo":"Negociar com estratégia costuma ser mais rápido e mais barato do que esperar.","lista":["Bancos dão **descontos maiores** para quem negocia com plano","Você **volta a ter crédito** em meses, não em anos","E aprende a **não voltar** para o vermelho"]},
-{"tipo":"texto","escuro":true,"kicker":"RESUMO","titulo":"Esperar não resolve. *Organizar e negociar*, sim.","destaque":"Cada caso é único. O primeiro passo é entender o seu."},
-{"tipo":"cta","kicker":"NÃO ESPERE 5 ANOS","titulo":"Descubra o que dá para fazer com a sua dívida agora.","palavra":"DESTRAVA","assinatura":"TB Finance · desde 2019 tirando brasileiros do vermelho"}
-]}
+{
+ "tag": "@TBFINANCE_",
+ "data": "NOV · 2026",
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-aperto-mao.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-pagando-cartao.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-contrato.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "kicker": "MITO OU VERDADE?",
+   "titulo": "\"Depois de 5 anos a dívida *some*.\"",
+   "fs": 96,
+   "foto": "hq-contrato.jpg",
+   "pos": "center 40%",
+   "h": 1350,
+   "credito": "Foto: Blogtrepreneur (CC BY 2.0)"
+  },
+  {
+   "tipo": "texto",
+   "kicker": "A PARTE QUE É VERDADE",
+   "titulo": "Depois de 5 anos, a negativação sai do cadastro de devedores.",
+   "paragrafos": [
+    "O Código de Defesa do Consumidor proíbe que informações negativas fiquem **mais de 5 anos** nos cadastros de proteção ao crédito."
+   ],
+   "fonte": "Fonte: Código de Defesa do Consumidor, art. 43, § 1º. Foto: Hloom Templates (CC BY 2.0).",
+   "foto": "hq-pagando-cartao.jpg",
+   "pos": "70% center",
+   "fade": 24
+  },
+  {
+   "tipo": "texto",
+   "escuro": true,
+   "kicker": "A PARTE QUE É MITO",
+   "titulo": "O nome sai da lista. A dívida *não some* da sua vida.",
+   "lista": [
+    "O banco credor **continua com o registro** e pode negar novos créditos",
+    "Você passa **5 anos com crédito travado**: sem cartão, financiamento ou empréstimo bom",
+    "Enquanto isso, o problema que causou a dívida **continua lá**"
+   ]
+  },
+  {
+   "tipo": "texto",
+   "kicker": "A CONTA QUE NINGUÉM FAZ",
+   "titulo": "Esperar 5 anos sai caro.",
+   "paragrafos": [
+    "São 60 meses sem conseguir financiar um imóvel, trocar de carro ou ter um limite para emergências. E muita gente faz **dívidas novas** nesse tempo, porque não resolveu a raiz do problema."
+   ],
+   "escuro": true
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O CAMINHO MAIS CURTO",
+   "titulo": "Negociar com estratégia costuma ser mais rápido e mais barato do que esperar.",
+   "lista": [
+    "Bancos dão **descontos maiores** para quem negocia com plano",
+    "Você **volta a ter crédito** em meses, não em anos",
+    "E aprende a **não voltar** para o vermelho"
+   ],
+   "foto": "hq-aperto-mao.jpg",
+   "pos": "center 30%",
+   "fade": 24,
+   "fonte": "Foto: rawpixel.com (CC0)."
+  },
+  {
+   "tipo": "texto",
+   "escuro": true,
+   "kicker": "RESUMO",
+   "titulo": "Esperar não resolve. *Organizar e negociar*, sim.",
+   "destaque": "Cada caso é único. O primeiro passo é entender o seu."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "NÃO ESPERE 5 ANOS",
+   "titulo": "Descubra o que dá para fazer com a sua dívida agora.",
+   "palavra": "DESTRAVA",
+   "assinatura": "TB Finance · desde 2019 tirando brasileiros do vermelho"
+  }
+ ],
+ "cheia": true
+}

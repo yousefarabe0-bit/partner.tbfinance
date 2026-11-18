@@ -1,9 +1,89 @@
-{"tag":"@TBFINANCE_","data":"NOV · 2026","copiar":[],"slides":[
-{"tipo":"capa","kicker":"BLACK FRIDAY 2026","titulo":"*86%* dos brasileiros já desistiram de uma promoção por medo de golpe.","fs":84},
-{"tipo":"texto","kicker":"O QUE A PESQUISA MOSTRA","titulo":"O medo de golpe já muda o jeito de comprar.","numero":"86%","numero_legenda":"já desistiram de uma promoção por medo de golpe digital","fonte":"Fonte: Serasa Experian, pesquisa com 1.480 pessoas (set/2026)."},
-{"tipo":"texto","kicker":"OS GOLPES QUE MAIS PREOCUPAM","titulo":"Sites falsos lideram a lista.","lista":["**Sites falsos:** 53%","**Golpes com Pix:** 42%","**Anúncios falsos nas redes sociais:** 32%"],"fonte":"Fonte: Serasa Experian (set/2026)."},
-{"tipo":"texto","kicker":"O NOVO PERIGO","titulo":"Golpes feitos com *inteligência artificial*.","paragrafos":["**76%** dos consumidores se sentem inseguros com golpes feitos com IA, e **63%** dizem não conseguir identificar uma fraude desse tipo."],"fonte":"Fonte: Reclame Aqui (2026)."},
-{"tipo":"texto","kicker":"COMO SE PROTEGER","titulo":"5 cuidados antes de pagar:","lista":["Digite o endereço da loja, **não clique em anúncio**","Desconfie de preço **muito abaixo** do mercado","No Pix, **confira o nome** de quem recebe","Prefira **cartão virtual** para compras online","Nunca passe **códigos** recebidos por SMS"]},
-{"tipo":"texto","escuro":true,"kicker":"E TEM O OUTRO GOLPE","titulo":"O golpe que você mesmo aplica: comprar *o que não cabe*.","destaque":"Desconto em coisa que você não ia comprar não é economia. É dívida com desconto."},
-{"tipo":"cta","kicker":"COMPRE COM A CONTA FEITA","titulo":"Organize o mês antes da Black Friday.","palavra":"PLANILHA","assinatura":"TB Finance · desde 2019 tirando brasileiros do vermelho"}
-]}
+{
+ "tag": "@TBFINANCE_",
+ "data": "NOV · 2026",
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-cartoes.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-cofrinho.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-compra-online.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-pagando-cartao.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "kicker": "BLACK FRIDAY 2026",
+   "titulo": "*86%* dos brasileiros já desistiram de uma promoção por medo de golpe.",
+   "fs": 84,
+   "foto": "hq-compra-online.jpg",
+   "pos": "88% center",
+   "h": 1350,
+   "credito": "Foto: Shixart1985 (CC BY 2.0)"
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O QUE A PESQUISA MOSTRA",
+   "titulo": "O medo de golpe já muda o jeito de comprar.",
+   "numero": "86%",
+   "numero_legenda": "já desistiram de uma promoção por medo de golpe digital",
+   "fonte": "Fonte: Serasa Experian, pesquisa com 1.480 pessoas (set/2026).",
+   "escuro": true
+  },
+  {
+   "tipo": "texto",
+   "kicker": "OS GOLPES QUE MAIS PREOCUPAM",
+   "titulo": "Sites falsos lideram a lista.",
+   "lista": [
+    "**Sites falsos:** 53%",
+    "**Golpes com Pix:** 42%",
+    "**Anúncios falsos nas redes sociais:** 32%"
+   ],
+   "fonte": "Fonte: Serasa Experian (set/2026). Foto: $5000 (CC BY-SA 4.0).",
+   "foto": "hq-cartoes.jpg",
+   "pos": "center 0%",
+   "fade": 24
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O NOVO PERIGO",
+   "titulo": "Golpes feitos com *inteligência artificial*.",
+   "paragrafos": [
+    "**76%** dos consumidores se sentem inseguros com golpes feitos com IA, e **63%** dizem não conseguir identificar uma fraude desse tipo."
+   ],
+   "fonte": "Fonte: Reclame Aqui (2026).",
+   "escuro": true
+  },
+  {
+   "tipo": "texto",
+   "kicker": "COMO SE PROTEGER",
+   "titulo": "5 cuidados antes de pagar:",
+   "lista": [
+    "Digite o endereço da loja, **não clique em anúncio**",
+    "Desconfie de preço **muito abaixo** do mercado",
+    "No Pix, **confira o nome** de quem recebe",
+    "Prefira **cartão virtual** para compras online",
+    "Nunca passe **códigos** recebidos por SMS"
+   ],
+   "foto": "hq-pagando-cartao.jpg",
+   "pos": "70% center",
+   "fade": 16,
+   "fonte": "Foto: Hloom Templates (CC BY 2.0)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "E TEM O OUTRO GOLPE",
+   "titulo": "O golpe que você mesmo aplica: comprar *o que não cabe*.",
+   "destaque": "Desconto em coisa que você não ia comprar não é economia. É dívida com desconto.",
+   "foto": "hq-cofrinho.jpg",
+   "pos": "center 0%",
+   "fade": 22,
+   "fonte": "Foto: Ken Teegardin (CC BY-SA 2.0)."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "COMPRE COM A CONTA FEITA",
+   "titulo": "Organize o mês antes da Black Friday.",
+   "palavra": "PLANILHA",
+   "assinatura": "TB Finance · desde 2019 tirando brasileiros do vermelho"
+  }
+ ],
+ "cheia": true
+}

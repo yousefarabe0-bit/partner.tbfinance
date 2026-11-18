@@ -17,3 +17,10 @@
 | hq-ps5.jpg | PlayStation 5 e DualSense | Osh33m | CC BY-SA 4.0 | File:PlayStation 5 and DualSense (2).jpg |
 | hq-rockstar-north.jpg | Rockstar North, Edimburgo | Discott | CC0 | File:20231022 Rockstar North.jpg |
 | hq-controle.jpg | Mãos segurando controle | Vu Hoang | CC BY 2.0 | File:Hands holding video game controller (50811892858).jpg |
+| hq-bc-sede.jpg | Edifício-sede do Banco Central, Brasília | Senado Federal | CC BY 2.0 | File:Edifício sede do Banco Central do Brasil (16011635094).jpg |
+| hq-galipolo-cae.jpg | Gabriel Galípolo na CAE | Agência Senado | CC BY 2.0 | File:2024-10-08, CAE - Comissão de Assuntos Econômicos (54052239106).jpg |
+| hq-contrato.jpg | Contrato e caneta | Blogtrepreneur | CC BY 2.0 | File:Legal Contract & Signature - Warm Tones.jpg |
+| hq-aperto-mao.jpg | Aperto de mão | rawpixel.com | CC0 | File:Business agreement handshake at coffee shop.jpg |
+| hq-congresso.jpg | Congresso Nacional | Jardelsliumba | CC BY-SA 4.0 | File:Congresso Nacional Brasília, DF.jpg |
+| hq-esplanada.jpg | Esplanada dos Ministérios | Senado Federal | CC BY 2.0 | File:Esplanada dos Ministérios (fachada ministérios).jpg |
+| hq-compra-online.jpg | Compra online com cartão | Shixart1985 | CC BY 2.0 | File:Business professional engages in online shopping from home workspace while using credit card.jpg |

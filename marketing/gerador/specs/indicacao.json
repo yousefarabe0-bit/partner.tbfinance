@@ -1,9 +1,79 @@
-{"tag":"@TBFINANCE_","data":"NOV · 2026","copiar":[],"slides":[
-{"tipo":"capa","kicker":"PROGRAMA DE INDICAÇÃO","titulo":"Indicou, *ganhou*. Indicou muito, virou parceiro.","fs":92},
-{"tipo":"texto","kicker":"COMO FUNCIONA","titulo":"Você conhece alguém que está apertado com dívidas?","paragrafos":["Todo mundo conhece. E quem já saiu do vermelho com a TB sabe o alívio que é."]},
-{"tipo":"texto","kicker":"PARA CLIENTES","titulo":"Cada indicação que fecha vira *desconto* para você.","paragrafos":["Indicou um amigo ou familiar e ele fechou com a TB Finance? O desconto entra **automaticamente** no seu próximo pagamento."]},
-{"tipo":"texto","escuro":true,"kicker":"PARA QUEM INDICA MUITO","titulo":"Com 5 indicações fechadas, você vira *parceiro*.","numero":"7%","numero_legenda":"de comissão recorrente sobre os contratos ativos que você trouxe"},
-{"tipo":"texto","kicker":"O MELHOR TIPO DE INDICAÇÃO","titulo":"Você ajuda alguém a sair do vermelho. E ainda é recompensado.","lista":["Seu amigo ganha **um plano e a renegociação**","Você ganha **desconto ou comissão**","Todo mundo sai com a vida financeira mais leve"]},
-{"tipo":"texto","kicker":"COMO INDICAR","titulo":"Simples assim:","lista":["Fale com a equipe TB pelo **WhatsApp**","Passe o contato de quem você quer indicar","Acompanhe tudo pela **área do parceiro**"]},
-{"tipo":"cta","kicker":"COMECE PELO SEU PLANO","titulo":"Ainda não é cliente? Comece organizando o seu mês.","palavra":"PLANILHA","assinatura":"TB Finance · desde 2019 tirando brasileiros do vermelho"}
-]}
+{
+ "tag": "@TBFINANCE_",
+ "data": "NOV · 2026",
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-aperto-mao.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-cofrinho.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "kicker": "PROGRAMA DE INDICAÇÃO",
+   "titulo": "Indicou, *ganhou*. Indicou muito, virou parceiro.",
+   "fs": 92,
+   "foto": "hq-aperto-mao.jpg",
+   "pos": "center 30%",
+   "h": 1350,
+   "credito": "Foto: rawpixel.com (CC0)"
+  },
+  {
+   "tipo": "texto",
+   "kicker": "COMO FUNCIONA",
+   "titulo": "Você conhece alguém que está apertado com dívidas?",
+   "paragrafos": [
+    "Todo mundo conhece. E quem já saiu do vermelho com a TB sabe o alívio que é."
+   ],
+   "escuro": true
+  },
+  {
+   "tipo": "texto",
+   "kicker": "PARA CLIENTES",
+   "titulo": "Cada indicação que fecha vira *desconto* para você.",
+   "paragrafos": [
+    "Indicou um amigo ou familiar e ele fechou com a TB Finance? O desconto entra **automaticamente** no seu próximo pagamento."
+   ],
+   "escuro": true
+  },
+  {
+   "tipo": "texto",
+   "escuro": true,
+   "kicker": "PARA QUEM INDICA MUITO",
+   "titulo": "Com 5 indicações fechadas, você vira *parceiro*.",
+   "numero": "7%",
+   "numero_legenda": "de comissão recorrente sobre os contratos ativos que você trouxe"
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O MELHOR TIPO DE INDICAÇÃO",
+   "titulo": "Você ajuda alguém a sair do vermelho. E ainda é recompensado.",
+   "lista": [
+    "Seu amigo ganha **um plano e a renegociação**",
+    "Você ganha **desconto ou comissão**",
+    "Todo mundo sai com a vida financeira mais leve"
+   ],
+   "foto": "hq-cofrinho.jpg",
+   "pos": "center 0%",
+   "fade": 20,
+   "fonte": "Foto: Ken Teegardin (CC BY-SA 2.0)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "COMO INDICAR",
+   "titulo": "Simples assim:",
+   "lista": [
+    "Fale com a equipe TB pelo **WhatsApp**",
+    "Passe o contato de quem você quer indicar",
+    "Acompanhe tudo pela **área do parceiro**"
+   ],
+   "escuro": true
+  },
+  {
+   "tipo": "cta",
+   "kicker": "COMECE PELO SEU PLANO",
+   "titulo": "Ainda não é cliente? Comece organizando o seu mês.",
+   "palavra": "PLANILHA",
+   "assinatura": "TB Finance · desde 2019 tirando brasileiros do vermelho"
+  }
+ ],
+ "cheia": true
+}

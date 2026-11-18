@@ -2,21 +2,23 @@
  "tag": "YOUSEF AMER · @YOUSEFAMEROFICIAL",
  "data": "NOV · 2026",
  "copiar": [
-  "/home/user/partner.tbfinance/marketing/yousef/carrosseis/2026-11-black-friday/slides/y-estudio.jpg",
-  "/home/user/partner.tbfinance/marketing/yousef/carrosseis/2026-11-black-friday/slides/y-claro.jpg",
-  "/home/user/partner.tbfinance/marketing/yousef/carrosseis/2026-11-black-friday/slides/y-terno.jpg"
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-cofrinho.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-congresso.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-esplanada.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-maquininha.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-pagando-cartao.jpg"
  ],
  "slides": [
   {
    "tipo": "capa",
-   "foto": "y-estudio.jpg",
-   "pos": "center 30%",
-   "h": 900,
+   "foto": "hq-congresso.jpg",
+   "pos": "center center",
+   "h": 1350,
    "brilho": 1.18,
-   "quem": "Yousef Amer · fundador da TB Finance",
    "kicker": "PACOTE FISCAL",
    "titulo": "O governo quer cortar até *R$ 60 bilhões* em gastos. E o ajuste fiscal da sua casa?",
-   "fs": 76
+   "fs": 76,
+   "credito": "Foto: Jardelsliumba (CC BY-SA 4.0)"
   },
   {
    "tipo": "texto",
@@ -28,7 +30,11 @@
     "Inclui um **gatilho** que reduz o crescimento das despesas de **2,5% para 2%**",
     "E a revisão de benefícios e de supersalários"
    ],
-   "fonte": "Fontes: B3 Bora Investir, Metrópoles, Times Brasil (11/11/2026)."
+   "fonte": "Fontes: B3 Bora Investir, Metrópoles, Times Brasil (11/11/2026). Foto: Senado Federal (CC BY 2.0).",
+   "foto": "hq-esplanada.jpg",
+   "pos": "100% center",
+   "fade": 18,
+   "brilho": 0.7
   },
   {
    "tipo": "texto",
@@ -37,7 +43,8 @@
    "paragrafos": [
     "No país, essa conta aparece em **juros e dólar mais altos**. O mercado reagiu à notícia com dúvida sobre o tamanho real do corte.",
     "Na sua casa, ela aparece em **juros do cartão**."
-   ]
+   ],
+   "escuro": true
   },
   {
    "tipo": "texto",
@@ -46,7 +53,10 @@
    "paragrafos": [
     "É exatamente o \"gatilho\" do governo. Se o salário subiu 5%, o padrão de vida não pode subir 15%."
    ],
-   "escuro": true
+   "foto": "hq-pagando-cartao.jpg",
+   "pos": "70% center",
+   "fade": 24,
+   "fonte": "Foto: Hloom Templates (CC BY 2.0)."
   },
   {
    "tipo": "texto",
@@ -56,14 +66,21 @@
     "**Trava de gastos:** um teto mensal para o que é variável",
     "**Revisão de \"benefícios\":** assinaturas, delivery, padrão que subiu sem perceber",
     "**Superávit:** fechar o mês com sobra **antes** de pensar em consumo"
-   ]
+   ],
+   "foto": "hq-cofrinho.jpg",
+   "pos": "center 0%",
+   "fade": 16,
+   "fonte": "Foto: Ken Teegardin (CC BY-SA 2.0)."
   },
   {
    "tipo": "texto",
-   "escuro": true,
    "kicker": "O QUE EU VEJO TODO DIA",
    "titulo": "Família não quebra por um gasto grande. Quebra por *vários gastos pequenos* que crescem sem trava.",
-   "destaque": "O governo pode votar o pacote. Você pode começar o seu hoje."
+   "destaque": "O governo pode votar o pacote. Você pode começar o seu hoje.",
+   "foto": "hq-maquininha.jpg",
+   "pos": "center 30%",
+   "fade": 24,
+   "fonte": "Foto: Basile Morin (CC BY-SA 4.0)."
   },
   {
    "tipo": "cta",
@@ -72,5 +89,6 @@
    "palavra": "EBOOK",
    "assinatura": "Yousef Amer · fundador da @tbfinance_"
   }
- ]
+ ],
+ "cheia": true
 }
