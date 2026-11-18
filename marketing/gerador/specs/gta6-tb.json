@@ -1,0 +1,104 @@
+{
+ "tag": "NOTÍCIA · @TBFINANCE_",
+ "data": "18 NOV · 2026",
+ "cheia": true,
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-ps5.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-rockstar-north.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-controle.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-pagando-cartao.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-maquininha.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-cofrinho.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "foto": "hq-ps5.jpg",
+   "h": 1350,
+   "pos": "center 40%",
+   "brilho": 0.9,
+   "kicker": "GTA 6 · HOJE À MEIA-NOITE",
+   "titulo": "O GTA 6 já saiu na Nova Zelândia. No Brasil, chega à meia-noite. *Cabe no seu bolso?*",
+   "fs": 74,
+   "credito": "Foto: Osh33m (CC BY-SA 4.0)"
+  },
+  {
+   "tipo": "texto",
+   "foto": "hq-rockstar-north.jpg",
+   "pos": "center 30%",
+   "fade": 22,
+   "kicker": "O QUE ACONTECEU",
+   "titulo": "Depois de 13 anos de espera, o lançamento mais aguardado dos games está rodando o mundo.",
+   "lista": [
+    "**Nova Zelândia:** liberou às 8h de hoje (horário de Brasília)",
+    "**Brasil:** 0h desta quinta, 19/11",
+    "**Metacritic:** nota **99**, a maior já registrada no site"
+   ],
+   "fonte": "Fonte: Jovem Pan (18/11/2026), com dados do Metacritic. Foto: Rockstar North, Edimburgo, por Discott (CC0)."
+  },
+  {
+   "tipo": "texto",
+   "foto": "hq-controle.jpg",
+   "pos": "center 30%",
+   "fade": 20,
+   "kicker": "QUANTO CUSTA",
+   "titulo": "R$ 449,90 na versão padrão.",
+   "numero": "66 horas",
+   "numero_legenda": "de trabalho para quem ganha um salário mínimo",
+   "paragrafos": [
+    "A Ultimate custa **R$ 549,90**. Com salário mínimo de **R$ 1.621**, a versão padrão consome cerca de **8 dias de trabalho**."
+   ],
+   "fonte": "Fontes: PlayStation Store, via CNN Brasil; cálculo do Canaltech. Foto: Vu Hoang (CC BY 2.0)."
+  },
+  {
+   "tipo": "texto",
+   "escuro": true,
+   "kicker": "E SE NÃO TIVER O CONSOLE?",
+   "titulo": "Jogo + PS5 passa de *R$ 5 mil*.",
+   "numero": "3,1 salários",
+   "numero_legenda": "mínimos: PS5 Digital (R$ 4.599,90) + GTA 6 (R$ 449,90)",
+   "paragrafos": [
+    "Preço sugerido pela Sony desde abril. Em promoção sai mais barato, mas continua sendo uma compra grande para a maioria das famílias."
+   ],
+   "fonte": "Fontes: Sony, via Olhar Digital e Tecnoblog; PlayStation Store. Cálculo: R$ 5.049,80 ÷ R$ 1.621."
+  },
+  {
+   "tipo": "texto",
+   "foto": "hq-pagando-cartao.jpg",
+   "pos": "70% center",
+   "fade": 22,
+   "kicker": "O PERIGO",
+   "titulo": "O problema não é o GTA. É a *fila de parcelas*.",
+   "lista": [
+    "**Hoje:** GTA 6 em 8x de R$ 56",
+    "**27/11:** Black Friday",
+    "**Dezembro:** Natal e presentes",
+    "**Janeiro:** IPVA, IPTU e material escolar"
+   ],
+   "fonte": "Parcelamento: Amazon (versão física). Foto: Hloom Templates (CC BY 2.0)."
+  },
+  {
+   "tipo": "texto",
+   "foto": "hq-cofrinho.jpg",
+   "pos": "center 0%",
+   "fade": 12,
+   "brilho": 0.95,
+   "kicker": "COMO JOGAR SEM VIRAR PROCURADO",
+   "titulo": "4 regras antes de apertar *comprar*:",
+   "lista": [
+    "**Some as parcelas** que você já tem antes de criar outra",
+    "**Pix à vista** costuma sair mais barato (R$ 418 na Amazon)",
+    "**Nunca pague a fatura no mínimo**: o rotativo pode dobrar a dívida",
+    "**Não precisa ser no dia 1**: o jogo não vai fugir"
+   ],
+   "fonte": "Fonte: Amazon (preço no Pix em 18/11/2026); Lei 14.690/2023. Foto: Ken Teegardin (CC BY-SA 2.0)."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "MISSÃO: SAIR DO VERMELHO",
+   "titulo": "Zere a dívida antes de zerar o jogo.",
+   "palavra": "DESTRAVA",
+   "assinatura": "TB Finance · desde 2019 tirando brasileiros do vermelho"
+  }
+ ]
+}
