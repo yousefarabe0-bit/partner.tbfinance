@@ -1,0 +1,101 @@
+{
+ "tag": "YOUSEF AMER · @YOUSEFAMEROFICIAL",
+ "data": "19 NOV · 2026",
+ "cheia": true,
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-bb-sede.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-bb-agencia.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-maquininha.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-contrato.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-pagando-cartao.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "foto": "hq-bb-sede.jpg",
+   "h": 1350,
+   "pos": "center center",
+   "brilho": 0.85,
+   "kicker": "BANCO DO BRASIL",
+   "titulo": "Dados de clientes do BB vazaram. *O perigo de verdade começa agora.*",
+   "fs": 76,
+   "credito": "Foto: Agência Senado (CC BY 2.0)"
+  },
+  {
+   "tipo": "texto",
+   "foto": "hq-bb-agencia.jpg",
+   "pos": "center center",
+   "fade": 20,
+   "brilho": 0.85,
+   "kicker": "O QUE ACONTECEU",
+   "titulo": "O BB confirmou acesso indevido a dados cadastrais de clientes.",
+   "lista": [
+    "**Nome e CPF**",
+    "**E-mail**",
+    "**Número da agência**",
+    "Em alguns casos, **número da conta**"
+   ],
+   "fonte": "Fonte: Banco do Brasil, via Money Times e DOL (18/11/2026). Foto: Bruno Luiz (CC BY-SA 4.0)."
+  },
+  {
+   "tipo": "texto",
+   "escuro": true,
+   "kicker": "O QUE O BANCO DIZ",
+   "titulo": "Não foi invasão. Foi uma *credencial válida* usada do jeito errado.",
+   "paragrafos": [
+    "Segundo o BB, terceiros usaram uma credencial válida para consultar os dados. O acesso foi cortado assim que o banco identificou o problema, em **12/11**.",
+    "**Senhas, tokens e códigos de transação não vazaram**, e o banco diz não ter identificado movimentação financeira ligada ao caso."
+   ],
+   "fonte": "Fonte: Banco do Brasil, via Money Times e DOL (18/11/2026)."
+  },
+  {
+   "tipo": "texto",
+   "foto": "hq-maquininha.jpg",
+   "pos": "center 30%",
+   "fade": 22,
+   "brilho": 0.9,
+   "kicker": "POR QUE ISSO IMPORTA",
+   "titulo": "Com seu nome, CPF e agência, o golpista liga *sabendo tudo de você*.",
+   "paragrafos": [
+    "Não precisa da sua senha. Ele precisa que **você confie**. E dado verdadeiro é o que faz o golpe parecer o banco."
+   ],
+   "fonte": "Foto: Basile Morin (CC BY-SA 4.0)."
+  },
+  {
+   "tipo": "texto",
+   "foto": "hq-contrato.jpg",
+   "pos": "center 40%",
+   "fade": 20,
+   "kicker": "O GOLPE QUE MIRA QUEM ESTÁ DEVENDO",
+   "titulo": "\"Temos um *acordo com desconto* para a sua dívida.\"",
+   "lista": [
+    "Boleto de \"renegociação\" que não é do banco",
+    "Pedido de transferência para \"conta segura\"",
+    "Link para \"atualizar cadastro\" ou instalar aplicativo"
+   ],
+   "fonte": "Foto: Blogtrepreneur (CC BY 2.0)."
+  },
+  {
+   "tipo": "texto",
+   "foto": "hq-pagando-cartao.jpg",
+   "pos": "70% center",
+   "fade": 14,
+   "kicker": "COMO SE PROTEGER",
+   "titulo": "O que o próprio BB orienta:",
+   "lista": [
+    "O banco **não pede** senha, código, app nem transferência",
+    "Ligou alguém do \"banco\"? **Desligue e ligue você** no canal oficial",
+    "**Não clique em links** de mensagens inesperadas",
+    "Canais oficiais: app (Fale Com) e Central **4004-0001** ou **0800 729 0001**"
+   ],
+   "fonte": "Fonte: Banco do Brasil (18/11/2026). Foto: Hloom Templates (CC BY 2.0)."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "DÍVIDA SE NEGOCIA COM SEGURANÇA",
+   "titulo": "Acordo de dívida só pelo canal oficial. Nunca por quem te ligou.",
+   "palavra": "EBOOK",
+   "assinatura": "Yousef Amer · fundador da @tbfinance_"
+  }
+ ]
+}
