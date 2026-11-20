@@ -24,3 +24,4 @@
 | hq-congresso.jpg | Congresso Nacional | Jardelsliumba | CC BY-SA 4.0 | File:Congresso Nacional Brasília, DF.jpg |
 | hq-esplanada.jpg | Esplanada dos Ministérios | Senado Federal | CC BY 2.0 | File:Esplanada dos Ministérios (fachada ministérios).jpg |
 | hq-compra-online.jpg | Compra online com cartão | Shixart1985 | CC BY 2.0 | File:Business professional engages in online shopping from home workspace while using credit card.jpg |
+| hq-rihappy.jpg | Fachada de loja da Ri Happy | Izabella Galhardo | CC0 | File:Fachada de loja da Ri Happy em shopping center.jpg |

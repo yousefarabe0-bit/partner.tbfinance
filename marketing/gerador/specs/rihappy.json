@@ -1,13 +1,21 @@
 {
  "tag": "NOTÍCIA · @TBFINANCE_",
  "data": "NOV · 2026",
- "copiar": [],
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-contrato.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-rihappy.jpg"
+ ],
  "slides": [
   {
    "tipo": "capa",
    "kicker": "RI HAPPY E CHILLI BEANS",
    "titulo": "Duas marcas famosas estão renegociando *R$ 1,1 bilhão* em dívidas. E não tem vergonha nenhuma nisso.",
-   "fs": 72
+   "fs": 72,
+   "foto": "hq-rihappy.jpg",
+   "pos": "center 30%",
+   "h": 1350,
+   "credito": "Foto: Izabella Galhardo (CC0)",
+   "brilho": 0.85
   },
   {
    "tipo": "texto",
@@ -17,7 +25,10 @@
     "O pedido foi feito em 18/10. A Justiça aceitou e **suspendeu as cobranças por 180 dias**.",
     "A empresa citou os efeitos da pandemia e os **juros altos**."
    ],
-   "fonte": "Fontes: TJSP, Gazeta do Povo, Meio & Mensagem (out–nov/2026)."
+   "fonte": "Fontes: TJSP, Gazeta do Povo, Meio & Mensagem (out–nov/2026). Foto: Izabella Galhardo (CC0).",
+   "foto": "hq-rihappy.jpg",
+   "pos": "80% 30%",
+   "fade": 24
   },
   {
    "tipo": "texto",
@@ -27,7 +38,8 @@
     "Em julho e agosto, a rede deixou de pagar parcelas. O credor então declarou o **vencimento antecipado** de toda a dívida.",
     "Em 30/10, pediu recuperação extrajudicial para renegociar **R$ 340 milhões**, com um aporte previsto de até R$ 50 mi."
    ],
-   "fonte": "Fontes: Mercado & Consumo, Times Brasil, BPMoney (out/2026)."
+   "fonte": "Fontes: Mercado & Consumo, Times Brasil, BPMoney (out/2026).",
+   "escuro": true
   },
   {
    "tipo": "texto",
@@ -36,7 +48,8 @@
    "paragrafos": [
     "A maior parte vem de gigantes como Braskem e Raízen. Renegociar dívida virou rotina até para quem é grande."
    ],
-   "fonte": "Fonte: Observatório de Recuperação Extrajudicial (Obre), até 11/11/2026."
+   "fonte": "Fonte: Observatório de Recuperação Extrajudicial (Obre), até 11/11/2026.",
+   "escuro": true
   },
   {
    "tipo": "texto",
@@ -58,7 +71,11 @@
    "paragrafos": [
     "Em muitos contratos, o atraso de parcelas permite ao credor cobrar **todo o saldo de uma vez**.",
     "Por isso, a ordem certa é: **organizar, negociar e só então pagar**. Nunca no improviso."
-   ]
+   ],
+   "foto": "hq-contrato.jpg",
+   "pos": "center 40%",
+   "fade": 22,
+   "fonte": "Foto: Blogtrepreneur (CC BY 2.0)."
   },
   {
    "tipo": "cta",
@@ -67,5 +84,6 @@
    "palavra": "DESTRAVA",
    "assinatura": "TB Finance · desde 2019 tirando brasileiros do vermelho"
   }
- ]
+ ],
+ "cheia": true
 }

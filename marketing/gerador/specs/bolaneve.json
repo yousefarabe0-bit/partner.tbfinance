@@ -1,9 +1,81 @@
-{"tag":"@TBFINANCE_","data":"NOV · 2026","copiar":[],"slides":[
-{"tipo":"capa","kicker":"DÍVIDAS","titulo":"3 sinais de que sua dívida virou *bola de neve*.","fs":96},
-{"tipo":"texto","kicker":"SINAL 1","titulo":"Você paga uma dívida pegando outra.","paragrafos":["Empréstimo para pagar o cartão, cartão para pagar o empréstimo. O total **não diminui**, só muda de lugar, e ganha juros novos no caminho."]},
-{"tipo":"texto","kicker":"SINAL 2","titulo":"Você paga o mínimo do cartão todo mês.","paragrafos":["Parece que está em dia. Mas o resto vai para o **rotativo**, com juros que passam de **450% ao ano**. Pela lei, a dívida pode **dobrar**."],"fonte":"Fontes: Banco Central (set/2026); Lei 14.690/2023."},
-{"tipo":"texto","kicker":"SINAL 3","titulo":"Você não sabe dizer quanto deve no total.","paragrafos":["Se você precisa abrir 4 aplicativos para descobrir, a dívida já está **mandando em você**."]},
-{"tipo":"texto","escuro":true,"kicker":"SE VOCÊ MARCOU 2 OU MAIS","titulo":"Não é falta de esforço. É falta de *estratégia*.","destaque":"Bola de neve não se derrete pagando aos poucos. Precisa de um plano que corte os juros."},
-{"tipo":"texto","kicker":"O PRIMEIRO PASSO","titulo":"Coloque tudo num lugar só.","lista":["**Liste** todas as dívidas: valor, parcela e juros","**Ordene** da mais cara para a mais barata","**Negocie** primeiro as mais caras"]},
-{"tipo":"cta","kicker":"PARE A BOLA DE NEVE","titulo":"Comece pelo mapa das suas dívidas.","palavra":"PLANILHA","assinatura":"TB Finance · desde 2019 tirando brasileiros do vermelho"}
-]}
+{
+ "tag": "@TBFINANCE_",
+ "data": "NOV · 2026",
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-cartoes.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-cofrinho.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-pagando-cartao.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "kicker": "DÍVIDAS",
+   "titulo": "3 sinais de que sua dívida virou *bola de neve*.",
+   "fs": 96,
+   "foto": "hq-cartoes.jpg",
+   "pos": "center 0%",
+   "h": 1350,
+   "credito": "Foto: $5000 (CC BY-SA 4.0)",
+   "brilho": 0.85
+  },
+  {
+   "tipo": "texto",
+   "kicker": "SINAL 1",
+   "titulo": "Você paga uma dívida pegando outra.",
+   "paragrafos": [
+    "Empréstimo para pagar o cartão, cartão para pagar o empréstimo. O total **não diminui**, só muda de lugar, e ganha juros novos no caminho."
+   ],
+   "escuro": true
+  },
+  {
+   "tipo": "texto",
+   "kicker": "SINAL 2",
+   "titulo": "Você paga o mínimo do cartão todo mês.",
+   "paragrafos": [
+    "Parece que está em dia. Mas o resto vai para o **rotativo**, com juros que passam de **450% ao ano**. Pela lei, a dívida pode **dobrar**."
+   ],
+   "fonte": "Fontes: Banco Central (set/2026); Lei 14.690/2023. Foto: Hloom Templates (CC BY 2.0).",
+   "foto": "hq-pagando-cartao.jpg",
+   "pos": "70% center",
+   "fade": 24
+  },
+  {
+   "tipo": "texto",
+   "kicker": "SINAL 3",
+   "titulo": "Você não sabe dizer quanto deve no total.",
+   "paragrafos": [
+    "Se você precisa abrir 4 aplicativos para descobrir, a dívida já está **mandando em você**."
+   ],
+   "escuro": true
+  },
+  {
+   "tipo": "texto",
+   "escuro": true,
+   "kicker": "SE VOCÊ MARCOU 2 OU MAIS",
+   "titulo": "Não é falta de esforço. É falta de *estratégia*.",
+   "destaque": "Bola de neve não se derrete pagando aos poucos. Precisa de um plano que corte os juros."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O PRIMEIRO PASSO",
+   "titulo": "Coloque tudo num lugar só.",
+   "lista": [
+    "**Liste** todas as dívidas: valor, parcela e juros",
+    "**Ordene** da mais cara para a mais barata",
+    "**Negocie** primeiro as mais caras"
+   ],
+   "foto": "hq-cofrinho.jpg",
+   "pos": "center 0%",
+   "fade": 18,
+   "fonte": "Foto: Ken Teegardin (CC BY-SA 2.0)."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "PARE A BOLA DE NEVE",
+   "titulo": "Comece pelo mapa das suas dívidas.",
+   "palavra": "PLANILHA",
+   "assinatura": "TB Finance · desde 2019 tirando brasileiros do vermelho"
+  }
+ ],
+ "cheia": true
+}

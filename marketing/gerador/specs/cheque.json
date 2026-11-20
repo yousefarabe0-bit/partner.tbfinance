@@ -1,9 +1,89 @@
-{"tag":"@TBFINANCE_","data":"NOV · 2026","copiar":[],"slides":[
-{"tipo":"capa","kicker":"CHEQUE ESPECIAL","titulo":"O limite que aparece no seu saldo *não é seu dinheiro*.","fs":88},
-{"tipo":"texto","kicker":"O QUE É","titulo":"Cheque especial é um empréstimo automático.","paragrafos":["Quando a conta fica negativa, o banco cobre a diferença. E começa a cobrar **juros por dia**, sem você assinar nada."]},
-{"tipo":"texto","kicker":"QUANTO CUSTA","titulo":"O juro pode chegar a 8% ao mês.","numero":"8% a.m.","numero_legenda":"teto definido pelo Conselho Monetário Nacional (cerca de 150% ao ano)","fonte":"Fonte: Resolução CMN nº 4.765/2019."},
-{"tipo":"texto","escuro":true,"kicker":"A ARMADILHA","titulo":"O banco mostra o limite *somado* ao seu saldo.","paragrafos":["Você vê R$ 3.000 \"disponíveis\", mas R$ 2.000 são do banco. Parece que sobrou dinheiro, e o mês termina no negativo de novo."]},
-{"tipo":"texto","kicker":"SINAIS DE QUE VOCÊ VIVE NELE","titulo":"Se você se reconhece em 2 destes, acenda o alerta:","lista":["Todo mês a conta **fica negativa** antes do salário","O salário entra e **some** cobrindo o negativo","Você nem sabe **quanto pagou de juros** no ano"]},
-{"tipo":"texto","kicker":"COMO SAIR","titulo":"Troque a dívida cara por um plano.","lista":["Peça para **separar o limite** do saldo no app do banco","Negocie o saldo negativo **em parcelas fixas**, com juros menores","Monte um orçamento para **não voltar** a usar"]},
-{"tipo":"cta","kicker":"SAIA DO NEGATIVO","titulo":"Seu salário precisa ser seu de novo.","palavra":"EBOOK","assinatura":"TB Finance · desde 2019 tirando brasileiros do vermelho"}
-]}
+{
+ "tag": "@TBFINANCE_",
+ "data": "NOV · 2026",
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-bb-agencia.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-contrato.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-maquininha.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-pagando-cartao.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "kicker": "CHEQUE ESPECIAL",
+   "titulo": "O limite que aparece no seu saldo *não é seu dinheiro*.",
+   "fs": 88,
+   "foto": "hq-bb-agencia.jpg",
+   "pos": "center center",
+   "h": 1350,
+   "credito": "Foto: Bruno Luiz (CC BY-SA 4.0)",
+   "brilho": 0.85
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O QUE É",
+   "titulo": "Cheque especial é um empréstimo automático.",
+   "paragrafos": [
+    "Quando a conta fica negativa, o banco cobre a diferença. E começa a cobrar **juros por dia**, sem você assinar nada."
+   ],
+   "foto": "hq-maquininha.jpg",
+   "pos": "center 30%",
+   "fade": 24,
+   "fonte": "Foto: Basile Morin (CC BY-SA 4.0)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "QUANTO CUSTA",
+   "titulo": "O juro pode chegar a 8% ao mês.",
+   "numero": "8% a.m.",
+   "numero_legenda": "teto definido pelo Conselho Monetário Nacional (cerca de 150% ao ano)",
+   "fonte": "Fonte: Resolução CMN nº 4.765/2019.",
+   "escuro": true
+  },
+  {
+   "tipo": "texto",
+   "escuro": true,
+   "kicker": "A ARMADILHA",
+   "titulo": "O banco mostra o limite *somado* ao seu saldo.",
+   "paragrafos": [
+    "Você vê R$ 3.000 \"disponíveis\", mas R$ 2.000 são do banco. Parece que sobrou dinheiro, e o mês termina no negativo de novo."
+   ]
+  },
+  {
+   "tipo": "texto",
+   "kicker": "SINAIS DE QUE VOCÊ VIVE NELE",
+   "titulo": "Se você se reconhece em 2 destes, acenda o alerta:",
+   "lista": [
+    "Todo mês a conta **fica negativa** antes do salário",
+    "O salário entra e **some** cobrindo o negativo",
+    "Você nem sabe **quanto pagou de juros** no ano"
+   ],
+   "foto": "hq-pagando-cartao.jpg",
+   "pos": "70% center",
+   "fade": 18,
+   "fonte": "Foto: Hloom Templates (CC BY 2.0)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "COMO SAIR",
+   "titulo": "Troque a dívida cara por um plano.",
+   "lista": [
+    "Peça para **separar o limite** do saldo no app do banco",
+    "Negocie o saldo negativo **em parcelas fixas**, com juros menores",
+    "Monte um orçamento para **não voltar** a usar"
+   ],
+   "foto": "hq-contrato.jpg",
+   "pos": "center 40%",
+   "fade": 22,
+   "fonte": "Foto: Blogtrepreneur (CC BY 2.0)."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "SAIA DO NEGATIVO",
+   "titulo": "Seu salário precisa ser seu de novo.",
+   "palavra": "EBOOK",
+   "assinatura": "TB Finance · desde 2019 tirando brasileiros do vermelho"
+  }
+ ],
+ "cheia": true
+}
