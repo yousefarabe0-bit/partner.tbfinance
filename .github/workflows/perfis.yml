@@ -1,0 +1,25 @@
+name: Perfis – leitura para revisão
+
+# Lê o próprio perfil do X (bio, link, fixado, métricas). Disparo manual.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  x:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Ler perfil do X
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+        run: node automation/x/profile.mjs
