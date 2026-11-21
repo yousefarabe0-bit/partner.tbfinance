@@ -124,3 +124,10 @@ Não mexer no código do site (`src/`).
   "Se você ganha acima de R$ 8 mil, tem dívida em banco e ainda tem crédito...".
 - LinkedIn: o link vai no **primeiro comentário** (campo `firstComment` na fila), nunca no corpo do post.
 - X: link só no post de CTA (custa ~US$ 0,20 por post com link). Fio fixado com o método e o link.
+
+## 12. Threads (perfil do Yousef)
+- Robô: `automation/threads/publish.mjs`, fila `automation/threads/posts.json`, histórico `automation/threads/published.json`. Mesmo workflow.
+  Token no secret `THREADS_TOKEN` (vence a cada 60 dias; avisar o Yousef uma semana antes). Sem custo por post.
+- Ritmo: **3 por dia** (11h, 15h, 19h): as 2 melhores notícias do dia do X reescritas para o público do Instagram (até 500 caracteres,
+  linguagem de conversa, sem jargão) + 1 post de conversa para gerar respostas ("qual foi a pior dívida que você já fez?").
+- Tipos: `"type": "post"` (`text`) ou `"type": "thread"` (`texts`). Lead: mesma regra 90/10 da seção 11, link com `utm_source=threads`.
