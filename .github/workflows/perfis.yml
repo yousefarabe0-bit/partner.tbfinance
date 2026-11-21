@@ -3,6 +3,16 @@ name: Perfis – leitura para revisão
 # Lê o próprio perfil do X (bio, link, fixado, métricas). Disparo manual.
 on:
   workflow_dispatch:
+    inputs:
+      x_delete_ids:
+        description: 'IDs de posts do X para apagar (vírgula)'
+        default: ''
+      x_bio:
+        description: 'Nova bio do X'
+        default: ''
+      x_url:
+        description: 'Novo link do X'
+        default: ''
 
 permissions:
   contents: read
@@ -16,7 +26,26 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Ler perfil do X
+      - name: Ler perfil do X (antes)
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+        run: node automation/x/profile.mjs
+      - name: Ajustes no perfil do X
+        if: ${{ inputs.x_delete_ids != '' || inputs.x_bio != '' || inputs.x_url != '' }}
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+          X_DELETE_IDS: ${{ inputs.x_delete_ids }}
+          X_BIO: ${{ inputs.x_bio }}
+          X_URL: ${{ inputs.x_url }}
+        run: node automation/x/manage.mjs
+      - name: Ler perfil do X (depois)
+        if: ${{ inputs.x_delete_ids != '' || inputs.x_bio != '' || inputs.x_url != '' }}
         env:
           X_API_KEY: ${{ secrets.X_API_KEY }}
           X_API_SECRET: ${{ secrets.X_API_SECRET }}
