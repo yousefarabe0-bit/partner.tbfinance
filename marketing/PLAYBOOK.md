@@ -92,7 +92,15 @@ Não mexer no código do site (`src/`).
 - Robô: `automation/linkedin/publish.mjs`, fila `automation/linkedin/posts.json`, histórico `automation/linkedin/published.json`.
   Roda no mesmo workflow do Instagram (mesmos horários de disparo). Token no secret `LINKEDIN_TOKEN` (vence a cada 60 dias;
   gerado em 21/11/2026, vence ~20/01/2027: avisar o Yousef por e-mail uma semana antes).
-- Ritmo: **3 a 5 posts por semana**, entrando no e-mail de domingo junto com o Instagram.
+- Ritmo (decidido em 21/11): **1 post por dia às 9h, 7 por semana**, semana de quarta a terça, no e-mail de domingo junto com o Instagram
+  (seção separada "LinkedIn"). Mais de 1 por dia derruba o alcance de cada post.
+- **Operação diferente do Instagram**: temas próprios, não repetir os carrosséis do IG. Rodízio de 3 editorias:
+  **Negócios** (caso de empresa contado como história: decisão, erro, virada), **Investimentos** (conceito educativo com conta simples,
+  sem recomendar produto) e **História financeira** (crises, bolhas, planos econômicos, datas da semana). Sempre fechar com a lição
+  para as finanças pessoais e uma pergunta para gerar comentários.
+- Estrutura: 2 primeiras linhas com o fato mais forte, parágrafos curtos, história, "o que eu vejo na TB", pergunta final, fonte.
+  Inspiração de formato: Morgan Housel e Nick Maggiulli (história e dados), Codie Sanchez (casos de negócio), Nathalia Arcuri (prático).
+- Prévia da semana em `marketing/linkedin/semana-DDmmm.md`.
 - Formatos: `"type": "document"` (carrossel da semana em PDF: `python3 marketing/gerador/pdf_linkedin.py <pasta jpg> marketing/linkedin/<nome>.pdf`,
   com `title`) ou `"type": "text"`. Campo `text` até 3000 caracteres.
 - Tom: primeira pessoa do Yousef, mais profissional que o Instagram. Abrir com 2 linhas fortes (é o que aparece antes do "ver mais"),
