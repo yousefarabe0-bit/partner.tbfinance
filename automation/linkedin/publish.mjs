@@ -11,7 +11,9 @@ const DIR = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(DIR, '..', '..')
 const POSTS = process.env.LI_POSTS_FILE || path.join(DIR, 'posts.json')
 const STATE = process.env.LI_STATE_FILE || path.join(DIR, 'published.json')
-const VERSION = process.env.LINKEDIN_VERSION || '202509'
+// Versão da API (YYYYMM). O LinkedIn só mantém as dos últimos ~12 meses: começa no mês atual e recua se não existir.
+let VERSION = process.env.LINKEDIN_VERSION || (() => { const d = new Date(); return `${d.getUTCFullYear()}${String(d.getUTCMonth() + 1).padStart(2, '0')}` })()
+const prevVersion = (v) => { let y = +v.slice(0, 4), m = +v.slice(4, 6) - 1; if (!m) { y--; m = 12 } return `${y}${String(m).padStart(2, '0')}` }
 const TOKEN = process.env.LINKEDIN_TOKEN
 const DRY = process.env.LI_DRY_RUN === 'true' || process.argv.includes('--dry-run')
 const VALIDATE = process.argv.includes('--validate')
@@ -37,7 +39,7 @@ if (VALIDATE) process.exit(0)
 // O LinkedIn interpreta alguns caracteres no texto ("little text"): é preciso escapar.
 const escape = (t) => t.replace(/[\\|{}@\[\]()<>#*_~]/g, (c) => '\\' + c)
 
-async function api(method, url, body, extra = {}) {
+async function api(method, url, body, extra = {}, tries = 0) {
   const res = await fetch(url.startsWith('http') ? url : `https://api.linkedin.com${url}`, {
     method,
     headers: {
@@ -50,6 +52,10 @@ async function api(method, url, body, extra = {}) {
     body: body instanceof Buffer ? body : body ? JSON.stringify(body) : undefined,
   })
   const text = await res.text()
+  if (res.status === 426 && /NONEXISTENT_VERSION/.test(text) && tries < 12) {
+    VERSION = prevVersion(VERSION)
+    return api(method, url, body, extra, tries + 1)
+  }
   if (!res.ok) throw new Error(`${method} ${url}: HTTP ${res.status} ${text.slice(0, 300)}`)
   return { res, data: text ? JSON.parse(text) : {} }
 }
@@ -89,7 +95,7 @@ for (const p of due) {
     const { res } = await api('POST', '/rest/posts', body)
     const urn = res.headers.get('x-restli-id')
     state[p.id] = { postUrn: urn, url: `https://www.linkedin.com/feed/update/${urn}/`, publishedAt: new Date().toISOString() }
-    log(`✅ ${p.id}: ${state[p.id].url}`)
+    log(`✅ ${p.id}: ${state[p.id].url} (API ${VERSION})`)
   } catch (e) {
     failed++
     state[p.id] = { attempts: (state[p.id]?.attempts || 0) + 1, lastError: e.message, lastAttemptAt: new Date().toISOString() }
