@@ -87,3 +87,14 @@ Não mexer no código do site (`src/`).
   e as prévias dos carrosséis (uma imagem por carrossel com todos os slides).
 - Instrução no fim: "Responda **APROVADO** ou diga o que mudar até terça às 18h. Sem resposta, tudo sai como planejado."
 - Guardar as prévias em `marketing/previas/` e o cronograma em `marketing/cronograma/`.
+
+## 9. LinkedIn (perfil pessoal do Yousef)
+- Robô: `automation/linkedin/publish.mjs`, fila `automation/linkedin/posts.json`, histórico `automation/linkedin/published.json`.
+  Roda no mesmo workflow do Instagram (mesmos horários de disparo). Token no secret `LINKEDIN_TOKEN` (vence a cada 60 dias;
+  gerado em 21/11/2026, vence ~20/01/2027: avisar o Yousef por e-mail uma semana antes).
+- Ritmo: **3 a 5 posts por semana**, entrando no e-mail de domingo junto com o Instagram.
+- Formatos: `"type": "document"` (carrossel da semana em PDF: `python3 marketing/gerador/pdf_linkedin.py <pasta jpg> marketing/linkedin/<nome>.pdf`,
+  com `title`) ou `"type": "text"`. Campo `text` até 3000 caracteres.
+- Tom: primeira pessoa do Yousef, mais profissional que o Instagram. Abrir com 2 linhas fortes (é o que aparece antes do "ver mais"),
+  história real da TB (sem nome de cliente), uma lição prática, fonte no fim. Sem CTA de palavra-chave (a automação de comentários é só do Instagram).
+- Referências (Favikon, LinkedIn 2026): Nathalia Arcuri e Gabriel Rabelo (criadores) e CEOs de banco (marcos e bastidores da empresa).
