@@ -1,1 +1,7 @@
-{}
+{
+  "2026-11-li-bb-vazamento": {
+    "attempts": 1,
+    "lastError": "POST /rest/documents?action=initializeUpload: HTTP 426 {\"status\":426,\"code\":\"NONEXISTENT_VERSION\",\"message\":\"Requested version 20250901 is not active\"}",
+    "lastAttemptAt": "2026-11-21T19:15:18.088Z"
+  }
+}
