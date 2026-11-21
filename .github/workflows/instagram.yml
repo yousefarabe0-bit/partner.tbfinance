@@ -14,6 +14,7 @@ on:
     paths:
       - 'automation/instagram/posts.json'
       - 'automation/linkedin/posts.json'
+      - 'automation/x/posts.json'
 
 permissions:
   contents: write
@@ -69,13 +70,24 @@ jobs:
           LI_DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
         run: node automation/linkedin/publish.mjs
 
+      - name: Publicar no X (perfil do Yousef)
+        if: always()
+        continue-on-error: true
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+          X_DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
+        run: node automation/x/publish.mjs
+
       - name: Salvar histórico de publicações
         if: always()
         run: |
-          if [ -n "$(git status --porcelain automation/instagram/published.json automation/linkedin/published.json)" ]; then
+          if [ -n "$(git status --porcelain automation/instagram/published.json automation/linkedin/published.json automation/x/published.json)" ]; then
             git config user.name "instagram-bot"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add automation/instagram/published.json automation/linkedin/published.json
+            git add automation/instagram/published.json automation/linkedin/published.json automation/x/published.json
             git commit -m "chore(instagram): registra publicações [skip ci]"
             git pull --rebase
             git push

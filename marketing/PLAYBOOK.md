@@ -106,3 +106,12 @@ Não mexer no código do site (`src/`).
 - Tom: primeira pessoa do Yousef, mais profissional que o Instagram. Abrir com 2 linhas fortes (é o que aparece antes do "ver mais"),
   história real da TB (sem nome de cliente), uma lição prática, fonte no fim. Sem CTA de palavra-chave (a automação de comentários é só do Instagram).
 - Referências (Favikon, LinkedIn 2026): Nathalia Arcuri e Gabriel Rabelo (criadores) e CEOs de banco (marcos e bastidores da empresa).
+
+## 10. X (perfil pessoal do Yousef)
+- Robô: `automation/x/publish.mjs`, fila `automation/x/posts.json`, histórico `automation/x/published.json`. Roda no mesmo workflow.
+  Credenciais nos secrets `X_API_KEY`, `X_API_SECRET`, `X_ACCESS_TOKEN`, `X_ACCESS_SECRET` (OAuth 1.0a, app com permissão Read and Write).
+- Custo: API do X é paga por uso (cerca de US$ 0,015 por post sem link; com link, ~US$ 0,20). **Evitar links** nos posts.
+- Ritmo (decidido em 21/11): **5 por dia**: 9h fio (`"type": "thread"`, `"texts": [...]`, cada parte até 280 caracteres) com a história do dia
+  (negócios, investimentos ou história financeira, sem repetir o texto do LinkedIn) + 10h, 12h, 15h e 19h posts curtos (`"type": "post"`, `"text"`)
+  com notícia de negócios/mercado do dia e opinião rápida do Yousef. Tom mais direto e informal que o LinkedIn.
+- Entra no e-mail de domingo (seção "X"). Notícias do dia podem ser escritas na véspera, sempre com fato conferido em fonte.
