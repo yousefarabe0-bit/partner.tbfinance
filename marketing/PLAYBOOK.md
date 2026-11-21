@@ -115,3 +115,12 @@ Não mexer no código do site (`src/`).
   (negócios, investimentos ou história financeira, sem repetir o texto do LinkedIn) + 10h, 12h, 15h e 19h posts curtos (`"type": "post"`, `"text"`)
   com notícia de negócios/mercado do dia e opinião rápida do Yousef. Tom mais direto e informal que o LinkedIn.
 - Entra no e-mail de domingo (seção "X"). Notícias do dia podem ser escritas na véspera, sempre com fato conferido em fonte.
+
+## 11. Geração de leads (decidido em 21/11)
+- Objetivo: **90% autoridade, 10% lead**. Cerca de 1 em cada 10 posts (LinkedIn e X) termina com CTA para o diagnóstico.
+- Destino: **tbfinance.com.br/agendar** (formulário de 10 perguntas que já pontua renda e crédito). Sempre com UTM:
+  `?utm_source=linkedin&utm_medium=post`, `?utm_source=x&utm_medium=post`, `utm_medium=bio` no perfil.
+- Lead qualificado: **renda acima de R$ 8 mil/mês, dívidas bancárias altas e ainda com crédito disponível**. O texto do CTA já filtra:
+  "Se você ganha acima de R$ 8 mil, tem dívida em banco e ainda tem crédito...".
+- LinkedIn: o link vai no **primeiro comentário** (campo `firstComment` na fila), nunca no corpo do post.
+- X: link só no post de CTA (custa ~US$ 0,20 por post com link). Fio fixado com o método e o link.

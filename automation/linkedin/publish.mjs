@@ -31,6 +31,7 @@ for (const p of posts) {
   if (isNaN(new Date(p.publishAt))) throw new Error(`${p.id}: publishAt inválido`)
   if (!['text', 'document'].includes(p.type)) throw new Error(`${p.id}: type deve ser text ou document`)
   if (!p.text || p.text.length > 3000) throw new Error(`${p.id}: texto vazio ou com mais de 3000 caracteres`)
+  if (p.firstComment && p.firstComment.length > 1250) throw new Error(`${p.id}: firstComment muito longo`)
   if (p.type === 'document' && (!p.document || !p.title)) throw new Error(`${p.id}: document e title são obrigatórios`)
 }
 log(`linkedin/posts.json OK (${posts.length} post(s))`)
@@ -95,6 +96,14 @@ for (const p of due) {
     const { res } = await api('POST', '/rest/posts', body)
     const urn = res.headers.get('x-restli-id')
     state[p.id] = { postUrn: urn, url: `https://www.linkedin.com/feed/update/${urn}/`, publishedAt: new Date().toISOString() }
+    // CTA com link vai no primeiro comentário (link no corpo do post derruba o alcance).
+    if (p.firstComment) {
+      try {
+        await new Promise((r) => setTimeout(r, 3000))
+        await api('POST', `/rest/socialActions/${encodeURIComponent(urn)}/comments`, { actor: author, object: urn, message: { text: p.firstComment } })
+        state[p.id].firstComment = true
+      } catch (e) { state[p.id].firstCommentError = e.message; log(`⚠️ ${p.id}: comentário não publicado: ${e.message}`) }
+    }
     log(`✅ ${p.id}: ${state[p.id].url} (API ${VERSION})`)
   } catch (e) {
     failed++
