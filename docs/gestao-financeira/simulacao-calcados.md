@@ -5,6 +5,38 @@
 
 ---
 
+## Perfil do piloto (sem números)
+
+- **Canais:** site próprio, Mercado Livre, TikTok Shop e outros (a confirmar).
+- **Controle atual:** planilhas, sem ERP. Os dados virão das planilhas dele, do banco e dos painéis dos canais.
+- **Produção:** a marca desenvolve o molde e uma fábrica terceirizada produz. Ele paga a fábrica, normalmente com sinal antes da produção.
+- **Planilha a usar:** `planilhas/Modelo_Calcados_TB.xlsx` (em branco). Gerar com `python3 planilhas/gerar_modelo.py Modelo_Calcados_TB.xlsx calcados`.
+
+### O que a versão de calçados tem a mais
+| Onde | O quê |
+|---|---|
+| Aba **Custo por Par** | Custo real de cada modelo: fábrica + insumos + frete da fábrica + caixa/embalagem + etiqueta → custo total, margem por par e CMV do mês |
+| Plano de contas | **Comissão de afiliados/creators** (TikTok), **Amortização de moldes**, **Desenvolvimento de moldes e amostras** (investimento), **Pagamento à fábrica** |
+| Balanço | **Adiantamentos à fábrica**: o sinal pago antes de receber os pares. Não é despesa, mas é caixa preso |
+| DFC e NCG | Já consideram os adiantamentos à fábrica |
+| Fluxo 13 semanas | Linhas separadas para sinal e saldo da fábrica, repasses do ML e do TikTok, creators, moldes |
+| KPIs | Preço médio por par, custo médio por par, pares por pedido, taxa de troca |
+
+### Atenção extra porque ele usa planilha (sem ERP)
+1. **CMV:** sem ERP, ninguém calcula o custo do que foi vendido. É preciso saber **quantos pares de cada modelo saíram**, somando os pedidos exportados de cada canal, e multiplicar pelo custo por par.
+2. **Estoque:** provavelmente não existe um saldo confiável. Fazer uma **contagem** (mesmo que aproximada) no início do piloto.
+3. **TikTok Shop:** baixar o relatório financeiro/de liquidação, que separa a comissão da plataforma, a comissão de afiliados, o frete e os descontos bancados pela loja.
+4. **Pagamentos à fábrica:** montar a lista de pedidos em aberto (data, pares, valor, sinal pago, saldo, previsão de entrega). Isso vira o fluxo de caixa das próximas semanas.
+
+### Itens extras para pedir a ele
+- A(s) planilha(s) de controle que ele já usa (do jeito que estiverem).
+- Pedidos feitos para a fábrica nos últimos 3 meses e os que estão em aberto (com sinais e saldos).
+- Tabela de custo por modelo (nota ou orçamento da fábrica) + custo de caixa, embalagem e frete da fábrica.
+- Relatórios financeiros do **TikTok Shop** e do Mercado Livre.
+- Quanto foi gasto com molde e amostras, e quando.
+
+---
+
 ## Duas formas de fazer
 
 | | **Versão rápida** (recomendada para começar) | **Versão completa** |
@@ -68,8 +100,9 @@ Comece pela rápida. Se os números mostrarem algo interessante (e quase sempre 
 > 1. Faturamento por canal, mês a mês (site, ML, Shopee, loja, atacado…)
 > 2. Devoluções/trocas por mês
 > 3. Guias de impostos (ou pede pro contador) + qual o regime (Simples, Presumido…)
-> 4. Custo de cada modelo de calçado + quantos pares vendeu de cada (relatório do ERP)
-> 5. Relatórios financeiros/de repasse do Mercado Livre e Shopee
+> 4. Quanto paga pra fábrica por par de cada modelo (+ caixa, embalagem e frete da fábrica) e quantos pares vendeu de cada
+> 4b. Pedidos feitos pra fábrica nos últimos 3 meses e os que estão em aberto (sinal pago, saldo a pagar, previsão de entrega)
+> 5. Relatórios financeiros/de repasse do Mercado Livre e do TikTok Shop
 > 6. Extrato do gateway/maquininha (taxas e antecipação)
 > 7. Quanto gastou com frete e embalagem
 > 8. Quanto investiu em anúncio (Meta, Google, ads de marketplace)
@@ -81,7 +114,7 @@ Comece pela rápida. Se os números mostrarem algo interessante (e quase sempre 
 > - Contas a pagar e empréstimos em aberto
 > - Pedidos já feitos pra fábrica (coleção/reposição)
 >
-> Pode me mandar numa pasta do Drive. Se for mais fácil, me passa um acesso só de consulta no ERP e nos marketplaces que eu puxo tudo.
+> Manda também as planilhas que tu já usa pra controlar, do jeito que estiverem. Pode me mandar numa pasta do Drive. Se for mais fácil, me passa um acesso só de consulta no ERP e nos marketplaces que eu puxo tudo.
 
 ---
 

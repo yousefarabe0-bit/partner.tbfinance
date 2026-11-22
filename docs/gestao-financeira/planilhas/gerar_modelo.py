@@ -1,6 +1,8 @@
 """Gera o modelo de gestão financeira (DRE, Fluxo 13 semanas, Balanço, DFC,
 Ciclo, KPIs, Orçado x Realizado, Dashboard e aba _API) com dados da Loja Exemplo.
-Uso: python3 gerar_modelo.py [saida.xlsx]"""
+Uso: python3 gerar_modelo.py [saida.xlsx] [exemplo|calcados]
+  exemplo  = preenchido com a Loja Exemplo (para estudo)
+  calcados = em branco, adaptado para marca de calçados com produção terceirizada"""
 import sys, datetime as dt
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
@@ -9,10 +11,13 @@ from openpyxl.worksheet.datavalidation import DataValidation
 from openpyxl.formatting.rule import FormulaRule, CellIsRule
 from openpyxl.chart import BarChart, LineChart, Reference
 
-OUT = sys.argv[1] if len(sys.argv) > 1 else "Modelo_Gestao_Financeira_TB.xlsx"
+PERFIL = sys.argv[2] if len(sys.argv) > 2 else "exemplo"
+CAL = PERFIL == "calcados"
+OUT = sys.argv[1] if len(sys.argv) > 1 else ("Modelo_Calcados_TB.xlsx" if CAL else "Modelo_Gestao_Financeira_TB.xlsx")
 ANO = 2026
 MESES = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"]
-CANAIS = ["Site Próprio","Mercado Livre","Shopee","Amazon/Outros","Geral"]
+CANAIS = (["Site Próprio","Mercado Livre","TikTok Shop","Outros","Geral"] if CAL
+          else ["Site Próprio","Mercado Livre","Shopee","Amazon/Outros","Geral"])
 
 NAVY = "1F2A44"; GOLD = "C9A227"
 F_HEAD = PatternFill("solid", fgColor=NAVY)
@@ -59,7 +64,8 @@ MC = lambda m: L(1 + m)   # coluna do mês m (B..M)
 
 # ------------------------------------------------------------------ LEIA-ME
 ws = sheet("LEIA-ME", "Modelo de Gestão Financeira — TB Finance",
-           "Modelo para e-commerce. Preenchido com a empresa fictícia 'Loja Exemplo' (set e out/2026).", first=True)
+           ("Modelo para marca de calçados com produção terceirizada (piloto). Em branco — preencher com os dados reais." if CAL else
+            "Modelo para e-commerce. Preenchido com a empresa fictícia 'Loja Exemplo' (set e out/2026)."), first=True)
 txt = [
  ("COMO FUNCIONA", None),
  ("1. Células AMARELAS são para digitar. Todas as outras são calculadas — não sobrescreva.", None),
@@ -83,12 +89,22 @@ txt = [
  ("", None),
  ("Guia completo de como preencher e analisar: docs/gestao-financeira/guia-relatorios.md", None),
 ]
+if CAL:
+    txt[-1:-1] = [
+     ("ESPECÍFICO DE CALÇADOS", None),
+     ("• Custo por Par: monte o custo real de cada modelo (fábrica + insumos + frete + caixa/embalagem). O total de CMV do mês vai para Lançamentos.", None),
+     ("• Sinal/adiantamento pago à fábrica NÃO é despesa: vai no Balanço ('Adiantamentos à fábrica') e no Fluxo de Caixa.", None),
+     ("• Molde e amostras = 'Desenvolvimento de moldes e amostras' (investimento); a parcela mensal vai como 'Amortização de moldes'.", None),
+     ("• TikTok Shop: separe a comissão da plataforma ('Comissões de marketplace') da comissão de creators ('Comissão de afiliados/creators').", None),
+     ("• Trocas por numeração: lance o frete de volta em 'Logística reversa' — não deixe sumir no frete normal.", None),
+     ("", None)]
 for i, (t, _) in enumerate(txt, start=4):
     c = ws.cell(row=i, column=1, value=t)
     if t.isupper() and t: c.font = Font(bold=True, color=NAVY, size=12)
-ws["A27"] = "Legenda:"; ws["A27"].font = B
-ws["A28"] = "Digitar"; ws["A28"].fill = F_INPUT
-ws["A29"] = "Resultado / subtotal"; ws["A29"].fill = F_RES
+lg = 6 + len(txt)
+ws[f"A{lg}"] = "Legenda:"; ws[f"A{lg}"].font = B
+ws[f"A{lg+1}"] = "Digitar"; ws[f"A{lg+1}"].fill = F_INPUT
+ws[f"A{lg+2}"] = "Resultado / subtotal"; ws[f"A{lg+2}"].fill = F_RES
 ws.column_dimensions["A"].width = 110
 
 # ------------------------------------------------------------------ CONFIG
@@ -96,6 +112,10 @@ ws = sheet("Config", "Configurações")
 cfg = [("Empresa", "Loja Exemplo Ltda."), ("Ano", ANO), ("Mês de análise (1-12)", 10),
        ("Caixa mínimo de segurança (R$)", 100000), ("Início do fluxo 13 semanas (segunda-feira)", dt.date(2026, 11, 2)),
        ("Saldo bancário no início do fluxo (R$)", 150000)]
+if CAL:
+    cfg = [("Empresa", "Marca de Calçados (piloto)"), ("Ano", ANO), ("Mês de análise (1-12)", 10),
+           ("Caixa mínimo de segurança (R$)", 0), ("Início do fluxo 13 semanas (segunda-feira)", dt.date(2026, 11, 23)),
+           ("Saldo bancário no início do fluxo (R$)", 0)]
 for i, (k, v) in enumerate(cfg, start=3):
     ws.cell(row=i, column=1, value=k).font = B
     c = ws.cell(row=i, column=2, value=v); c.fill = F_INPUT
@@ -146,6 +166,14 @@ PLANO = [
  ("12.3","Aporte de sócios","Financiamento",1,"Caixa"),
  ("12.4","Distribuição de lucros","Financiamento",-1,"Caixa"),
 ]
+if CAL:
+    def ins_after(name, row):
+        i = [p[1] for p in PLANO].index(name); PLANO.insert(i + 1, row)
+    ins_after("Comissões de marketplace", ("4.1.1","Comissão de afiliados/creators","Despesas Variáveis",-1,"Variável"))
+    ins_after("Depreciação", ("7.2","Amortização de moldes","Depreciação",-1,"Fixo"))
+    ins_after("Venda de ativos", ("11.3","Desenvolvimento de moldes e amostras","Investimento",-1,"Caixa"))
+    for i, p_ in enumerate(PLANO):
+        if p_[1] == "Compra de mercadorias (estoque)": PLANO[i] = ("10.1","Pagamento à fábrica (sinal e saldo)","Fora da DRE - Operacional",-1,"Caixa")
 ws = sheet("Plano de Contas", "Plano de Contas Gerencial",
            "Sinal: +1 soma no resultado, -1 subtrai. Grupos 'Investimento'/'Financiamento'/'Fora da DRE' não entram na DRE (vão para a DFC).")
 header(ws, 4, ["Código", "Categoria", "Grupo", "Sinal", "Natureza"])
@@ -153,6 +181,29 @@ for i, r in enumerate(PLANO, start=5):
     for j, v in enumerate(r, start=1): ws.cell(row=i, column=j, value=v)
 for col, w in zip("ABCDE", [8, 40, 28, 7, 16]): ws.column_dimensions[col].width = w
 PC_LAST = 4 + len(PLANO) + 40  # espaço para novas categorias
+
+# ------------------------------------------------------------------ CUSTO POR PAR (calçados)
+if CAL:
+    ws = sheet("Custo por Par", "Custo real por par e CMV do mês",
+               "Uma linha por modelo/referência. O total da coluna L é o CMV do mês: lance em Lançamentos como 'CMV - Custo das mercadorias vendidas'.")
+    header(ws, 4, ["Modelo / referência", "Fábrica (por par)", "Insumos que você fornece", "Frete fábrica → estoque", "Caixa + embalagem",
+                   "Etiqueta / tag / outros", "CUSTO TOTAL POR PAR", "Preço médio de venda", "Margem bruta por par", "Margem bruta %",
+                   "Pares vendidos no mês", "CMV do mês"])
+    for i in range(5, 105):
+        for j in (1, 2, 3, 4, 5, 6, 8, 11): ws.cell(row=i, column=j).fill = F_INPUT
+        ws.cell(row=i, column=7, value=f'=IF(A{i}="","",SUM(B{i}:F{i}))')
+        ws.cell(row=i, column=9, value=f'=IF(OR(A{i}="",H{i}=""),"",H{i}-G{i})')
+        ws.cell(row=i, column=10, value=f'=IF(OR(A{i}="",H{i}="",H{i}=0),"",I{i}/H{i})')
+        ws.cell(row=i, column=12, value=f'=IF(OR(A{i}="",K{i}=""),"",G{i}*K{i})')
+        for j in range(2, 13): ws.cell(row=i, column=j).number_format = PCT if j == 10 else ('#,##0' if j == 11 else '#,##0.00')
+    ws["A106"] = "TOTAL"; ws["A106"].font = B
+    ws["K106"] = "=SUM(K5:K104)"; ws["L106"] = "=SUM(L5:L104)"
+    ws["G106"] = '=IFERROR(L106/K106,"")'; ws["J106"] = '=IFERROR(SUMPRODUCT(K5:K104,I5:I104)/SUMPRODUCT(K5:K104,H5:H104),"")'
+    style_row(ws, 106, 1, 12, fill=F_RES, font=B, fmt='#,##0.00'); ws["J106"].number_format = PCT; ws["K106"].number_format = '#,##0'
+    ws["A107"] = "Custo médio por par (G) e margem bruta média ponderada (J) na linha TOTAL."; ws["A107"].font = GRAY
+    ws.column_dimensions["A"].width = 30
+    for c in range(2, 13): ws.column_dimensions[L(c)].width = 15
+    ws.freeze_panes = "B5"
 
 # ------------------------------------------------------------------ LANÇAMENTOS
 ws = sheet("Lançamentos", "Lançamentos (base de dados)",
@@ -188,6 +239,7 @@ for cat, v in [("Folha + encargos + benefícios",80),("Pró-labore",20),("Alugue
                ("Depreciação",4),("Juros de empréstimos",12),("IRPJ / CSLL",15),
                ("Compra de imobilizado",20),("Empréstimos captados",80),("Amortização de empréstimos",25),("Distribuição de lucros",30)]:
     add(10,cat,"Geral",v)
+if CAL: lan = []
 N_ROWS = 2000
 for i in range(5, 5 + N_ROWS):
     if i - 5 < len(lan):
@@ -366,6 +418,13 @@ SAI = ["Fornecedores (estoque)", "Folha + pró-labore", "Impostos", "Marketing",
 data_ent = [[90,85,85,95,110,130,140,150,140,110,100,95,95],[70,70,65,70,90,100,110,110,100,90,85,80,80],[30,30,30,30,40,45,45,50,45,35,30,30,30],[0]*13,[0]*13]
 data_sai = [[120,90,40,150,60,80,60,100,80,70,60,50,80],[0,100,0,0,0,100,0,0,160,0,0,100,0],[0,0,160,0,0,0,190,0,0,0,200,0,0],
             [30,30,35,35,40,40,40,45,40,30,30,30,30],[12,12,12,12,15,16,16,18,16,12,12,12,12],[15,10,10,10,10,10,10,10,15,10,10,10,10],[0,0,0,25,0,0,0,25,0,0,0,25,0]]
+if CAL:
+    ENT = ["Repasses Mercado Livre", "Repasses TikTok Shop", "Recebíveis de cartão (site)", "Pix / boleto", "Outros canais",
+           "Antecipação de recebíveis", "Empréstimos / aportes"]
+    SAI = ["Fábrica — sinal / adiantamento", "Fábrica — saldo na entrega", "Frete fábrica → estoque", "Caixas e embalagens",
+           "Folha + pró-labore", "Impostos", "Marketing (ads)", "Creators / afiliados pagos à parte", "Frete / logística (envios e trocas)",
+           "Aluguel e outras fixas", "Parcelas de empréstimo", "Moldes e amostras"]
+    data_ent = [[None] * 13 for _ in ENT]; data_sai = [[None] * 13 for _ in SAI]
 r = 6
 ws.cell(row=r, column=1, value="SALDO INICIAL").font = B
 for w in range(13):
@@ -376,7 +435,7 @@ ws.cell(row=r, column=1, value="(+) ENTRADAS").font = Font(bold=True, color="1A7
 e0 = r
 for name, vals in zip(ENT, data_ent):
     ws.cell(row=r, column=1, value=name).alignment = Alignment(indent=2)
-    for w, v in enumerate(vals): c = ws.cell(row=r, column=2 + w, value=v * 1000); c.fill = F_INPUT
+    for w, v in enumerate(vals): c = ws.cell(row=r, column=2 + w, value=v * 1000 if v is not None else None); c.fill = F_INPUT
     ws.cell(row=r, column=15, value=f"=SUM(B{r}:N{r})"); style_row(ws, r, 2, 15, fmt=NUM); r += 1
 ws.cell(row=r, column=1, value="Total entradas")
 for w in range(14): col = L(2 + w); ws.cell(row=r, column=2 + w, value=f"=SUM({col}{e0}:{col}{r-1})")
@@ -385,7 +444,7 @@ ws.cell(row=r, column=1, value="(−) SAÍDAS").font = Font(bold=True, color="B4
 s0 = r
 for name, vals in zip(SAI, data_sai):
     ws.cell(row=r, column=1, value=name).alignment = Alignment(indent=2)
-    for w, v in enumerate(vals): c = ws.cell(row=r, column=2 + w, value=v * 1000); c.fill = F_INPUT
+    for w, v in enumerate(vals): c = ws.cell(row=r, column=2 + w, value=v * 1000 if v is not None else None); c.fill = F_INPUT
     ws.cell(row=r, column=15, value=f"=SUM(B{r}:N{r})"); style_row(ws, r, 2, 15, fmt=NUM); r += 1
 ws.cell(row=r, column=1, value="Total saídas")
 for w in range(14): col = L(2 + w); ws.cell(row=r, column=2 + w, value=f"=SUM({col}{s0}:{col}{r-1})")
@@ -415,7 +474,7 @@ ws.cell(row=r, column=1, value="1ª semana abaixo do mínimo").font = B
 ws.cell(row=r, column=2, value=f'=IFERROR("Sem "&MATCH(TRUE,INDEX(B{R_FIM}:N{R_FIM}<B{R_MIN}:N{R_MIN},0),0),"nenhuma")'); R_PRIM = r
 ws.conditional_formatting.add(f"B{R_FIM}:N{R_FIM}", CellIsRule(operator="lessThan", formula=["0"], fill=PatternFill("solid", fgColor="F8D7DA"), font=Font(bold=True, color="B42318")))
 ws.conditional_formatting.add(f"B{R_FOLGA}:N{R_FOLGA}", CellIsRule(operator="lessThan", formula=["0"], font=Font(bold=True, color="B42318")))
-ws.column_dimensions["A"].width = 30
+ws.column_dimensions["A"].width = 36
 for c in range(2, 16): ws.column_dimensions[L(c)].width = 11
 ws.freeze_panes = "B6"
 FLX_MENOR, FLX_SEM, FLX_PRIM = f"'Fluxo 13 Semanas'!B{R_MENOR}", f"'Fluxo 13 Semanas'!B{R_SEMMENOR}", f"'Fluxo 13 Semanas'!B{R_PRIM}"
@@ -434,6 +493,7 @@ bal_data = {
  "Empréstimos de longo prazo": {9: 170, 10: 205}, "Outros passivos não circulantes": {},
  "Patrimônio Líquido": {9: 810, 10: 820},
 }
+if CAL: bal_data = {}
 r = 5
 def bline(label, key=None, inp=True, formula=None, bold=False, fill=None, fmt=NUM):
     global r
@@ -454,7 +514,7 @@ def sect(t):
     global r
     ws.cell(row=r, column=1, value=t).font = Font(bold=True, color=NAVY); r += 1
 sect("ATIVO")
-for k in ["Caixa e bancos", "Contas a receber", "Estoque", "Impostos a recuperar", "Outros ativos circulantes"]: bline(k)
+for k in ["Caixa e bancos", "Contas a receber", "Estoque", "Adiantamentos à fábrica", "Impostos a recuperar", "Outros ativos circulantes"]: bline(k)
 bline("(=) Ativo Circulante", "AC", False, f"SUM(#{BAL['Caixa e bancos']}:#{BAL['Outros ativos circulantes']})", True, F_SUB)
 for k in ["Imobilizado líquido", "Outros ativos não circulantes"]: bline(k)
 bline("(=) Ativo Não Circulante", "ANC", False, f"#{BAL['Imobilizado líquido']}+#{BAL['Outros ativos não circulantes']}", True, F_SUB)
@@ -478,7 +538,7 @@ bline("Dívida bruta (empréstimos)", "DB", False, ATIVO_OK(f"{G('Empréstimos d
 bline("Dívida líquida (dívida − caixa)", "DL", False, ATIVO_OK(f"{G('DB')}-{G('Caixa e bancos')}"))
 bline("Dívida líquida ÷ EBITDA anualizado", "DLE", False, ATIVO_OK(f"{G('DL')}/(DRE!#{ROW['EBITDA']}*12)"), fmt='0.00"x"')
 bline("NCG — Necessidade de Capital de Giro", "NCG", False,
-      ATIVO_OK(f"{G('Contas a receber')}+{G('Estoque')}-{G('Fornecedores')}-{G('Impostos a pagar')}-{G('Salários e encargos a pagar')}"))
+      ATIVO_OK(f"{G('Contas a receber')}+{G('Estoque')}+{G('Adiantamentos à fábrica')}-{G('Fornecedores')}-{G('Impostos a pagar')}-{G('Salários e encargos a pagar')}"))
 ws.column_dimensions["A"].width = 42
 for c in range(2, 14): ws.column_dimensions[L(c)].width = 12
 ws.freeze_panes = "B5"
@@ -510,6 +570,7 @@ dline("Lucro líquido (DRE)", "LL", lambda c, p: f"DRE!{c}{ROW['LL']}", indent=T
 dline("(+) Depreciação", "DEP", lambda c, p: f"-DRE!{c}{ROW['DEP']}", indent=True)
 dline("(±) Variação contas a receber", "dREC", delta("Contas a receber", -1), indent=True)
 dline("(±) Variação estoque", "dEST", delta("Estoque", -1), indent=True)
+dline("(±) Variação adiantamentos à fábrica", "dADI", delta("Adiantamentos à fábrica", -1), indent=True)
 dline("(±) Variação impostos a recuperar / outros AC", "dOAC", lambda c, p: f"-({BB('Impostos a recuperar', c)}+{BB('Outros ativos circulantes', c)}-{BB('Impostos a recuperar', p)}-{BB('Outros ativos circulantes', p)})", indent=True)
 dline("(±) Variação fornecedores", "dFOR", delta("Fornecedores", 1), indent=True)
 dline("(±) Variação impostos a pagar", "dIMP", delta("Impostos a pagar", 1), indent=True)
@@ -571,6 +632,8 @@ header(ws, 4, ["KPI"] + MESES + ["Referência"])
 K = {}; r = 5
 kin = {"Pedidos": {9: 4400, 10: 5000}, "Clientes novos": {9: 1600, 10: 2000}, "Sessões do site": {9: 90000, 10: 100000},
        "Pedidos do site": {9: 1800, 10: 2000}, "Compras por cliente em 12 meses": {9: 2.5, 10: 2.5}, "Estoque parado 90+ dias (R$)": {9: 150000, 10: 180000}}
+if CAL:
+    kin = {k: {} for k in kin}; kin["Pares vendidos"] = {}; kin["Pares trocados/devolvidos"] = {}
 ws.cell(row=r, column=1, value="DADOS DE ENTRADA").font = Font(bold=True, color=NAVY); r += 1
 for k, vals in kin.items():
     ws.cell(row=r, column=1, value=k).alignment = Alignment(indent=2)
@@ -601,6 +664,11 @@ kline("% pedidos de recompra", "REC", lambda c: f"({c}{K['Pedidos']}-{c}{K['Clie
 kline("Taxa de conversão do site", "CONV", lambda c: f"{c}{K['Pedidos do site']}/{c}{K['Sessões do site']}", '0.00%', "1–2% moda")
 kline("Giro de estoque (vezes/ano)", "GIRO", lambda c: f"'Ciclo Financeiro'!{c}{CY['GIRO']}", '0.0')
 kline("% estoque parado 90+ dias", "PAR", lambda c: f"{c}{K['Estoque parado 90+ dias (R$)']}/Balanço!{c}{BAL['Estoque']}", PCT, "< 20%")
+if CAL:
+    kline("Preço médio por par (receita bruta ÷ pares)", "PMP_PAR", lambda c: f"{D('RB', c)}/{c}{K['Pares vendidos']}", MOEDA)
+    kline("Custo médio por par (CMV ÷ pares)", "CMP_PAR", lambda c: f"-{D('CMV', c)}/{c}{K['Pares vendidos']}", MOEDA)
+    kline("Pares por pedido", "PPP", lambda c: f"{c}{K['Pares vendidos']}/{c}{K['Pedidos']}", '0.00')
+    kline("Taxa de troca/devolução (pares)", "TROCA", lambda c: f"{c}{K['Pares trocados/devolvidos']}/{c}{K['Pares vendidos']}", PCT, "calçado online: acompanhar")
 ws.conditional_formatting.add(f"B{K['LTVCAC']}:M{K['LTVCAC']}", FormulaRule(formula=[f'AND(B{K["LTVCAC"]}<>"",B{K["LTVCAC"]}<3)'], font=Font(bold=True, color="B42318")))
 ws.column_dimensions["A"].width = 42
 for c in range(2, 14): ws.column_dimensions[L(c)].width = 11
@@ -614,6 +682,7 @@ orc = {"Receita Líquida": {9: 720, 10: 850, 11: 1100, 12: 1000},
        "Despesas variáveis": {9: 129.6, 10: 153, 11: 198, 12: 180},
        "Marketing": {9: 100.8, 10: 119, 11: 165, 12: 140},
        "Despesas fixas": {9: 125, 10: 125, 11: 130, 12: 130}}
+if CAL: orc = {k: {} for k in orc}
 O = {}; r = 5
 for k, vals in orc.items():
     ws.cell(row=r, column=1, value=k)
@@ -707,8 +776,8 @@ ws.cell(row=r, column=1, value="ALERTAS AUTOMÁTICOS").font = Font(bold=True, co
 prevsel = lambda key: f"INDEX(DRE!$B${ROW[key]}:$M${ROW[key]},{CFG_MES}-1)"
 alerts = [
  f'IF({FLX_MENOR}<{CFG_CXMIN},"🚨 Caixa: saldo projetado abaixo do mínimo a partir da "&{FLX_PRIM}&" (menor saldo na "&{FLX_SEM}&"). Agir agora: negociar fornecedores / rever compras.","✅ Caixa: projeção de 13 semanas acima do mínimo.")',
- f'IF({CFG_MES}=1,"",IF(-{DRE_SEL("CMV")}/{DRE_SEL("RL")}>-{prevsel("CMV")}/{prevsel("RL")}+0.01,"⚠ CMV subiu de "&TEXT(-{prevsel("CMV")}/{prevsel("RL")},"0.0%")&" para "&TEXT(-{DRE_SEL("CMV")}/{DRE_SEL("RL")},"0.0%")&" da receita. Verificar descontos, mix e custo de compra.","✅ CMV estável."))',
- f'IF({CFG_MES}=1,"",IF(-{DRE_SEL("MKT")}/{DRE_SEL("RL")}>-{prevsel("MKT")}/{prevsel("RL")}+0.01,"⚠ Marketing subiu de "&TEXT(-{prevsel("MKT")}/{prevsel("RL")},"0.0%")&" para "&TEXT(-{DRE_SEL("MKT")}/{DRE_SEL("RL")},"0.0%")&" da receita. Eficiência caindo.","✅ Marketing estável em % da receita."))',
+ f'IFERROR(IF({CFG_MES}=1,"",IF(-{DRE_SEL("CMV")}/{DRE_SEL("RL")}>-{prevsel("CMV")}/{prevsel("RL")}+0.01,"⚠ CMV subiu de "&TEXT(-{prevsel("CMV")}/{prevsel("RL")},"0.0%")&" para "&TEXT(-{DRE_SEL("CMV")}/{DRE_SEL("RL")},"0.0%")&" da receita. Verificar descontos, mix e custo de compra.","✅ CMV estável.")),"")',
+ f'IFERROR(IF({CFG_MES}=1,"",IF(-{DRE_SEL("MKT")}/{DRE_SEL("RL")}>-{prevsel("MKT")}/{prevsel("RL")}+0.01,"⚠ Marketing subiu de "&TEXT(-{prevsel("MKT")}/{prevsel("RL")},"0.0%")&" para "&TEXT(-{DRE_SEL("MKT")}/{DRE_SEL("RL")},"0.0%")&" da receita. Eficiência caindo.","✅ Marketing estável em % da receita.")),"")',
  f'IF({CFG_MES}=1,"",IF(AND({DRE_SEL("RL")}>{prevsel("RL")},{DRE_SEL("EBITDA")}<{prevsel("EBITDA")}),"⚠ Receita cresceu mas o EBITDA caiu: crescimento comprado com margem.",""))',
  f'IFERROR(IF({colsel("KPIs", K["LTVCAC"])}<3,"⚠ LTV/CAC em "&TEXT({colsel("KPIs", K["LTVCAC"])},"0.0")&"x (referência ≥ 3x).","✅ LTV/CAC saudável."),"")',
  f'IFERROR(IF({colsel("KPIs", K["MER"])}<{colsel("KPIs", K["ROASEQ"])},"🚨 MER abaixo do ROAS de equilíbrio: marketing dando prejuízo.","✅ MER acima do ROAS de equilíbrio ("&TEXT({colsel("KPIs", K["ROASEQ"])},"0.0")&"x)."),"")',
