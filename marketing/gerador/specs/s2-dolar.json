@@ -1,0 +1,73 @@
+{
+ "tag": "NOTÍCIA · @TBFINANCE_",
+ "data": "NOV · 2026",
+ "cheia": true,
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-cartoes.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-maquininha.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "foto": "hq-maquininha.jpg",
+   "h": 1350,
+   "pos": "center 30%",
+   "brilho": 0.85,
+   "kicker": "CÂMBIO",
+   "titulo": "O dólar disparou em novembro. *A Black Friday \"gringa\" ficou mais cara.*",
+   "fs": 72,
+   "credito": "Foto: Basile Morin (CC BY-SA 4.0)"
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O MOVIMENTO",
+   "titulo": "Maior nível desde abril de 2025",
+   "paragrafos": [
+    "Na semana encerrada em 20/11, a PTAX fechou em R$ 5,89, alta de 4,2% em cinco dias. Uma semana antes, já estava em R$ 5,65."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: TradeMap, resumo semanal (20/11/2026); Jornal do Comércio (13/11/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "POR QUÊ",
+   "titulo": "Pressão de dentro e de fora",
+   "lista": [
+    "Preocupação com as contas públicas",
+    "Expectativa de juros mais altos nos EUA",
+    "Dólar mais forte no mundo todo"
+   ],
+   "escuro": true,
+   "fonte": "Fontes: TradeMap, resumo semanal (20/11/2026); Jornal do Comércio (13/11/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "NO CARRINHO",
+   "titulo": "Preço em dólar *é preço que se mexe*",
+   "paragrafos": [
+    "Em sites internacionais, o valor em reais depende do câmbio e ainda tem IOF e, às vezes, imposto de importação. Um desconto de 20% pode sumir com o dólar subindo."
+   ],
+   "foto": "hq-cartoes.jpg",
+   "pos": "center 0%",
+   "fade": 24,
+   "fonte": "Fontes: TradeMap, resumo semanal (20/11/2026); Jornal do Comércio (13/11/2026). Foto: $5000 (CC BY-SA 4.0)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "NO SEU BOLSO",
+   "titulo": "Não assuma dívida numa moeda *que você não ganha*",
+   "paragrafos": [
+    "Compare o preço final em reais, com taxas e frete, e evite parcelar importados se o orçamento já está apertado."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: TradeMap, resumo semanal (20/11/2026); Jornal do Comércio (13/11/2026)."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "SEU BOLSO EM REAL",
+   "titulo": "Organize o que você ganha antes de gastar em dólar.",
+   "palavra": "DESTRAVA",
+   "assinatura": "TB Finance · desde 2019 tirando brasileiros do vermelho"
+  }
+ ]
+}

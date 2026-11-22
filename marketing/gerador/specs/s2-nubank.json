@@ -1,0 +1,84 @@
+{
+ "tag": "NOTÍCIA · @TBFINANCE_",
+ "data": "NOV · 2026",
+ "cheia": true,
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-cartoes.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-maquininha.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "foto": "hq-cartoes.jpg",
+   "h": 1350,
+   "pos": "center 0%",
+   "brilho": 0.85,
+   "kicker": "BANCOS DIGITAIS",
+   "titulo": "Nubank lucra US$ 1,09 bilhão no trimestre. *E os atrasos também cresceram.*",
+   "fs": 72,
+   "credito": "Foto: $5000 (CC BY-SA 4.0)"
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O RESULTADO",
+   "titulo": "Lucro recorde de US$ 1,09 bi",
+   "paragrafos": [
+    "No 3º trimestre, o lucro subiu 31% sem efeito do câmbio, acima do esperado por analistas. São 142,6 milhões de clientes."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Bloomberg Línea, DGABC e Times Brasil (12/11/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O MOTOR",
+   "titulo": "Crédito *crescendo rápido*",
+   "paragrafos": [
+    "A carteira de crédito chegou a US$ 41,6 bilhões, alta de 33% em um ano, puxada principalmente pelo Brasil."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Bloomberg Línea, DGABC e Times Brasil (12/11/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O ALERTA",
+   "titulo": "Inadimplência subiu para 7,3%",
+   "paragrafos": [
+    "O índice de atraso foi de 7,3%, contra 6,9% no trimestre anterior. Mais crédito na praça também significa mais gente sem conseguir pagar."
+   ],
+   "foto": "hq-maquininha.jpg",
+   "pos": "center 30%",
+   "fade": 24,
+   "fonte": "Fontes: Bloomberg Línea, DGABC e Times Brasil (12/11/2026). Foto: Basile Morin (CC BY-SA 4.0)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "A LÓGICA",
+   "titulo": "Limite fácil é produto, *não presente*",
+   "paragrafos": [
+    "Para os bancos, crédito é uma das principais fontes de receita. O limite que aparece no app é uma oferta de empréstimo, não dinheiro seu."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Bloomberg Línea, DGABC e Times Brasil (12/11/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "NO SEU BOLSO",
+   "titulo": "Seu limite não é sua renda",
+   "lista": [
+    "Defina um teto de fatura menor que o limite",
+    "Nunca pague só o mínimo",
+    "Se for atrasar, negocie antes do vencimento",
+    "Revise os aumentos automáticos de limite"
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Bloomberg Línea, DGABC e Times Brasil (12/11/2026)."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "SEU LIMITE NÃO É SEU",
+   "titulo": "Use o cartão como ferramenta, não como renda.",
+   "palavra": "EBOOK",
+   "assinatura": "TB Finance · desde 2019 tirando brasileiros do vermelho"
+  }
+ ]
+}

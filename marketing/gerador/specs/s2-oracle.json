@@ -1,0 +1,83 @@
+{
+ "tag": "YOUSEF AMER · @YOUSEFAMEROFICIAL",
+ "data": "NOV · 2026",
+ "cheia": true,
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-ellison.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "foto": "hq-ellison.jpg",
+   "h": 1350,
+   "pos": "center 20%",
+   "brilho": 0.85,
+   "kicker": "CRESCER COM DÍVIDA",
+   "titulo": "Oracle levanta mais US$ 20 bi para apostar em IA, *com US$ 125 bi já em dívidas*.",
+   "fs": 72,
+   "credito": "Foto: Oracle Corporate Communications (CC BY 2.0)"
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O FATO",
+   "titulo": "US$ 20 bilhões de uma vez",
+   "paragrafos": [
+    "Em 2/11, a Oracle captou US$ 10 bi em ações novas e US$ 10 bi em títulos de dívida para financiar data centers de IA."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: The Motley Fool (02/11/2026); IBTimes UK com Reuters (03/11/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O PESO",
+   "titulo": "Dívida de *quase 2x o patrimônio*",
+   "paragrafos": [
+    "Em 31/08, a empresa já tinha cerca de US$ 125,3 bi em dívidas. Os novos títulos pagam juros de 7% a 8,65% ao ano."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: The Motley Fool (02/11/2026); IBTimes UK com Reuters (03/11/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "A REAÇÃO",
+   "titulo": "Investidores desconfiaram",
+   "lista": [
+    "Ações caíram perto de 9% no dia",
+    "Fitch mantém nota BBB",
+    "Moody's com perspectiva negativa"
+   ],
+   "escuro": true,
+   "fonte": "Fontes: The Motley Fool (02/11/2026); IBTimes UK com Reuters (03/11/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O QUE EU PENSO",
+   "titulo": "Alavancar só faz sentido *se o retorno vencer os juros*",
+   "paragrafos": [
+    "Dívida para construir algo que gera mais caixa do que custa é estratégia. Dívida para tapar buraco ou apostar sem retorno é risco, em qualquer tamanho de empresa."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: The Motley Fool (02/11/2026); IBTimes UK com Reuters (03/11/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "NO SEU BOLSO",
+   "titulo": "O teste da dívida boa",
+   "lista": [
+    "O que comprei gera renda ou economia maior que os juros?",
+    "Consigo pagar se a renda cair 20%?",
+    "Qual o custo efetivo total (CET)?",
+    "Se a resposta é não, é consumo financiado"
+   ],
+   "escuro": true,
+   "fonte": "Fontes: The Motley Fool (02/11/2026); IBTimes UK com Reuters (03/11/2026)."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "DÍVIDA BOA OU RUIM?",
+   "titulo": "Faça o teste antes de assinar.",
+   "palavra": "PLANILHA",
+   "assinatura": "Yousef Amer · fundador da @tbfinance_"
+  }
+ ]
+}

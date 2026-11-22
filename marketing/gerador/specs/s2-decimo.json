@@ -1,0 +1,89 @@
+{
+ "tag": "NOTÍCIA · @TBFINANCE_",
+ "data": "NOV · 2026",
+ "cheia": true,
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-carteira.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-cofrinho.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-pagando-cartao.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "foto": "hq-carteira.jpg",
+   "h": 1350,
+   "pos": "center center",
+   "brilho": 0.85,
+   "kicker": "13º SALÁRIO",
+   "titulo": "R$ 399 bilhões de 13º vão cair na economia. *O seu já tem destino?*",
+   "fs": 72,
+   "credito": "Foto: Marcello Casal Jr/Agência Brasil (CC BY 3.0 BR)"
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O NÚMERO",
+   "titulo": "R$ 399,1 bilhões",
+   "paragrafos": [
+    "Estimativa do Dieese para 2026: cerca de 99,7 milhões de pessoas recebem, com média de R$ 3.720. É ~2,9% do PIB."
+   ],
+   "foto": "hq-pagando-cartao.jpg",
+   "pos": "70% center",
+   "fade": 22,
+   "fonte": "Fontes: Dieese (13/11/2026); CNC/Peic (out/2026); Lei 4.749/1965. Foto: Hloom Templates (CC BY 2.0)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "QUEM RECEBE",
+   "titulo": "Para onde vai o dinheiro",
+   "lista": [
+    "Trabalhadores formais: R$ 287,4 bi (72%)",
+    "Aposentados e pensionistas: R$ 111,6 bi (28%)",
+    "Só o INSS: R$ 70,8 bi"
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Dieese (13/11/2026); CNC/Peic (out/2026); Lei 4.749/1965."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O CALENDÁRIO",
+   "titulo": "A 1ª parcela chega *junto com a Black Friday*",
+   "paragrafos": [
+    "A 1ª parcela deve ser paga até 30/11, e a Black Friday é 27/11. A 2ª vence em 20/12, que cai num domingo: a tendência é antecipar para sexta, 18/12."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Dieese (13/11/2026); CNC/Peic (out/2026); Lei 4.749/1965."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O CONTEXTO",
+   "titulo": "O dinheiro já chega *com dono*",
+   "paragrafos": [
+    "Em outubro, 81,6% das famílias tinham dívidas, 29,3% estavam com contas atrasadas e 12,2% diziam não ter como pagá-las (Peic/CNC)."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Dieese (13/11/2026); CNC/Peic (out/2026); Lei 4.749/1965."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "NO SEU BOLSO",
+   "titulo": "A ordem de prioridade do 13º",
+   "lista": [
+    "Dívidas atrasadas de juros altos: tente acordo à vista com desconto",
+    "Contas de janeiro: IPVA, IPTU, matrícula e material",
+    "Reserva de emergência",
+    "Só depois: compras planejadas"
+   ],
+   "foto": "hq-cofrinho.jpg",
+   "pos": "center 0%",
+   "fade": 14,
+   "fonte": "Fontes: Dieese (13/11/2026); CNC/Peic (out/2026); Lei 4.749/1965. Foto: Ken Teegardin (CC BY-SA 2.0)."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "O 13º NÃO É BÔNUS",
+   "titulo": "Dê um destino ao seu 13º antes que a fatura dê.",
+   "palavra": "DESTRAVA",
+   "assinatura": "TB Finance · desde 2019 tirando brasileiros do vermelho"
+  }
+ ]
+}

@@ -1,0 +1,71 @@
+{
+ "tag": "YOUSEF AMER · @YOUSEFAMEROFICIAL",
+ "data": "NOV · 2026",
+ "cheia": true,
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-cybertruck.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "foto": "hq-cybertruck.jpg",
+   "h": 1350,
+   "pos": "center center",
+   "brilho": 0.85,
+   "kicker": "SABER DESISTIR",
+   "titulo": "Musk prometeu 250 mil Cybertrucks por ano. *Vendeu 20 mil e decidiu parar.*",
+   "fs": 72,
+   "credito": "Foto: Mr.choppers (CC BY-SA 3.0)"
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O FATO",
+   "titulo": "Fim da linha em 2027",
+   "paragrafos": [
+    "Em 6/11, Elon Musk anunciou que a Tesla vai encerrar a produção do Cybertruck no Texas por volta de meados de 2027, para abrir espaço ao Cybercab, o robotáxi."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Fox Business e Kelley Blue Book (06/11/2026); The Next Web e GM Authority (nov/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "PROMESSA x REALIDADE",
+   "titulo": "Os números *não fecharam*",
+   "lista": [
+    "Promessa de 2023: 250 mil por ano",
+    "2024: 38.965 vendidos nos EUA",
+    "2025: 20.237 (−48%)",
+    "11 recalls desde o lançamento"
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Fox Business e Kelley Blue Book (06/11/2026); The Next Web e GM Authority (nov/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O QUE EU PENSO",
+   "titulo": "Custo afundado *não é motivo para continuar*",
+   "paragrafos": [
+    "O que já foi gasto não volta. A pergunta certa é: daqui para frente, onde cada real rende mais? Grandes empresas cortam produtos. Quem quebra é quem não corta."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Fox Business e Kelley Blue Book (06/11/2026); The Next Web e GM Authority (nov/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "NO SEU BOLSO",
+   "titulo": "O seu \"Cybertruck\" financeiro",
+   "paragrafos": [
+    "Um carro cuja parcela não cabe, uma assinatura esquecida, um negócio que só consome: revise. Às vezes vender, trocar ou renegociar é a melhor saída, sempre negociando e pagando, nunca abandonando a dívida."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Fox Business e Kelley Blue Book (06/11/2026); The Next Web e GM Authority (nov/2026)."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "SAIBA CORTAR",
+   "titulo": "Revise o que só consome o seu dinheiro.",
+   "palavra": "EBOOK",
+   "assinatura": "Yousef Amer · fundador da @tbfinance_"
+  }
+ ]
+}

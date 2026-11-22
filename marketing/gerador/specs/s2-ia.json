@@ -1,0 +1,76 @@
+{
+ "tag": "NOTÍCIA · @TBFINANCE_",
+ "data": "NOV · 2026",
+ "cheia": true,
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-cofrinho.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-dolar.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "foto": "hq-dolar.jpg",
+   "h": 1350,
+   "pos": "center center",
+   "brilho": 0.85,
+   "kicker": "TRABALHO E IA",
+   "titulo": "A IA já foi citada em 121 mil demissões nos EUA em 2026. *Sua reserva aguenta?*",
+   "fs": 72,
+   "credito": "Foto: Jernej Furman (CC BY 2.0)"
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O DADO",
+   "titulo": "121.401 cortes atribuídos à IA",
+   "paragrafos": [
+    "De janeiro a outubro, empresas americanas citaram a inteligência artificial em 121.401 demissões anunciadas, mais que o dobro de todo o ano de 2025 (54.836)."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Challenger, Gray & Christmas, via HCAMag e Trading Economics (nov/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O PICO",
+   "titulo": "Maio foi o mês recorde",
+   "paragrafos": [
+    "Em maio, 38.579 cortes citaram IA, cerca de 40% de todas as demissões anunciadas no mês."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Challenger, Gray & Christmas, via HCAMag e Trading Economics (nov/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O OUTRO LADO",
+   "titulo": "A economia voltou a ser *o motivo nº 1*",
+   "lista": [
+    "Outubro: 43.994 cortes, o menor outubro desde 2023",
+    "Só 1.265 citaram IA no mês",
+    "\"Condições econômicas\": 130.531 no ano"
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Challenger, Gray & Christmas, via HCAMag e Trading Economics (nov/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "NO SEU BOLSO",
+   "titulo": "Reserva é o seu *seguro-demissão*",
+   "lista": [
+    "Junte de 3 a 6 meses de gastos essenciais",
+    "Evite parcelas longas que só cabem com o emprego atual",
+    "Invista em qualificação: é o seu ativo mais valioso",
+    "Mantenha o currículo e a rede de contatos em dia"
+   ],
+   "foto": "hq-cofrinho.jpg",
+   "pos": "center 0%",
+   "fade": 16,
+   "fonte": "Fontes: Challenger, Gray & Christmas, via HCAMag e Trading Economics (nov/2026). Foto: Ken Teegardin (CC BY-SA 2.0)."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "PROTEJA SUA RENDA",
+   "titulo": "Comece a sua reserva neste mês.",
+   "palavra": "PLANILHA",
+   "assinatura": "TB Finance · desde 2019 tirando brasileiros do vermelho"
+  }
+ ]
+}

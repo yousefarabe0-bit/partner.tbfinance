@@ -25,3 +25,10 @@
 | hq-esplanada.jpg | Esplanada dos Ministérios | Senado Federal | CC BY 2.0 | File:Esplanada dos Ministérios (fachada ministérios).jpg |
 | hq-compra-online.jpg | Compra online com cartão | Shixart1985 | CC BY 2.0 | File:Business professional engages in online shopping from home workspace while using credit card.jpg |
 | hq-rihappy.jpg | Fachada de loja da Ri Happy | Izabella Galhardo | CC0 | File:Fachada de loja da Ri Happy em shopping center.jpg |
+| hq-bitcoin.jpg | Moeda física de bitcoin (Casascius, 2011) | Tiberiandusk | CC BY-SA 4.0 | File:Physical Bitcoin 2011 Casascius 1 Bitcoin Coin Token.png |
+| hq-walmart.jpg | Walmart Supercenter, Albany | UpstateNYer | CC BY-SA 3.0 | File:WalMart Supercenter Albany.jpg |
+| hq-ellison.jpg | Larry Ellison | Oracle Corporate Communications | CC BY 2.0 | File:Larry Ellison on stage.jpg |
+| hq-cybertruck.jpg | Tesla Cybertruck | Mr.choppers | CC BY-SA 3.0 | File:2024 Tesla Cybertruck Foundation Series, front left (Greenwich).jpg |
+| hq-carteira.jpg | Carteira de trabalho | Marcello Casal Jr/ABr | CC BY 3.0 BR | File:Carteiradetrabalho.jpg |
+| hq-amodei.jpg | Dario Amodei | TechCrunch | CC BY 2.0 | File:Dario Amodei at TechCrunch Disrupt 2023 01.jpg |
+| hq-dolar.jpg | Celular com ChatGPT sobre notas de dólar | Jernej Furman | CC BY 2.0 | File:Smartphone with ChatGPT text on the US dollar banknotes background (52916923766).jpg |

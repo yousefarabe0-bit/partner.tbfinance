@@ -1,0 +1,71 @@
+{
+ "tag": "NOTÍCIA · @TBFINANCE_",
+ "data": "NOV · 2026",
+ "cheia": true,
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-pagando-cartao.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "foto": "hq-pagando-cartao.jpg",
+   "h": 1350,
+   "pos": "70% center",
+   "brilho": 0.85,
+   "kicker": "BLACK FRIDAY 27/11",
+   "titulo": "Black Friday deve faturar R$ 13,3 bi online. *O perigo mora nas compras pequenas.*",
+   "fs": 72,
+   "credito": "Foto: Hloom Templates (CC BY 2.0)"
+  },
+  {
+   "tipo": "texto",
+   "kicker": "A PROJEÇÃO",
+   "titulo": "R$ 13,3 bilhões em 4 dias",
+   "paragrafos": [
+    "A Confi/Neotrust projeta para o e-commerce, de 26 a 29/11, 20,7% a mais que em 2025 e 69,4 milhões de produtos vendidos."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Confi/Neotrust via Meio & Mensagem (out/2026) e Folha de Pernambuco (13/11/2026); Serasa Experian, Raio-X da Black Friday (out/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O SINAL",
+   "titulo": "Mais pedidos, *ticket menor*",
+   "paragrafos": [
+    "De janeiro a setembro, os pedidos online subiram 34,9%, mas o tíquete médio caiu 13,4%: de R$ 309,70 para R$ 268,20. Compramos mais vezes, em valores menores."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Confi/Neotrust via Meio & Mensagem (out/2026) e Folha de Pernambuco (13/11/2026); Serasa Experian, Raio-X da Black Friday (out/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O COMPORTAMENTO",
+   "titulo": "O que diz o Raio-X da Serasa",
+   "lista": [
+    "Mais de 66% pretendem parcelar",
+    "81% definem um orçamento, mas 33% não cumprem",
+    "43% compram itens fora do plano",
+    "22% aumentariam o limite do cartão"
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Confi/Neotrust via Meio & Mensagem (out/2026) e Folha de Pernambuco (13/11/2026); Serasa Experian, Raio-X da Black Friday (out/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "NO SEU BOLSO",
+   "titulo": "O efeito \"compra pequena\" na fatura",
+   "paragrafos": [
+    "Dez compras de R$ 268 em 6x viram cerca de R$ 447 por mês, durante seis meses. Antes de clicar em comprar, some as parcelas que você já tem. Se não cabe, o desconto não compensa."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Confi/Neotrust via Meio & Mensagem (out/2026) e Folha de Pernambuco (13/11/2026); Serasa Experian, Raio-X da Black Friday (out/2026)."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "COMPRE COM A CONTA FEITA",
+   "titulo": "Some suas parcelas antes de sexta.",
+   "palavra": "PLANILHA",
+   "assinatura": "TB Finance · desde 2019 tirando brasileiros do vermelho"
+  }
+ ]
+}

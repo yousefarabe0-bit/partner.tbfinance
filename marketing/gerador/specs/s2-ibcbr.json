@@ -1,0 +1,87 @@
+{
+ "tag": "NOTÍCIA · @TBFINANCE_",
+ "data": "NOV · 2026",
+ "cheia": true,
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-bc-sede.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-esplanada.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "foto": "hq-bc-sede.jpg",
+   "h": 1350,
+   "pos": "center 30%",
+   "brilho": 0.85,
+   "kicker": "PRÉVIA DO PIB",
+   "titulo": "A economia brasileira encolheu 0,9% no trimestre. *Seu orçamento está preparado?*",
+   "fs": 72,
+   "credito": "Foto: Senado Federal (CC BY 2.0)"
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O DADO",
+   "titulo": "IBC-Br: −0,9%",
+   "paragrafos": [
+    "O índice de atividade do Banco Central, considerado uma prévia do PIB, caiu 0,9% de julho a setembro frente ao trimestre anterior. Divulgado em 16/11."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Banco Central (IBC-Br), via Agência Brasil (16/11/2026); Copom (04/11/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "QUEM PUXOU",
+   "titulo": "Todos os setores recuaram",
+   "lista": [
+    "Agropecuária: −2%",
+    "Indústria: −1,1%",
+    "Serviços: −0,5%",
+    "Em 12 meses, ainda +1,4%"
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Banco Central (IBC-Br), via Agência Brasil (16/11/2026); Copom (04/11/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "JUROS NO ALTO",
+   "titulo": "Selic parada em 13,75%",
+   "paragrafos": [
+    "Em 4/11, o Copom interrompeu os cortes e manteve a Selic em 13,75% ao ano. Economia mais fraca e juro alto significam crédito ainda caro."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Banco Central (IBC-Br), via Agência Brasil (16/11/2026); Copom (04/11/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "POR QUE IMPORTA",
+   "titulo": "O freio chega *na renda extra*",
+   "paragrafos": [
+    "Quando a atividade desacelera, as primeiras a sumir costumam ser horas extras, comissões e bicos, justamente a renda que muita gente usa para pagar parcelas."
+   ],
+   "foto": "hq-esplanada.jpg",
+   "pos": "100% center",
+   "fade": 22,
+   "fonte": "Fontes: Banco Central (IBC-Br), via Agência Brasil (16/11/2026); Copom (04/11/2026). Foto: Senado Federal (CC BY 2.0)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "NO SEU BOLSO",
+   "titulo": "Faça o seu \"IBC-Br\" do mês",
+   "lista": [
+    "Compare a renda dos últimos 3 meses com os 3 anteriores",
+    "Separe renda fixa de renda variável",
+    "Parcelas devem caber só na renda fixa",
+    "Se a renda caiu, renegocie antes de atrasar"
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Banco Central (IBC-Br), via Agência Brasil (16/11/2026); Copom (04/11/2026)."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "PREPARE O ORÇAMENTO",
+   "titulo": "Economia desacelerando pede orçamento em dia.",
+   "palavra": "PLANILHA",
+   "assinatura": "TB Finance · desde 2019 tirando brasileiros do vermelho"
+  }
+ ]
+}

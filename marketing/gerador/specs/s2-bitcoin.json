@@ -1,0 +1,73 @@
+{
+ "tag": "NOTÍCIA · @TBFINANCE_",
+ "data": "NOV · 2026",
+ "cheia": true,
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-bitcoin.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-cartoes.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "foto": "hq-bitcoin.jpg",
+   "h": 1350,
+   "pos": "center center",
+   "brilho": 0.85,
+   "kicker": "MERCADO CRIPTO",
+   "titulo": "Bitcoin cai abaixo de US$ 70 mil, e *quem estava alavancado perdeu primeiro*.",
+   "fs": 72,
+   "credito": "Foto: Tiberiandusk (CC BY-SA 4.0)"
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O QUE ACONTECEU",
+   "titulo": "Metade do valor do pico",
+   "paragrafos": [
+    "Em 13/11, o bitcoin perdeu os US$ 70 mil pela 1ª vez desde agosto. Em meados de novembro chegou a cerca de US$ 62 mil, perto de 50% abaixo do pico de outubro de 2025."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Forklog (13/11/2026); Crypto Briefing (17/11/2026). Conteúdo educativo, não é recomendação de investimento."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O GATILHO",
+   "titulo": "A conta da *alavancagem* chegou",
+   "paragrafos": [
+    "Em 24 horas, US$ 1,5 bilhão em posições foram liquidadas à força (Forklog). Quem opera com dinheiro emprestado é obrigado a vender quando o preço cai."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Forklog (13/11/2026); Crypto Briefing (17/11/2026). Conteúdo educativo, não é recomendação de investimento."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "EFEITO DOMINÓ",
+   "titulo": "Venda forçada puxa mais venda",
+   "lista": [
+    "Saída de ~US$ 1,9 bi dos ETFs de bitcoin nos EUA",
+    "Medo de juros mais altos nos EUA",
+    "Seis semanas seguidas de queda"
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Forklog (13/11/2026); Crypto Briefing (17/11/2026). Conteúdo educativo, não é recomendação de investimento."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "NO SEU BOLSO",
+   "titulo": "Alavancagem pessoal tem outro nome: *dívida cara*",
+   "paragrafos": [
+    "Quem banca o mês com rotativo ou empréstimo está \"alavancado\": se a renda cai, os juros não esperam. Antes de qualquer ativo volátil, quite as dívidas caras e monte sua reserva."
+   ],
+   "foto": "hq-cartoes.jpg",
+   "pos": "center 0%",
+   "fade": 22,
+   "fonte": "Fontes: Forklog (13/11/2026); Crypto Briefing (17/11/2026). Conteúdo educativo, não é recomendação de investimento. Foto: $5000 (CC BY-SA 4.0)."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "ANTES DE INVESTIR",
+   "titulo": "Primeiro, saia da dívida cara.",
+   "palavra": "DESTRAVA",
+   "assinatura": "TB Finance · desde 2019 tirando brasileiros do vermelho"
+  }
+ ]
+}

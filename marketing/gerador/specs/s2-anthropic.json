@@ -1,0 +1,73 @@
+{
+ "tag": "YOUSEF AMER · @YOUSEFAMEROFICIAL",
+ "data": "NOV · 2026",
+ "cheia": true,
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-amodei.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-nasdaq-tower.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "foto": "hq-amodei.jpg",
+   "h": 1350,
+   "pos": "35% center",
+   "brilho": 0.85,
+   "kicker": "WALL STREET",
+   "titulo": "O maior IPO da história levantou mais de US$ 100 bi. *O que a estreia ensina?*",
+   "fs": 72,
+   "credito": "Foto: TechCrunch (CC BY 2.0)"
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O FATO",
+   "titulo": "Estreia na Nasdaq em 19/11",
+   "paragrafos": [
+    "As ações da Anthropic saíram a US$ 83, acima da faixa de US$ 70 a 78, e abriram a US$ 111,50 (+34%)."
+   ],
+   "foto": "hq-nasdaq-tower.jpg",
+   "pos": "center 8%",
+   "fade": 24,
+   "fonte": "Fontes: NPR e TimesLive (19/11/2026); Korea JoongAng Daily (nov/2026). Não é recomendação de investimento. Foto: Nielsoncaetanosalmeron (CC BY 4.0)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "OS NÚMEROS",
+   "titulo": "Recorde absoluto",
+   "lista": [
+    "Mais de US$ 107 bi somando oferta e colocação privada",
+    "Supera os US$ 75 bi da SpaceX (junho/2026)",
+    "Valor de ~US$ 1,5 trilhão ao preço do IPO"
+   ],
+   "escuro": true,
+   "fonte": "Fontes: NPR e TimesLive (19/11/2026); Korea JoongAng Daily (nov/2026). Não é recomendação de investimento."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O DIA",
+   "titulo": "Euforia na abertura, *ajuste no fechamento*",
+   "paragrafos": [
+    "A ação abriu +34% e fechou o dia +17%, enquanto a Nasdaq acumulava queda de mais de 11% desde outubro. O mercado paga hoje por resultados que ainda vão acontecer."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: NPR e TimesLive (19/11/2026); Korea JoongAng Daily (nov/2026). Não é recomendação de investimento."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "NO SEU BOLSO",
+   "titulo": "Parcelar é fazer o \"IPO\" da sua renda futura",
+   "paragrafos": [
+    "Cada parcela vende hoje um pedaço do seu salário de amanhã. Funciona se a renda vier como prometido. Planeje com o cenário realista, não com o otimista."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: NPR e TimesLive (19/11/2026); Korea JoongAng Daily (nov/2026). Não é recomendação de investimento."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "RENDA FUTURA TEM LIMITE",
+   "titulo": "Parcele só o que cabe no seu cenário realista.",
+   "palavra": "EBOOK",
+   "assinatura": "Yousef Amer · fundador da @tbfinance_"
+  }
+ ]
+}

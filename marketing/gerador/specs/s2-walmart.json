@@ -1,0 +1,74 @@
+{
+ "tag": "NOTÍCIA · @TBFINANCE_",
+ "data": "NOV · 2026",
+ "cheia": true,
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-pagando-cartao.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-walmart.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "foto": "hq-walmart.jpg",
+   "h": 1350,
+   "pos": "center center",
+   "brilho": 0.85,
+   "kicker": "VAREJO GLOBAL",
+   "titulo": "Walmart fatura US$ 188 bi em 3 meses vendendo o básico. *A lição para o seu carrinho.*",
+   "fs": 72,
+   "credito": "Foto: UpstateNYer (CC BY-SA 3.0)"
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O RESULTADO",
+   "titulo": "US$ 188,8 bilhões em um trimestre",
+   "paragrafos": [
+    "A receita do 3º trimestre fiscal subiu 5,2%, acima do esperado. As vendas online nos EUA cresceram 23%."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: StockAnalysis e American Bazaar (19/11/2026), com dados do balanço do Walmart."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O DETALHE",
+   "titulo": "Ganhou espaço *no supermercado*",
+   "paragrafos": [
+    "Segundo o diretor financeiro, a empresa ganhou participação em alimentos no ritmo mais rápido em três anos. A projeção anual foi elevada pela 3ª vez em 2026."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: StockAnalysis e American Bazaar (19/11/2026), com dados do balanço do Walmart."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "A LEITURA",
+   "titulo": "Em tempo apertado, *o básico vence*",
+   "paragrafos": [
+    "Quando o orçamento encolhe, as compras do dia a dia migram para onde é mais barato e prático. Quem compra bem economiza todo mês."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: StockAnalysis e American Bazaar (19/11/2026), com dados do balanço do Walmart."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "NO SEU BOLSO",
+   "titulo": "Pense como o cliente que trocou de loja",
+   "lista": [
+    "Compare o preço por kg ou litro dos 10 itens que mais compra",
+    "Teste marcas próprias",
+    "Mercado no Pix ou no débito, nunca no rotativo",
+    "Mande a diferença para a dívida mais cara"
+   ],
+   "foto": "hq-pagando-cartao.jpg",
+   "pos": "70% center",
+   "fade": 16,
+   "fonte": "Fontes: StockAnalysis e American Bazaar (19/11/2026), com dados do balanço do Walmart. Foto: Hloom Templates (CC BY 2.0)."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "O BÁSICO VENCE",
+   "titulo": "Cada real economizado no mercado é um real a menos de dívida.",
+   "palavra": "EBOOK",
+   "assinatura": "TB Finance · desde 2019 tirando brasileiros do vermelho"
+  }
+ ]
+}

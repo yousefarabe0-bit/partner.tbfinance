@@ -1,0 +1,86 @@
+{
+ "tag": "NOTÍCIA · @TBFINANCE_",
+ "data": "NOV · 2026",
+ "cheia": true,
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-aperto-mao.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-contrato.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "foto": "hq-contrato.jpg",
+   "h": 1350,
+   "pos": "center 40%",
+   "brilho": 0.85,
+   "kicker": "EMPRESAS EM CRISE",
+   "titulo": "Recorde: 8.478 empresas em recuperação judicial. *E quando quem está afogado é você?*",
+   "fs": 72,
+   "credito": "Foto: Blogtrepreneur (CC BY 2.0)"
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O RECORDE",
+   "titulo": "8.478 empresas em RJ",
+   "paragrafos": [
+    "No fim de setembro de 2026, o Brasil tinha 8.478 empresas em recuperação judicial, o maior número da série do Monitor RGF e 21% mais que um ano antes."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Monitor RGF via Brasil Paralelo (10/11/2026); Correio da Manhã (ago/2026); Predictus via Times Brasil; Lei 14.181/2021."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "QUEM ESTÁ NA LISTA",
+   "titulo": "Do comércio ao agro",
+   "lista": [
+    "O comércio lidera, seguido de indústria, agro e construção",
+    "Casas Bahia pediu RJ em agosto: R$ 17,3 bi em dívidas",
+    "Mato Grosso: 1 empresa em RJ a cada mil"
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Monitor RGF via Brasil Paralelo (10/11/2026); Correio da Manhã (ago/2026); Predictus via Times Brasil; Lei 14.181/2021."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O QUE É",
+   "titulo": "Recuperação *não é calote*",
+   "paragrafos": [
+    "A empresa ganha fôlego para apresentar um plano, e os credores votam se aceitam. É renegociação organizada, com regra e prazo."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Monitor RGF via Brasil Paralelo (10/11/2026); Correio da Manhã (ago/2026); Predictus via Times Brasil; Lei 14.181/2021."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "PESSOA FÍSICA TAMBÉM TEM",
+   "titulo": "Lei do Superendividamento",
+   "paragrafos": [
+    "A Lei 14.181/2021 permite reunir dívidas de consumo num plano de até 5 anos, preservando o mínimo para viver. As ações saltaram de 409 em 2021 para 35.301 em 2024."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Monitor RGF via Brasil Paralelo (10/11/2026); Correio da Manhã (ago/2026); Predictus via Times Brasil; Lei 14.181/2021."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "NO SEU BOLSO",
+   "titulo": "Monte o seu \"plano de recuperação\"",
+   "lista": [
+    "Liste todas as dívidas: credor, saldo e juros",
+    "Calcule quanto sobra depois do essencial",
+    "Proponha um acordo realista antes de atrasar",
+    "Continue pagando o que cabe enquanto negocia"
+   ],
+   "foto": "hq-aperto-mao.jpg",
+   "pos": "center 30%",
+   "fade": 16,
+   "fonte": "Fontes: Monitor RGF via Brasil Paralelo (10/11/2026); Correio da Manhã (ago/2026); Predictus via Times Brasil; Lei 14.181/2021. Foto: rawpixel.com (CC0)."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "RENEGOCIAR É ESTRATÉGIA",
+   "titulo": "Monte o seu plano antes que a dívida monte por você.",
+   "palavra": "DESTRAVA",
+   "assinatura": "TB Finance · desde 2019 tirando brasileiros do vermelho"
+  }
+ ]
+}

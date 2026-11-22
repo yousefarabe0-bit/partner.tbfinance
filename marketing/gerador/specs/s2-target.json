@@ -1,0 +1,71 @@
+{
+ "tag": "NOTÍCIA · @TBFINANCE_",
+ "data": "NOV · 2026",
+ "cheia": true,
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-carteira.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-cofrinho.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "foto": "hq-cofrinho.jpg",
+   "h": 1350,
+   "pos": "center 10%",
+   "brilho": 0.85,
+   "kicker": "BALANÇO COM ASTERISCO",
+   "titulo": "O lucro da Target disparou, mas parte veio de *um dinheiro que não se repete*.",
+   "fs": 72,
+   "credito": "Foto: Ken Teegardin (CC BY-SA 2.0)"
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O BALANÇO",
+   "titulo": "Vendas de US$ 27,1 bilhões",
+   "paragrafos": [
+    "A varejista americana vendeu 7,1% mais no 3º trimestre, e o lucro por ação saltou de US$ 1,51 para US$ 2,65."
+   ],
+   "escuro": true,
+   "fonte": "Fonte: Target Corporation, comunicado de resultados (18/11/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O ASTERISCO",
+   "titulo": "US$ 0,50 por ação *veio de reembolso*",
+   "paragrafos": [
+    "A Target recebeu de volta tarifas de importação pagas antes: US$ 301 milhões antes de impostos. Sem isso, o lucro seria bem menor."
+   ],
+   "escuro": true,
+   "fonte": "Fonte: Target Corporation, comunicado de resultados (18/11/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "A ATITUDE CERTA",
+   "titulo": "A empresa *não conta com isso de novo*",
+   "paragrafos": [
+    "Na própria projeção, a Target avisa que exclui qualquer reembolso futuro. Dinheiro extraordinário não entra no planejamento como se fosse recorrente."
+   ],
+   "escuro": true,
+   "fonte": "Fonte: Target Corporation, comunicado de resultados (18/11/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "NO SEU BOLSO",
+   "titulo": "Seu 13º é o \"reembolso de tarifa\"",
+   "paragrafos": [
+    "13º, restituição e bônus não são aumento de salário. Use para abater dívidas caras, pagar as contas de janeiro ou montar reserva. Nunca para assumir uma parcela nova que dura 2027 inteiro."
+   ],
+   "foto": "hq-carteira.jpg",
+   "pos": "center center",
+   "fade": 22,
+   "fonte": "Fonte: Target Corporation, comunicado de resultados (18/11/2026). Foto: Marcello Casal Jr/Agência Brasil (CC BY 3.0 BR)."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "DINHEIRO QUE NÃO SE REPETE",
+   "titulo": "Planeje com o que é recorrente.",
+   "palavra": "PLANILHA",
+   "assinatura": "TB Finance · desde 2019 tirando brasileiros do vermelho"
+  }
+ ]
+}
