@@ -1,47 +1,5 @@
 # X · fios da semana 25/11 a 01/12 (9h)
 
-## 21/11
-
-1/ Desde 2019, a TB Finance já ajudou mais de 3.000 brasileiros a sair das dívidas.
-
-E o caminho é quase sempre o mesmo.
-
-Um fio com os 5 passos 🧵
-
-2/ 1. O mapa.
-
-Todas as dívidas numa folha só: valor, parcela, juros e credor.
-
-Quase ninguém sabe o número total na primeira conversa. E não dá para resolver o que você não enxerga.
-
-3/ 2. A ordem.
-
-Primeiro a dívida mais cara: rotativo do cartão e cheque especial.
-
-O rotativo chegou a 451,7% ao ano em setembro, segundo o Banco Central. Nenhum investimento seguro rende isso.
-
-4/ 3. A negociação.
-
-Negociar com estratégia, e não no desespero. Com proposta pronta, os descontos podem chegar a 90%.
-
-E sempre por canal oficial: nunca com quem liga oferecendo acordo.
-
-5/ 4. O orçamento.
-
-Um plano de 12 meses em que a parcela cabe de verdade, com reserva para o imprevisto não virar dívida nova.
-
-Sair da dívida é metade. Não voltar é a outra.
-
-6/ 5. O acompanhamento.
-
-Plano sem acompanhamento vira planilha abandonada.
-
-Se você ganha acima de R$ 8 mil, tem dívida em banco e ainda tem crédito, faz o diagnóstico gratuito com a minha equipe:
-
-tbfinance.com.br/agendar
-
----
-
 ## 25/11
 
 1/ Em 3 de setembro de 1929, o índice Dow Jones fechou em 381 pontos. Todo mundo achava que a bolsa só subia.
