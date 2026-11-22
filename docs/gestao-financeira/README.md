@@ -86,6 +86,8 @@ Argumento de venda: num e-commerce de R$ 2 milhões por mês, recuperar 2 pontos
 
 ## Pendências
 - [x] Guia completo dos relatórios ([guia-relatorios.md](guia-relatorios.md))
+- [x] Manual da operação: rotinas, dados, frequências e resultados ([operacao.md](operacao.md))
+- [x] Planilha modelo ([planilhas/](planilhas/)) e protótipo do painel ([prototipo-sistema.html](prototipo-sistema.html))
 - [ ] Receber e analisar o material da CFO Company (vem pelo irmão, que é cliente deles)
-- [ ] Planilha modelo de DRE e fluxo de caixa para e-commerce
 - [ ] Estruturar a oferta final (pacotes, preços e roteiro do diagnóstico)
+- [ ] Apresentação de venda
