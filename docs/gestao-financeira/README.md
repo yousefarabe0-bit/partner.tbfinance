@@ -18,6 +18,8 @@ Quem toma a decisão é o dono. Nosso produto é **a decisão melhor**, não o l
 
 ## Relatórios do serviço
 
+> 📘 Guia completo (como preencher, como analisar e pontos de atenção, com exemplo numérico): [guia-relatorios.md](guia-relatorios.md)
+
 ### 1. DRE Gerencial (modelo e-commerce)
 
 ```
@@ -83,6 +85,7 @@ Argumento de venda: num e-commerce de R$ 2 milhões por mês, recuperar 2 pontos
 ---
 
 ## Pendências
+- [x] Guia completo dos relatórios ([guia-relatorios.md](guia-relatorios.md))
 - [ ] Receber e analisar o material da CFO Company (vem pelo irmão, que é cliente deles)
 - [ ] Planilha modelo de DRE e fluxo de caixa para e-commerce
 - [ ] Estruturar a oferta final (pacotes, preços e roteiro do diagnóstico)
