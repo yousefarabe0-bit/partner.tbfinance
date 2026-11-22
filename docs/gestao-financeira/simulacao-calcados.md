@@ -114,7 +114,7 @@ Comece pela rápida. Se os números mostrarem algo interessante (e quase sempre 
 > - Contas a pagar e empréstimos em aberto
 > - Pedidos já feitos pra fábrica (coleção/reposição)
 >
-> Manda também as planilhas que tu já usa pra controlar, do jeito que estiverem. Pode me mandar numa pasta do Drive. Se for mais fácil, me passa um acesso só de consulta no ERP e nos marketplaces que eu puxo tudo.
+> Manda também as planilhas que tu já usa pra controlar, do jeito que estiverem. Pode me mandar numa pasta do Drive. Se for mais fácil, me passa um acesso só de consulta no Mercado Livre, no TikTok Shop e no site que eu puxo tudo.
 
 ---
 
