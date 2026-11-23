@@ -1,0 +1,32 @@
+{
+  "_comentario": "URLs e seletores do painel da empresa no Reclame Aqui. Calibrados a partir de uma rodada no modo 'explorar'.",
+  "modo": "auto",
+  "maxRespostasPorDia": 20,
+  "urls": {
+    "login": "https://www.reclameaqui.com.br/area-da-empresa/",
+    "reclamacoes": "https://www.reclameaqui.com.br/area-da-empresa/",
+    "perfil": "https://www.reclameaqui.com.br/area-da-empresa/",
+    "paginaPublica": "https://www.reclameaqui.com.br/empresa/tb-finance/"
+  },
+  "seletores": {
+    "loginEmail": "input[type=email], input[name*=email i], input[name*=login i], input[name*=user i]",
+    "loginSenha": "input[type=password]",
+    "loginBotao": "button[type=submit], button:has-text('Entrar'), button:has-text('Acessar')",
+    "linkReclamacao": "a[href*='reclamacao'], a[href*='ticket'], a[href*='complain']",
+    "textoReclamacao": "main, [class*=complain i], [class*=ticket i], article",
+    "pendente": "text=/não respondida|aguardando resposta|nova reclamação|sem resposta/i",
+    "campoResposta": "textarea",
+    "botaoEnviarResposta": "button:has-text('Enviar'), button:has-text('Responder'), button:has-text('Publicar')"
+  },
+  "perfilCampos": {
+    "_comentario": "Para cada campo de perfil.json, o seletor do input no painel. Deixe vazio enquanto não estiver calibrado.",
+    "descricao": "",
+    "site": "",
+    "telefone": "",
+    "email": "",
+    "horario": "",
+    "fotoPerfil": "",
+    "fotoCapa": "",
+    "botaoSalvar": "button:has-text('Salvar')"
+  }
+}
