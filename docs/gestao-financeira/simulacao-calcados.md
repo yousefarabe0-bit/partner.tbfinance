@@ -8,7 +8,7 @@
 ## Perfil do piloto (sem números)
 
 - **Canais:** site próprio, Mercado Livre, TikTok Shop e outros (a confirmar).
-- **Controle atual:** planilhas, sem ERP. Os dados virão das planilhas dele, do banco e dos painéis dos canais.
+- **Controle atual:** usa ERP (qual: a confirmar). Lista exata de dados: [solicitacao-dados-piloto.md](solicitacao-dados-piloto.md).
 - **Produção:** a marca desenvolve o molde e uma fábrica terceirizada produz. Ele paga a fábrica, normalmente com sinal antes da produção.
 - **Planilha a usar:** `planilhas/Modelo_Calcados_TB.xlsx` (em branco). Gerar com `python3 planilhas/gerar_modelo.py Modelo_Calcados_TB.xlsx calcados`.
 
@@ -22,8 +22,8 @@
 | Fluxo 13 semanas | Linhas separadas para sinal e saldo da fábrica, repasses do ML e do TikTok, creators, moldes |
 | KPIs | Preço médio por par, custo médio por par, pares por pedido, taxa de troca |
 
-### Atenção extra porque ele usa planilha (sem ERP)
-1. **CMV:** sem ERP, ninguém calcula o custo do que foi vendido. É preciso saber **quantos pares de cada modelo saíram**, somando os pedidos exportados de cada canal, e multiplicar pelo custo por par.
+### Pontos de atenção na coleta
+1. **CMV:** conferir se o custo cadastrado no ERP está atualizado e o que ele inclui (só a fábrica ou também frete e caixa). É preciso saber **quantos pares de cada modelo saíram**, somando os pedidos exportados de cada canal, e multiplicar pelo custo por par.
 2. **Estoque:** provavelmente não existe um saldo confiável. Fazer uma **contagem** (mesmo que aproximada) no início do piloto.
 3. **TikTok Shop:** baixar o relatório financeiro/de liquidação, que separa a comissão da plataforma, a comissão de afiliados, o frete e os descontos bancados pela loja.
 4. **Pagamentos à fábrica:** montar a lista de pedidos em aberto (data, pares, valor, sinal pago, saldo, previsão de entrega). Isso vira o fluxo de caixa das próximas semanas.
