@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Agente de consulta de dívidas por CPF/CNPJ.
-// Uso: node automation/dividas/consulta.mjs <cpf|cnpj> [--nome "NOME COMPLETO"]
+// Uso: node automation/dividas/consulta.mjs <cpf|cnpj> [--nome "NOME COMPLETO"] [--sem-pagas]
 //
 // Cada fonte é um conector. O relatório SEMPRE termina com o checklist de cobertura:
 // uma fonte que falhou ou não está contratada aparece como tal, nunca como "sem dívida".
@@ -8,6 +8,7 @@
 // Fontes ativas hoje:
 //   - PGFN (Dívida Ativa da União: tributos federais, previdenciário, FGTS) via dados abertos.
 //     CNPJ vem completo; CPF vem mascarado (XXX123.456XX), então para CPF o nome é usado para confirmar.
+//   - Protestos em cartório de todo o país (Direct Data, pago por consulta; --sem-pagas pula).
 import { spawn } from 'node:child_process'
 import { mkdir, writeFile, stat } from 'node:fs/promises'
 import { createWriteStream } from 'node:fs'
@@ -145,18 +146,61 @@ async function fontePgfn({ tipo, doc, nome }) {
 const pgfnDivida = (r) => ({
   fonte: 'PGFN',
   credor: `União/PGFN ${r.BASE === 'FGTS' ? 'FGTS' : r.BASE === 'Previdenciario' ? 'previdenciário' : 'tributário'} – ${r.RECEITA_PRINCIPAL || r.TIPO_CREDITO || '?'}`,
-  identificador: r.NUMERO_INSCRICAO,
+  identificador: String(r.NUMERO_INSCRICAO ?? '').replace(/\.0$/, ''),
   devedor: `${r.NOME_DEVEDOR} (${r.CPF_CNPJ}, ${r.TIPO_DEVEDOR})`,
   situacao: `${r.TIPO_SITUACAO_INSCRICAO} / ${r.SITUACAO_INSCRICAO}${r.INDICADOR_AJUIZADO === 'SIM' ? ' / ajuizada' : ''}`,
   data: /\/1[0-8]\d\d$/.test(r.DATA_INSCRICAO ?? '') ? 'sem data' : r.DATA_INSCRICAO,
   valor: Number(r.VALOR_CONSOLIDADO) || 0,
 })
 
+// ---------- Protestos (Direct Data – Protestos Nacional IEPTB Completa, R$ 8,10/consulta) ----------
+// Token: no ambiente cloud o proxy injeta o header Authorization; fora dele, use DIRECTD_TOKEN.
+const DIRECTD = 'https://apiv3.directd.com.br/api/ProtestosCompleta'
+// "R$ 31.500,00", "31.500,00", "31500.00" ou número -> 31500
+function valorBR(v) {
+  if (typeof v === 'number') return v
+  const s = String(v ?? '').replace(/[^\d,.-]/g, '')
+  if (!s) return 0
+  return Number(s.includes(',') ? s.replace(/\./g, '').replace(',', '.') : s) || 0
+}
+
+async function fonteProtestos({ tipo, doc }) {
+  const url = `${DIRECTD}?${tipo === 'CPF' ? 'Cpf' : 'Cnpj'}=${doc}`
+  const res = await fetch(url, { headers: { Authorization: `Bearer ${process.env.DIRECTD_TOKEN || 'proxy-injected'}` }, signal: AbortSignal.timeout(120_000) })
+  const body = await res.json().catch(() => null)
+  const meta = body?.metaDados ?? {}
+  const r = body?.retorno
+  if (!res.ok || !r) throw new Error(`Direct Data HTTP ${res.status}: ${meta.resultado || meta.mensagem || 'sem retorno'}`)
+  const dividas = []
+  for (const d of r.documentos ?? []) {
+    for (const c of d.cartorios ?? []) {
+      const cartorio = [c.nomeCartorio, `${c.cidade}/${c.estado}`, c.telefone && `tel. ${c.telefone}`, c.endereco].filter(Boolean).join(' – ')
+      const titulos = c.titulos?.length ? c.titulos : [{ dataProtesto: '?', valorProtestado: c.valorTotalProtestosCartorio }]
+      for (const t of titulos) dividas.push({
+        fonte: 'Protesto',
+        credor: `Cartório: ${cartorio}`,
+        identificador: '—',
+        devedor: d.documento || r.documentoConsultado,
+        situacao: 'Protestado (credor só no cartório)',
+        data: t.dataProtesto || '?',
+        valor: valorBR(t.valorProtestado),
+      })
+    }
+  }
+  // Nunca aceitar "tem protesto" sem os títulos: seria uma dívida escondida.
+  if (r.constamProtestos && !dividas.length) throw new Error(`a Direct Data indica ${r.numeroTotalProtestos} protesto(s) (${r.valorTotalProtestos}) mas não trouxe os detalhes`)
+  const avisos = []
+  const totalApi = valorBR(r.valorTotalProtestos)
+  const soma = dividas.reduce((a, x) => a + x.valor, 0)
+  if (r.constamProtestos && Math.abs(totalApi - soma) > 0.01) avisos.push(`Protestos: soma dos títulos (${brl(soma)}) difere do total informado pela Direct Data (${brl(totalApi)}). Confira no cartório.`)
+  if (r.observacoes) avisos.push(`Protestos: ${r.observacoes}`)
+  return { dividas, avisos }
+}
+
 // ---------- fontes ainda não contratadas / sem acesso automatizado ----------
 // Ficam no relatório para o checklist mostrar exatamente o que NÃO foi verificado.
 const PENDENTES = [
   { nome: 'Birôs de crédito (Serasa, Boa Vista/SCPC, SPC, Quod)', motivo: 'precisa de contrato B2B com o birô', manual: 'O titular consulta grátis em serasa.com.br / consumidorpositivo.com.br' },
-  { nome: 'Protestos em cartório (CENPROT)', motivo: 'site bloqueia acesso automatizado; precisa de API paga', manual: 'https://www.pesquisaprotesto.com.br' },
   { nome: 'Dívida ativa estadual (ICMS, IPVA, ITCMD)', motivo: 'um sistema por estado; precisa de agregador pago', manual: 'Site da SEFAZ/PGE do estado' },
   { nome: 'Dívida ativa municipal (IPTU, ISS, taxas)', motivo: 'um sistema por prefeitura; precisa de agregador pago', manual: 'Site da prefeitura' },
   { nome: 'Débitos trabalhistas (CNDT/TST)', motivo: 'site exige captcha; precisa de agregador pago', manual: 'https://cndt-certidao.tst.jus.br' },
@@ -172,10 +216,15 @@ const nome = iNome >= 0 ? args[iNome + 1] : undefined
 const raw = args.find((a, i) => !a.startsWith('--') && (iNome < 0 || i !== iNome + 1))
 const doc = digits(raw ?? '')
 const tipo = doc.length === 11 ? 'CPF' : doc.length === 14 ? 'CNPJ' : null
-if (!tipo) { console.error('Uso: consulta.mjs <cpf|cnpj> [--nome "NOME"]'); process.exit(2) }
+if (!tipo) { console.error('Uso: consulta.mjs <cpf|cnpj> [--nome "NOME"] [--sem-pagas]'); process.exit(2) }
 if (!(tipo === 'CPF' ? cpfValido(doc) : cnpjValido(doc))) { console.error(`${tipo} inválido (dígito verificador não confere): ${raw}`); process.exit(2) }
 
-const FONTES = [{ nome: 'Dívida Ativa da União (PGFN): tributos federais, previdenciário e FGTS', run: fontePgfn }]
+const SEM_PAGAS = args.includes('--sem-pagas')
+const FONTES = [
+  { nome: 'Dívida Ativa da União (PGFN): tributos federais, previdenciário e FGTS', run: fontePgfn },
+  { nome: 'Protestos em cartório, todo o Brasil (IEPTB/CENPROT via Direct Data, R$ 8,10)', run: fonteProtestos, paga: true },
+].filter((f) => !(SEM_PAGAS && f.paga))
+if (SEM_PAGAS) PENDENTES.unshift({ nome: 'Protestos em cartório (Direct Data)', motivo: 'pulada com --sem-pagas', manual: 'https://www.pesquisaprotesto.com.br' })
 const resultados = await Promise.all(FONTES.map(async (f) => {
   try { return { ...f, ok: true, ...(await f.run({ tipo, doc, nome })) } }
   catch (e) { return { ...f, ok: false, erro: e.message, dividas: [], avisos: [] } }
