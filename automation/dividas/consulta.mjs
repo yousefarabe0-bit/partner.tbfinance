@@ -78,25 +78,29 @@ async function ensurePgfnFiles() {
   return files
 }
 
-function grepZip(zip, needle) {
+// Procura `needle` em todos os CSVs do zip, vários CSVs em paralelo.
+function sh(script, ...args) {
   return new Promise((resolve, reject) => {
-    const p = spawn('sh', ['-c', 'unzip -p "$1" | LC_ALL=C grep -F -- "$2"; true', 'sh', zip, needle])
+    const p = spawn('sh', ['-c', script, 'sh', ...args])
     const chunks = []
     let err = ''
     p.stdout.on('data', (c) => chunks.push(c))
     p.stderr.on('data', (c) => (err += c))
     p.on('error', reject)
     p.on('close', (code) => {
-      if (code !== 0 || /error|cannot find/i.test(err)) return reject(new Error(`falha ao ler ${zip}: ${err.trim()}`))
+      if (code !== 0 || /error|cannot find/i.test(err)) return reject(new Error(`falha ao ler ${args[0]}: ${err.trim() || `código ${code}`}`))
       // Os CSVs da PGFN são latin1.
       resolve(new TextDecoder('latin1').decode(Buffer.concat(chunks)).split('\n').filter(Boolean))
     })
   })
 }
+const grepZip = (zip, needle) => sh(
+  'unzip -Z1 "$1" | grep -i "\\.csv$" | xargs -P "$(nproc)" -I{} sh -c \'unzip -p "$1" "$3" | LC_ALL=C grep -F -- "$2"; true\' _ "$1" "$2" {}',
+  zip, needle)
 
 // Cada base (SIDA, Previdenciário, FGTS) tem colunas diferentes: lemos o cabeçalho de cada uma.
 async function pgfnHeader(zip) {
-  const [h] = await grepZip(zip, 'CPF_CNPJ;')
+  const [h] = await sh('unzip -p "$1" "$(unzip -Z1 "$1" | grep -i "\\.csv$" | head -1)" | head -1; true', zip)
   if (!h) throw new Error(`cabeçalho não encontrado em ${zip}`)
   return h.replace(/\r$/, '').split(';')
 }
@@ -107,9 +111,10 @@ async function fontePgfn({ tipo, doc, nome }) {
   // CPF: a base mascara o CPF; usamos os 6 dígitos visíveis e confirmamos pelo nome.
   const needle = tipo === 'CNPJ' ? `${fmtCnpj(doc).slice(0, 10)}/` : `XXX${doc.slice(3, 6)}.${doc.slice(6, 9)}XX;`
   const rows = []
-  for (const { name, file } of files) {
-    const cols = await pgfnHeader(file)
-    for (const line of await grepZip(file, needle)) {
+  const lidos = await Promise.all(files.map(async (f) => ({ ...f, cols: await pgfnHeader(f.file), linhas: await grepZip(f.file, needle) })))
+  for (const { name, cols, linhas } of lidos) {
+    if (cols[0] !== 'CPF_CNPJ') throw new Error(`layout inesperado na base ${name}: ${cols.join(';')}`)
+    for (const line of linhas) {
       const v = line.replace(/\r$/, '').split(';')
       const r = Object.fromEntries(cols.map((c, i) => [c, v[i]]))
       if (!r.CPF_CNPJ?.startsWith(needle.replace(/;$/, ''))) continue
