@@ -4,8 +4,9 @@
 //  1. Entra no painel da empresa com RA_EMAIL / RA_PASSWORD (ou com a sessão salva em RA_STORAGE_STATE).
 //  2. Publica as respostas de respostas.json que ainda não saíram (se a reclamação continuar sem resposta).
 //  3. Confere o perfil (descrição, site, contato, foto e capa) e corrige o que estiver diferente de perfil.json.
-//  4. Coleta as reclamações novas sem resposta e grava em saida/entrada.json, que o workflow tranca no cofre
-//     (caixa/entrada.enc) para o Claude ler e responder no dia.
+//  4. Coleta as reclamações novas sem resposta e grava em saida/entrada.json (o workflow copia para
+//     caixa/entrada.json) para o Claude ler e responder no dia. O repositório é público: CPF, telefone,
+//     e-mail e números longos são apagados do texto antes de salvar.
 //
 // Modos (RA_MODE ou config.json -> modo):
 //   auto      faz tudo acima
@@ -32,14 +33,13 @@ const relatorio = { modo: MODE, data: new Date().toISOString(), publicadas: [], 
 const log = (...a) => console.log('[reclameaqui]', ...a)
 let shot = 0
 async function capturar(page, nome, forcar = false) {
-  // capturas só no modo explorar ou em erro (vão trancadas no cofre)
+  // capturas só no modo explorar ou em erro (sem HTML: pode conter dados da sessão)
   if (MODE !== 'explorar' && !forcar) return
   const base = join(out, `${String(++shot).padStart(2, '0')}-${nome}`)
   await page.screenshot({ path: `${base}.png`, fullPage: true }).catch(() => {})
-  writeFileSync(`${base}.html`, await page.content().catch(() => ''))
   const mapa = await page.evaluate(() => ({
-    url: location.href,
-    links: [...document.querySelectorAll('a[href]')].map((a) => ({ texto: a.innerText.trim().slice(0, 80), href: a.href })).slice(0, 300),
+    url: location.origin + location.pathname,
+    links: [...document.querySelectorAll('a[href]')].map((a) => ({ texto: a.innerText.trim().slice(0, 80), href: a.href.split(/[?#]/)[0] })).slice(0, 300),
     campos: [...document.querySelectorAll('input, textarea, select')].map((e) => ({
       tag: e.tagName, type: e.type, name: e.name, id: e.id, placeholder: e.placeholder,
       label: e.labels?.[0]?.innerText?.trim() || e.getAttribute('aria-label') || '' })),
@@ -47,6 +47,13 @@ async function capturar(page, nome, forcar = false) {
   })).catch(() => ({}))
   writeFileSync(`${base}.json`, JSON.stringify(mapa, null, 1))
 }
+// tira dados pessoais do texto (o repositório é público)
+const limpar = (t) => t
+  .replace(/[\w.+-]+@[\w-]+\.[\w.]+/g, '[e-mail removido]')
+  .replace(/\d{3}\.?\d{3}\.?\d{3}-?\d{2}|\d{2}\.?\d{3}\.?\d{3}\/?\d{4}-?\d{2}/g, '[documento removido]')
+  .replace(/(\+?55\s?)?\(?\d{2}\)?\s?9?\d{4}[\s-]?\d{4}/g, '[telefone removido]')
+  .replace(/\d{6,}/g, '[número removido]')
+const semQuery = (u) => String(u).split(/[?#]/)[0]
 const visivel = async (loc) => (await loc.count()) > 0 && (await loc.first().isVisible().catch(() => false))
 const abrirPagina = async (page, url) => { await page.goto(url, { waitUntil: 'domcontentloaded' }); await page.waitForTimeout(3000) }
 
@@ -111,14 +118,14 @@ async function coletarNovas(page) {
   await abrirPagina(page, config.urls.reclamacoes)
   await capturar(page, 'reclamacoes')
   const hrefs = await page.locator(config.seletores.linkReclamacao).evaluateAll((as) => [...new Set(as.map((a) => a.href))])
-  const conhecidas = new Set([...respondidas, ...escaladas, ...respostas].map((r) => r.url))
-  for (const url of hrefs.filter((h) => !conhecidas.has(h))) {
+  const conhecidas = new Set([...respondidas, ...escaladas, ...respostas].map((r) => semQuery(r.url)))
+  for (const url of hrefs.filter((h) => !conhecidas.has(semQuery(h)))) {
     try {
       await abrirPagina(page, url)
       if (!(await pendente(page))) continue
       const titulo = (await page.locator('h1').first().innerText().catch(() => '')).trim()
       const texto = (await page.locator(config.seletores.textoReclamacao).first().innerText()).slice(0, 15000)
-      relatorio.novas.push({ url, titulo, texto, coletada_em: new Date().toISOString() })
+      relatorio.novas.push({ url: semQuery(url), titulo: limpar(titulo), texto: limpar(texto), coletada_em: new Date().toISOString() })
     } catch (e) {
       relatorio.erros.push(`coletar ${url}: ${e.message}`)
       await capturar(page, 'erro-coletar', true)
@@ -187,7 +194,7 @@ try {
   await capturar(page, 'erro-geral', true)
 } finally {
   await browser.close()
-  // entrada.json vai trancada no cofre pelo workflow (repositório público)
+  // entrada.json vai para caixa/ pelo workflow
   writeFileSync(join(out, 'entrada.json'), JSON.stringify(relatorio, null, 1))
   const resumo = [`## Reclame Aqui – ${relatorio.data.slice(0, 10)} (modo: ${MODE})`, '',
     `- Respostas publicadas: ${relatorio.publicadas.length}`, `- Reclamações novas coletadas: ${relatorio.novas.length}`,

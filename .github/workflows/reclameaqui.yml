@@ -1,7 +1,7 @@
 name: Reclame Aqui – robô diário
 
 # Entra na conta da TB Finance no Reclame Aqui, publica as respostas que o Claude escreveu (respostas.json),
-# mantém o perfil em dia e coleta as reclamações novas para o Claude responder. Não usa API paga.
+# mantém o perfil em dia e coleta as reclamações novas (caixa/entrada.json) para o Claude responder. Não usa API paga.
 # O Claude dispara este workflow pela tarefa agendada diária; o horário abaixo é só reserva.
 # Detalhes: automation/reclameaqui/README.md
 on:
@@ -45,15 +45,16 @@ jobs:
           RA_MODE: ${{ inputs.modo || vars.RA_MODE || 'auto' }}
         run: node automation/reclameaqui/agent.mjs
 
-      # Repositório público: o que veio do painel só entra trancado (chave pública; só o Claude abre).
-      - name: Trancar no cofre
+      # Reclamações coletadas (já sem CPF, telefone e e-mail) e capturas de calibração/erro vão para caixa/
+      - name: Guardar coleta
         if: always()
         run: |
           cd automation/reclameaqui
           [ -d saida ] || exit 0
-          mkdir -p caixa && tar czf /tmp/entrada.tgz saida
-          node cofre.mjs selar /tmp/entrada.tgz caixa/entrada.enc
-          rm -rf saida /tmp/entrada.tgz
+          rm -rf caixa && mkdir -p caixa/capturas
+          mv saida/entrada.json caixa/entrada.json
+          mv saida/* caixa/capturas/ 2>/dev/null || true
+          rm -rf saida
 
       - name: Salvar no repositório
         if: always()
