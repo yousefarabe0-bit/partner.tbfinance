@@ -91,8 +91,9 @@ async function consultar({ servico, params, doc, cacheDir, atualizar }) {
   const cacheFile = path.join(cacheDir, 'infosimples', doc, `${servico.replace(/\//g, '_')}.json`)
   const st = await stat(cacheFile).catch(() => null)
   if (st && Date.now() - st.mtimeMs < 864e5 && !atualizar) return { ...JSON.parse(await readFile(cacheFile, 'utf8')), _cache: true }
-  const token = process.env.INFOSIMPLES_TOKEN
-  if (!token) throw new Error('token da Infosimples não configurado (INFOSIMPLES_TOKEN)')
+  // Token: variável INFOSIMPLES_TOKEN ou o arquivo local .cache/infosimples.token (fora do git).
+  const token = process.env.INFOSIMPLES_TOKEN || (await readFile(path.join(cacheDir, 'infosimples.token'), 'utf8').catch(() => '')).trim()
+  if (!token) throw new Error('token da Infosimples não configurado (INFOSIMPLES_TOKEN ou .cache/infosimples.token)')
   const body = new URLSearchParams({ token, timeout: String(TIMEOUT_S), ignore_site_receipt: '1', ...params })
   const res = await fetch(API + servico, { method: 'POST', body, signal: AbortSignal.timeout((TIMEOUT_S + 30) * 1000) })
   const json = await res.json().catch(() => null)
