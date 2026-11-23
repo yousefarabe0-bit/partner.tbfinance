@@ -5,6 +5,7 @@
 // Não há retentativa automática: várias respostas de erro também são cobradas.
 import { mkdir, writeFile, readFile, stat } from 'node:fs/promises'
 import path from 'node:path'
+import { createHash } from 'node:crypto'
 
 const API = 'https://api.infosimples.com/api/v2/consultas/'
 const TIMEOUT_S = 300
@@ -88,7 +89,8 @@ async function emLotes(itens, n, fn) {
 
 // ---------- chamada (com cache de 24h por documento+serviço para nunca pagar duas vezes no dia) ----------
 async function consultar({ servico, params, doc, cacheDir, atualizar }) {
-  const cacheFile = path.join(cacheDir, 'infosimples', doc, `${servico.replace(/\//g, '_')}.json`)
+  const h = createHash('sha1').update(JSON.stringify(params)).digest('hex').slice(0, 10)
+  const cacheFile = path.join(cacheDir, 'infosimples', doc, `${servico.replace(/\//g, '_')}-${h}.json`)
   const st = await stat(cacheFile).catch(() => null)
   if (st && Date.now() - st.mtimeMs < 864e5 && !atualizar) return { ...JSON.parse(await readFile(cacheFile, 'utf8')), _cache: true }
   // Token: variável INFOSIMPLES_TOKEN ou o arquivo local .cache/infosimples.token (fora do git).
@@ -111,8 +113,12 @@ const paramsDoc = (tipo, doc, cnpjParam = 'cnpj') => (tipo === 'CPF' ? { cpf: do
 // Roda um grupo de serviços e consolida: quais deram certo, quais falharam e por quê.
 async function rodarGrupo(entradas, ctx, interpretar) {
   const res = await emLotes(entradas, PARALELO, async ([rotulo, cfg]) => {
+    // cfg.params(ctx) pode devolver { pular: 'motivo' } quando falta um dado do cliente (nascimento, placa...).
+    const params = cfg.params ? cfg.params(ctx) : paramsDoc(ctx.tipo, ctx.doc, cfg.cnpjParam)
+    if (params?.naoAplica) return { rotulo, ok: true, naoAplica: true, dividas: [] }
+    if (params?.pular) return { rotulo, ok: true, pulado: params.pular, dividas: [] }
     try {
-      const json = await consultar({ servico: cfg.servico, params: paramsDoc(ctx.tipo, ctx.doc, cfg.cnpjParam), doc: ctx.doc, cacheDir: ctx.cacheDir, atualizar: ctx.atualizar })
+      const json = await consultar({ servico: cfg.servico, params, doc: ctx.doc, cacheDir: ctx.cacheDir, atualizar: ctx.atualizar })
       if (json.code === 612) return { rotulo, ok: true, dividas: [], cache: json._cache }
       if (json.code !== 200) return { rotulo, ok: false, erro: `${json.code} ${json.code_message ?? ''}${json.errors?.length ? ` – ${json.errors.join('; ')}` : ''}`.trim() }
       const data = Array.isArray(json.data) ? json.data[0] ?? {} : json.data ?? {}
@@ -122,13 +128,15 @@ async function rodarGrupo(entradas, ctx, interpretar) {
     }
   })
   const falhas = res.filter((r) => !r.ok)
-  const oks = res.filter((r) => r.ok)
+  const pulados = res.filter((r) => r.pulado).map((r) => `${r.rotulo} (${r.pulado})`)
+  const oks = res.filter((r) => r.ok && !r.pulado && !r.naoAplica)
   const avisos = []
   if (oks.some((r) => r.cache)) avisos.push(`Infosimples: parte dos resultados foi reaproveitada de consulta feita nas últimas 24h (sem nova cobrança).`)
-  const resumo = `${oks.length} de ${res.length} consultados${falhas.length ? `; FALHARAM: ${falhas.map((f) => `${f.rotulo} (${f.erro})`).join(', ')}` : ''}`
+  if (!oks.length && !falhas.length) return { dividas: [], avisos, detalhe: 'nada consultado', pulados }
+  const resumo = `${oks.length} de ${res.filter((r) => !r.naoAplica).length} consultados${falhas.length ? `; FALHARAM: ${falhas.map((f) => `${f.rotulo} (${f.erro})`).join(', ')}` : ''}`
   // Se algo falhou, a fonte inteira fica ❌ com a lista do que foi e do que não foi verificado.
-  if (falhas.length) throw Object.assign(new Error(resumo), { parcial: { dividas: oks.flatMap((r) => r.dividas), avisos } })
-  return { dividas: oks.flatMap((r) => r.dividas), avisos, detalhe: resumo }
+  if (falhas.length) throw Object.assign(new Error(resumo + (pulados.length ? `; NÃO CONSULTADOS por falta de dado: ${pulados.join(', ')}` : '')), { parcial: { dividas: oks.flatMap((r) => r.dividas), avisos } })
+  return { dividas: oks.flatMap((r) => r.dividas), avisos, detalhe: resumo, pulados }
 }
 
 // ---------- interpretação ----------
@@ -197,12 +205,125 @@ function interpretarTst(_, __, data) {
   }]
 }
 
+
+// =====================================================================================
+// Fontes que dependem de dados extras do cliente (nascimento, mãe, cidade, placa, RENAVAM)
+// =====================================================================================
+// ⚠️ A CONFIRMAR NO OPENAPI DA INFOSIMPLES: formato de datas e nomes de cidade. Tudo num lugar só.
+export const FORMATOS = {
+  nascimento: (d) => d, // recebido como DD/MM/AAAA; ajustar se a API pedir AAAA-MM-DD
+  municipio: (c) => c, // nome da cidade como digitado (ex.: "Pelotas")
+}
+// Consulta que não se aplica ao tipo de documento (ex.: FGTS para CPF) some do relatório, não é "pulada".
+const so = (tipo, alvo) => (t) => (t === alvo ? null : { naoAplica: true })
+const doc = (c) => (c.tipo === 'CPF' ? { cpf: c.doc } : { cnpj: c.doc })
+const precisa = (c, campos) => {
+  const falta = campos.filter((k) => !c.extra?.[k])
+  return falta.length ? { pular: `falta ${falta.join(', ')}` } : null
+}
+
+// ---------- Federal em tempo real (Receita + PGFN) e FGTS ----------
+export const FEDERAL = {
+  'PGFN lista de devedores (tempo real)': { servico: 'receita-federal/pgfn/devedores', params: doc },
+  'Certidão federal Receita+PGFN': {
+    servico: 'receita-federal/pgfn',
+    params: (c) => (c.tipo === 'CPF' ? precisa(c, ['nascimento']) ?? { cpf: c.doc, birthdate: FORMATOS.nascimento(c.extra.nascimento) } : { cnpj: c.doc }),
+  },
+  'FGTS (certidão da Caixa)': { servico: 'caixa/regularidade', params: (c) => so(c.tipo, 'CNPJ')(c.tipo) ?? { cnpj: c.doc } },
+}
+function interpretarFederal(rotulo, _, data) {
+  const base = { identificador: data.certidao_codigo || '—', devedor: data.nome || data.razao_social || '', data: data.emissao_data || '?', valor: 0, valorDesconhecido: true }
+  if (rotulo.startsWith('PGFN lista')) {
+    const v = valorBR(data.total_divida)
+    if (!v) return []
+    return [{ ...base, fonte: 'PGFN (tempo real)', credor: `União – ${[].concat(data.naturezas_debitos ?? []).join(', ') || 'dívida ativa'}`, situacao: `Inscrito na lista de devedores (tributário ${data.total_tributario ?? '?'}, não tributário ${data.total_nao_tributario ?? '?'})`, valor: v, valorDesconhecido: false, duplicataProvavel: 'PGFN' }]
+  }
+  if (rotulo.startsWith('FGTS')) {
+    if (!/irregular/i.test(String(data.situacao ?? ''))) return []
+    return [{ ...base, fonte: 'FGTS (Caixa)', credor: 'FGTS – Caixa', situacao: `Empregador IRREGULAR no FGTS: ${data.situacao}` }]
+  }
+  if (data.conseguiu_emitir_certidao_negativa !== false) return []
+  const det = [['Receita', data.debitos_rfb], ['PGFN', data.debitos_pgfn]].filter(([, v]) => v && (!Array.isArray(v) || v.length)).map(([k, v]) => `${k}: ${typeof v === 'object' ? JSON.stringify(v).slice(0, 200) : v}`)
+  return [{ ...base, fonte: 'Receita Federal', credor: 'Receita Federal / PGFN', situacao: `Certidão federal POSITIVA: há pendência com a Receita e/ou PGFN${det.length ? ` (${det.join('; ')})` : ''}${data.observacoes ? ` – ${String(data.observacoes).slice(0, 200)}` : ''}` }]
+}
+
+// ---------- IPVA: por CPF/CNPJ em 6 estados; nos demais por RENAVAM/placa do veículo ----------
+const IPVA_DOC = { MG: 'sefaz/mg/debitos-ipva', MT: 'sefaz/mt/ipva', PA: 'sefaz/pa/ipva', PB: 'sefaz/pb/ipva', PI: 'sefaz/pi/ipva', TO: 'sefaz/to/ipva' }
+const IPVA_VEICULO = { AM: ['sefaz/am/ipva', ['renavam']], BA: ['sefaz/ba/ipva', ['renavam']], DF: ['sefaz/df/ipva', ['renavam']], PR: ['sefaz/pr/ipva', ['renavam']], RO: ['sefaz/ro/ipva', ['renavam']], CE: ['sefaz/ce/ipva', ['placa', 'renavam']], GO: ['sefaz/go/ipva', ['placa', 'renavam']], MS: ['sefaz/ms/ipva', ['placa', 'renavam']] }
+export function veiculos(c) {
+  const e = {}
+  for (const [uf, servico] of Object.entries(IPVA_DOC)) e[`IPVA ${uf} (por ${c.tipo})`] = { servico, params: doc }
+  const ufv = c.extra?.ufVeiculo
+  if (ufv && IPVA_VEICULO[ufv]) {
+    const [servico, campos] = IPVA_VEICULO[ufv]
+    e[`IPVA ${ufv} (veículo)`] = { servico, params: (ctx) => precisa(ctx, campos) ?? Object.fromEntries(campos.map((k) => [k, ctx.extra[k]])) }
+  } else if (ufv && !IPVA_DOC[ufv]) e[`IPVA ${ufv} (veículo)`] = { params: () => ({ pular: `sem API de IPVA por veículo para ${ufv} sem login` }) }
+  e['Multas PRF (rodovias federais)'] = { servico: 'dprf/nada-consta', params: (ctx) => precisa(ctx, ['placa', 'renavam']) ?? { placa: ctx.extra.placa, renavam: ctx.extra.renavam } }
+  return e
+}
+// Procura, em qualquer nível, itens com campo de valor (IPVA/multas têm formatos diferentes por estado).
+function coletarValores(obj, caminho = '', out = []) {
+  if (Array.isArray(obj)) obj.forEach((x, i) => coletarValores(x, `${caminho}[${i}]`, out))
+  else if (obj && typeof obj === 'object') {
+    const v = valorDoItem(obj)
+    const temFilhos = Object.values(obj).some((x) => x && typeof x === 'object')
+    if (v != null && v > 0 && !temFilhos) out.push({ caminho, item: obj, valor: v })
+    else for (const [k, x] of Object.entries(obj)) if (x && typeof x === 'object') coletarValores(x, caminho ? `${caminho}.${k}` : k, out)
+  }
+  return out
+}
+function interpretarVeiculo(rotulo, _, data) {
+  if (data.nada_consta === true) return []
+  return coletarValores(data).map(({ caminho, item, valor }) => ({
+    fonte: rotulo.startsWith('Multas') ? 'Multas PRF' : rotulo.replace(/ \(.*/, ''),
+    credor: rotulo.startsWith('Multas') ? `PRF – ${texto(item, ['descricao_infracao', 'enquadramento']) ?? 'multa'}` : `IPVA – ${caminho.replace(/\[\d+\]/g, '')}`,
+    identificador: texto(item, ['ait', 'placa', 'renavam', 'exercicio', 'ano']) ?? (data.placa || '—'),
+    devedor: texto(data, ['proprietario', 'nome_razao_social']) ?? '',
+    situacao: texto(item, ['situacao', 'exigibilidade']) ?? 'em aberto?',
+    data: texto(item, ['vencimento', 'data', 'ano', 'exercicio']) ?? '?',
+    valor,
+    conferir: true,
+  }))
+}
+
+// ---------- Municipal: certidão unificada das prefeituras ----------
+export const MUNICIPAL = {
+  'Prefeitura (CND unificada)': { servico: 'pref/cnd', params: (c) => precisa(c, ['cidade', 'uf']) ?? { ...doc(c), uf: c.extra.uf, municipio: FORMATOS.municipio(c.extra.cidade) } },
+}
+function interpretarMunicipal(_, __, data) {
+  if (data.conseguiu_emitir_certidao_negativa !== false) return []
+  return [{ fonte: 'Prefeitura', credor: 'Fazenda municipal (IPTU/ISS/taxas)', identificador: data.numero_certidao || '—', devedor: '', situacao: `Certidão municipal POSITIVA${data.mensagem ? `: ${String(data.mensagem).slice(0, 200)}` : ''}`, data: data.data_emissao || '?', valor: 0, valorDesconhecido: true }]
+}
+
+// ---------- Outros tribunais (certidões que pedem nascimento / mãe / nome) ----------
+export const OUTROS_TRIBUNAIS = {
+  TRF4: { servico: 'tribunal/trf4/certidao', params: (c) => (c.tipo === 'CPF' ? precisa(c, ['nascimento']) ?? { cpf: c.doc, birthdate: FORMATOS.nascimento(c.extra.nascimento) } : { cnpj: c.doc }) },
+  TJMT: { servico: 'tribunal/tjmt/primeiro-grau-pf', params: (c) => so(c.tipo, 'CPF')(c.tipo) ?? precisa(c, ['nascimento']) ?? { cpf: c.doc, birthdate: FORMATOS.nascimento(c.extra.nascimento) } },
+  TJGO: { servico: 'tribunal/tjgo/nada-consta', params: (c) => (c.tipo === 'CPF' ? precisa(c, ['nome', 'mae', 'nascimento']) ?? { cpf: c.doc, nome: c.extra.nome, nome_mae: c.extra.mae, birthdate: FORMATOS.nascimento(c.extra.nascimento) } : precisa(c, ['nome']) ?? { cnpj: c.doc, razao_social: c.extra.nome }) },
+  TJDF: { servico: 'tribunal/tjdf/nada-consta', params: (c) => (c.tipo === 'CPF' ? precisa(c, ['nome', 'mae']) ?? { cpf: c.doc, primeiro_nome: c.extra.nome.split(' ')[0], nome_mae: c.extra.mae } : { cnpj: c.doc }) },
+  TJRR: { servico: 'tribunal/tjrr/cert-negativa', params: (c) => precisa(c, ['nome']) ?? { ...doc(c), nome: c.extra.nome } },
+  TJTO: { servico: 'tribunal/tjto/cert-judicial', params: (c) => precisa(c, ['nome']) ?? { ...doc(c), nome: c.extra.nome } },
+  TJMA: { servico: 'tribunal/tjma/nada-consta', params: (c) => so(c.tipo, 'CPF')(c.tipo) ?? precisa(c, ['nome', 'mae', 'nascimento']) ?? { cpf: c.doc, nome: c.extra.nome, nome_mae: c.extra.mae, birthdate: FORMATOS.nascimento(c.extra.nascimento) } },
+}
+function interpretarCertidaoJudicial(trib, _, data) {
+  const negativa = data.nada_consta === true || data.conseguiu_emitir_certidao_negativa === true
+  if (negativa) return []
+  if (data.nada_consta == null && data.conseguiu_emitir_certidao_negativa == null) {
+    return [{ fonte: `Processo ${trib}`, credor: 'Certidão judicial', identificador: data.numero_certidao || data.numero || '—', devedor: '', situacao: `Resultado não reconhecido, conferir: ${String(data.mensagem ?? '').slice(0, 200)}`, data: '?', valor: 0, valorDesconhecido: true, processo: true }]
+  }
+  return [{ fonte: `Processo ${trib}`, credor: 'Certidão judicial POSITIVA (constam processos)', identificador: data.numero_certidao || data.codigo_autenticacao || '—', devedor: data.nome || '', situacao: String(data.mensagem ?? data.observacoes ?? 'constam processos').slice(0, 250), data: data.data_emissao || data.datahora_emissao || '?', valor: 0, valorDesconhecido: true, processo: true }]
+}
+
 // ---------- fontes exportadas para o consulta.mjs ----------
 export function fontesInfosimples({ cacheDir, atualizar }) {
   const ctx = (a) => ({ ...a, cacheDir, atualizar })
   return [
+    { nome: 'Federal em tempo real: Receita + PGFN (lista de devedores e certidão) e FGTS (Infosimples)', paga: true, custo: '~R$ 1', run: (a) => rodarGrupo(Object.entries(FEDERAL), ctx(a), interpretarFederal) },
     { nome: 'Dívida ativa / débitos estaduais, 27 estados (Infosimples)', paga: true, custo: '~R$ 7', run: (a) => rodarGrupo(Object.entries(ESTADOS), ctx(a), interpretarEstado).then((r) => ({ ...r, avisos: [...r.avisos, ...Object.values(ESTADOS).filter((c) => c.obs).map((c) => c.obs)] })) },
     { nome: 'Débitos trabalhistas – CNDT do TST (Infosimples)', paga: true, custo: '~R$ 0,26', run: (a) => rodarGrupo([['TST', { servico: 'tribunal/tst/cndt' }]], ctx(a), interpretarTst) },
+    { nome: 'IPVA (MG, MT, PA, PB, PI, TO por CPF/CNPJ; demais pelo veículo) e multas PRF (Infosimples)', paga: true, custo: '~R$ 2', run: (a) => rodarGrupo(Object.entries(veiculos(a)), ctx(a), interpretarVeiculo).then((r) => ({ ...r, avisos: [...r.avisos, ...(r.dividas.length ? ['IPVA/multas: valores lidos automaticamente de formatos diferentes por estado; confira os itens marcados.'] : [])] })) },
+    { nome: 'Dívida municipal: IPTU, ISS e taxas (certidão da prefeitura, Infosimples)', paga: true, custo: '~R$ 0,30', run: (a) => rodarGrupo(Object.entries(MUNICIPAL), ctx(a), interpretarMunicipal) },
+    { nome: 'Certidões judiciais: TRF4, TJMT, TJGO, TJDF, TJRR, TJTO, TJMA (Infosimples)', paga: true, custo: '~R$ 2', run: (a) => rodarGrupo(Object.entries(OUTROS_TRIBUNAIS), ctx(a), interpretarCertidaoJudicial) },
     { nome: 'Processos na Justiça: TJ SP/RJ/MG/PR/SC + TRF1/2/3/5/6 (Infosimples)', paga: true, custo: '~R$ 4', run: (a) => rodarGrupo(Object.entries(TRIBUNAIS), ctx(a), interpretarProcessos).then((r) => ({ ...r, avisos: [...r.avisos, 'Processos: cobertos TJ de SP, RJ, MG, PR e SC e a Justiça Federal (exceto TRF4). Demais TJs ainda não.'] })) },
   ]
 }

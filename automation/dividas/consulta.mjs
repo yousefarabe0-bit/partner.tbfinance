@@ -220,21 +220,36 @@ async function fonteProtestos({ tipo, doc }) {
 // Ficam no relatório para o checklist mostrar exatamente o que NÃO foi verificado.
 const PENDENTES = [
   { nome: 'Birôs de crédito (Serasa, Boa Vista/SCPC, SPC, Quod)', motivo: 'precisa de contrato B2B com o birô', manual: 'O titular consulta grátis em serasa.com.br / consumidorpositivo.com.br' },
-  { nome: 'Dívida ativa municipal (IPTU, ISS, taxas)', motivo: 'um sistema por prefeitura; precisa de agregador pago', manual: 'Site da prefeitura' },
   { nome: 'FGTS – regularidade do empregador (CRF/Caixa)', motivo: 'site exige captcha; precisa de agregador pago', manual: 'https://consulta-crf.caixa.gov.br', so: 'CNPJ' },
-  { nome: 'Processos nos TJs de outros estados (fora SP/RJ/MG/PR/SC) e TRF4', motivo: 'sem API de busca por CPF/CNPJ na Infosimples', manual: 'Sites dos tribunais' },
-  { nome: 'IPVA e multas de veículos', motivo: 'consulta exige placa/RENAVAM', manual: 'DETRAN do estado' },
+  { nome: 'Tribunais de AC, AL, AM, AP, BA, CE, ES, MS, PA, PB, PE, PI, RN, RO, SE e TJRS', motivo: 'sem consulta automática sem login/dados extensos', manual: 'Sites dos tribunais' },
+  { nome: 'Multas estaduais/municipais de trânsito (DETRAN)', motivo: 'a maioria dos DETRANs exige login do proprietário', manual: 'DETRAN do estado' },
   { nome: 'SCR/Registrato (empréstimos e cartões em bancos)', motivo: 'o Banco Central só libera ao próprio titular (gov.br) ou a banco autorizado pelo titular', manual: 'https://registrato.bcb.gov.br (titular)' },
 ]
 
 // ---------- main ----------
 const args = process.argv.slice(2)
-const iNome = args.indexOf('--nome')
-const nome = iNome >= 0 ? args[iNome + 1] : undefined
-const raw = args.find((a, i) => !a.startsWith('--') && (iNome < 0 || i !== iNome + 1))
+// Opções com valor: --nome, --nascimento DD/MM/AAAA, --mae, --cidade "Cidade/UF", --placa, --renavam, --uf-veiculo
+const COM_VALOR = ['--nome', '--nascimento', '--mae', '--cidade', '--placa', '--renavam', '--uf-veiculo']
+const opt = {}
+const soltos = []
+for (let i = 0; i < args.length; i++) {
+  if (COM_VALOR.includes(args[i])) opt[args[i].slice(2)] = args[++i]
+  else if (!args[i].startsWith('--')) soltos.push(args[i])
+}
+const nome = opt.nome
+const [cidadeNome, cidadeUf] = (opt.cidade ?? '').split(/\s*[/-]\s*(?=[A-Za-z]{2}$)/)
+const extra = {
+  nome, mae: opt.mae, nascimento: opt.nascimento,
+  cidade: cidadeNome || undefined, uf: cidadeUf?.toUpperCase(),
+  placa: opt.placa?.toUpperCase().replace(/[^A-Z0-9]/g, ''), renavam: opt.renavam && digits(opt.renavam),
+  ufVeiculo: (opt['uf-veiculo'] ?? cidadeUf)?.toUpperCase(),
+}
+if (opt.nascimento && !/^\d{2}\/\d{2}\/\d{4}$/.test(opt.nascimento)) { console.error('--nascimento deve ser DD/MM/AAAA'); process.exit(2) }
+if (opt.cidade && !extra.uf) { console.error('--cidade deve ser "Cidade/UF", ex.: "Pelotas/RS"'); process.exit(2) }
+const raw = soltos[0]
 const doc = digits(raw ?? '')
 const tipo = doc.length === 11 ? 'CPF' : doc.length === 14 ? 'CNPJ' : null
-if (!tipo) { console.error('Uso: consulta.mjs <cpf|cnpj> [--nome "NOME"] [--pagas] [--atualizar]'); process.exit(2) }
+if (!tipo) { console.error('Uso: consulta.mjs <cpf|cnpj> [--nome "NOME"] [--nascimento DD/MM/AAAA] [--mae "NOME"] [--cidade "Cidade/UF"] [--placa X] [--renavam N] [--uf-veiculo UF] [--pagas] [--atualizar]'); process.exit(2) }
 if (!(tipo === 'CPF' ? cpfValido(doc) : cnpjValido(doc))) { console.error(`${tipo} inválido (dígito verificador não confere): ${raw}`); process.exit(2) }
 
 // Fontes pagas só rodam com --pagas (pedido explícito do dono da conta). Sem a flag, nada é cobrado.
@@ -247,12 +262,14 @@ const TODAS = [
 if (SEM_PAGAS) for (const f of TODAS.filter((f) => f.paga).reverse()) PENDENTES.unshift({ nome: f.nome, motivo: `fonte paga (${f.custo}), só roda com --pagas`, manual: '—' })
 const FONTES = TODAS.filter((f) => !(SEM_PAGAS && f.paga))
 const resultados = await Promise.all(FONTES.map(async (f) => {
-  try { return { ...f, ok: true, ...(await f.run({ tipo, doc, nome })) } }
+  try { return { ...f, ok: true, ...(await f.run({ tipo, doc, nome, extra })) } }
   catch (e) { return { ...f, ok: false, erro: e.message, dividas: e.parcial?.dividas ?? [], avisos: e.parcial?.avisos ?? [] } }
 }))
 
 const dividas = resultados.flatMap((r) => r.dividas)
-const total = dividas.filter((d) => !d.processo).reduce((a, d) => a + d.valor, 0)
+// PGFN em tempo real repete o que a base aberta já trouxe: não soma duas vezes.
+if (dividas.some((d) => d.fonte === 'PGFN')) for (const d of dividas) if (d.duplicataProvavel === 'PGFN') d.foraDoTotal = true
+const total = dividas.filter((d) => !d.processo && !d.foraDoTotal).reduce((a, d) => a + d.valor, 0)
 const semValor = dividas.filter((d) => d.valorDesconhecido && !d.processo)
 const docFmt = tipo === 'CPF' ? fmtCpf(doc) : fmtCnpj(doc)
 const agora = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })
@@ -262,7 +279,7 @@ const naoConfirmado = tipo === 'CPF' && !nome && dividas.length > 0
 L.push(`## ${naoConfirmado ? 'POSSÍVEIS dívidas (CPF não confirmado, veja os avisos)' : 'Dívidas encontradas'}: ${dividas.length} · total ${brl(total)}`, '')
 if (dividas.length) {
   L.push('| Fonte | Credor / natureza | Inscrição | Devedor | Situação | Data | Valor |', '|---|---|---|---|---|---|---:|')
-  for (const d of dividas.sort((a, b) => b.valor - a.valor)) L.push(`| ${d.fonte} | ${d.credor} | ${d.identificador} | ${d.devedor} | ${d.situacao} | ${d.data} | ${d.valorDesconhecido ? 'não informado' : d.processo ? `${brl(d.valor)} (valor da ação)` : brl(d.valor)} |`)
+  for (const d of dividas.sort((a, b) => b.valor - a.valor)) L.push(`| ${d.fonte} | ${d.credor} | ${d.identificador} | ${d.devedor} | ${d.situacao} | ${d.data} | ${d.valorDesconhecido ? 'não informado' : d.processo ? `${brl(d.valor)} (valor da ação)` : d.foraDoTotal ? `${brl(d.valor)} (já somado na PGFN)` : `${brl(d.valor)}${d.conferir ? ' (conferir)' : ''}`} |`)
   L.push('')
 }
 const avisos = [...new Set(resultados.flatMap((r) => r.avisos))]
@@ -270,9 +287,9 @@ if (semValor.length) avisos.unshift(`${semValor.length} débito(s) sem valor inf
 if (dividas.some((d) => d.processo)) avisos.unshift('Processos judiciais aparecem na lista mas NÃO entram no total (o valor da ação não é necessariamente dívida).')
 if (avisos.length) L.push('## Avisos', '', ...avisos.map((a) => `- ${a}`), '')
 L.push('## Cobertura (o que foi e o que NÃO foi verificado)', '')
-for (const r of resultados) L.push(r.ok ? `- ✅ ${r.nome}: consultada (${r.dividas.length} registro(s)${r.detalhe ? `; ${r.detalhe}` : ''})` : `- ❌ ${r.nome}: FALHOU (${r.erro}). O que falhou tem resultado desconhecido.`)
+for (const r of resultados) L.push(r.ok && r.pulados?.length ? `- 🟡 ${r.nome}: PARCIAL (${r.detalhe}; NÃO CONSULTADOS por falta de dado: ${r.pulados.join(', ')})` : r.ok ? `- ✅ ${r.nome}: consultada (${r.dividas.length} registro(s)${r.detalhe ? `; ${r.detalhe}` : ''})` : `- ❌ ${r.nome}: FALHOU (${r.erro}). O que falhou tem resultado desconhecido.`)
 for (const p of PENDENTES.filter((p) => !p.so || p.so === tipo)) L.push(`- ⚠️ ${p.nome}: NÃO verificada (${p.motivo})${p.manual && p.manual !== '—' ? `. Consulta manual: ${p.manual}` : ''}`)
-L.push('', '> "Nenhuma dívida" só vale para as fontes marcadas com ✅. As marcadas com ⚠️ ou ❌ podem ter dívidas.')
+L.push('', '> "Nenhuma dívida" só vale para as fontes marcadas com ✅ (e para a parte consultada das 🟡). As marcadas com ⚠️ ou ❌ podem ter dívidas.')
 
 const out = L.join('\n')
 console.log(out)
