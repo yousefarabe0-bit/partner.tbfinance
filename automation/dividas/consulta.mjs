@@ -16,11 +16,12 @@ import { Readable } from 'node:stream'
 import { pipeline } from 'node:stream/promises'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
+import { fontesInfosimples } from './infosimples.mjs'
 
 // O fetch do Node só usa o HTTPS_PROXY (onde o token é injetado) com NODE_USE_ENV_PROXY=1.
 if ((process.env.HTTPS_PROXY || process.env.https_proxy) && !process.env.NODE_USE_ENV_PROXY) {
   const { spawnSync } = await import('node:child_process')
-  const r = spawnSync(process.execPath, ['--disable-warning=UNDICI-EHPA', ...process.argv.slice(1)], { stdio: 'inherit', env: { ...process.env, NODE_USE_ENV_PROXY: '1' } })
+  const r = spawnSync(process.execPath, [...process.execArgv, '--disable-warning=UNDICI-EHPA', ...process.argv.slice(1)], { stdio: 'inherit', env: { ...process.env, NODE_USE_ENV_PROXY: '1' } })
   process.exit(r.status ?? 1)
 }
 
@@ -219,11 +220,10 @@ async function fonteProtestos({ tipo, doc }) {
 // Ficam no relatório para o checklist mostrar exatamente o que NÃO foi verificado.
 const PENDENTES = [
   { nome: 'Birôs de crédito (Serasa, Boa Vista/SCPC, SPC, Quod)', motivo: 'precisa de contrato B2B com o birô', manual: 'O titular consulta grátis em serasa.com.br / consumidorpositivo.com.br' },
-  { nome: 'Dívida ativa estadual (ICMS, IPVA, ITCMD)', motivo: 'um sistema por estado; precisa de agregador pago', manual: 'Site da SEFAZ/PGE do estado' },
   { nome: 'Dívida ativa municipal (IPTU, ISS, taxas)', motivo: 'um sistema por prefeitura; precisa de agregador pago', manual: 'Site da prefeitura' },
-  { nome: 'Débitos trabalhistas (CNDT/TST)', motivo: 'site exige captcha; precisa de agregador pago', manual: 'https://cndt-certidao.tst.jus.br' },
   { nome: 'FGTS – regularidade do empregador (CRF/Caixa)', motivo: 'site exige captcha; precisa de agregador pago', manual: 'https://consulta-crf.caixa.gov.br', so: 'CNPJ' },
-  { nome: 'Processos de execução/cobrança na Justiça', motivo: 'precisa de agregador pago', manual: 'Sites dos tribunais' },
+  { nome: 'Processos nos TJs de outros estados (fora SP/RJ/MG/PR/SC) e TRF4', motivo: 'sem API de busca por CPF/CNPJ na Infosimples', manual: 'Sites dos tribunais' },
+  { nome: 'IPVA e multas de veículos', motivo: 'consulta exige placa/RENAVAM', manual: 'DETRAN do estado' },
   { nome: 'SCR/Registrato (empréstimos e cartões em bancos)', motivo: 'o Banco Central só libera ao próprio titular (gov.br) ou a banco autorizado pelo titular', manual: 'https://registrato.bcb.gov.br (titular)' },
 ]
 
@@ -239,18 +239,21 @@ if (!(tipo === 'CPF' ? cpfValido(doc) : cnpjValido(doc))) { console.error(`${tip
 
 // Fontes pagas só rodam com --pagas (pedido explícito do dono da conta). Sem a flag, nada é cobrado.
 const SEM_PAGAS = !args.includes('--pagas')
-const FONTES = [
+const TODAS = [
   { nome: 'Dívida Ativa da União (PGFN): tributos federais, previdenciário e FGTS', run: fontePgfn },
-  { nome: 'Protestos em cartório, todo o Brasil (IEPTB/CENPROT via Direct Data, R$ 8,10)', run: fonteProtestos, paga: true },
-].filter((f) => !(SEM_PAGAS && f.paga))
-if (SEM_PAGAS) PENDENTES.unshift({ nome: 'Protestos em cartório (Direct Data)', motivo: 'fonte paga (R$ 8,10), só roda com --pagas', manual: 'https://www.pesquisaprotesto.com.br' })
+  { nome: 'Protestos em cartório, todo o Brasil (IEPTB/CENPROT via Direct Data)', run: fonteProtestos, paga: true, custo: 'R$ 8,10' },
+  ...fontesInfosimples({ cacheDir: CACHE, atualizar: args.includes('--atualizar') }),
+]
+if (SEM_PAGAS) for (const f of TODAS.filter((f) => f.paga).reverse()) PENDENTES.unshift({ nome: f.nome, motivo: `fonte paga (${f.custo}), só roda com --pagas`, manual: '—' })
+const FONTES = TODAS.filter((f) => !(SEM_PAGAS && f.paga))
 const resultados = await Promise.all(FONTES.map(async (f) => {
   try { return { ...f, ok: true, ...(await f.run({ tipo, doc, nome })) } }
-  catch (e) { return { ...f, ok: false, erro: e.message, dividas: [], avisos: [] } }
+  catch (e) { return { ...f, ok: false, erro: e.message, dividas: e.parcial?.dividas ?? [], avisos: e.parcial?.avisos ?? [] } }
 }))
 
 const dividas = resultados.flatMap((r) => r.dividas)
-const total = dividas.reduce((a, d) => a + d.valor, 0)
+const total = dividas.filter((d) => !d.processo).reduce((a, d) => a + d.valor, 0)
+const semValor = dividas.filter((d) => d.valorDesconhecido && !d.processo)
 const docFmt = tipo === 'CPF' ? fmtCpf(doc) : fmtCnpj(doc)
 const agora = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })
 const L = []
@@ -259,14 +262,16 @@ const naoConfirmado = tipo === 'CPF' && !nome && dividas.length > 0
 L.push(`## ${naoConfirmado ? 'POSSÍVEIS dívidas (CPF não confirmado, veja os avisos)' : 'Dívidas encontradas'}: ${dividas.length} · total ${brl(total)}`, '')
 if (dividas.length) {
   L.push('| Fonte | Credor / natureza | Inscrição | Devedor | Situação | Data | Valor |', '|---|---|---|---|---|---|---:|')
-  for (const d of dividas.sort((a, b) => b.valor - a.valor)) L.push(`| ${d.fonte} | ${d.credor} | ${d.identificador} | ${d.devedor} | ${d.situacao} | ${d.data} | ${brl(d.valor)} |`)
+  for (const d of dividas.sort((a, b) => b.valor - a.valor)) L.push(`| ${d.fonte} | ${d.credor} | ${d.identificador} | ${d.devedor} | ${d.situacao} | ${d.data} | ${d.valorDesconhecido ? 'não informado' : d.processo ? `${brl(d.valor)} (valor da ação)` : brl(d.valor)} |`)
   L.push('')
 }
-const avisos = resultados.flatMap((r) => r.avisos)
+const avisos = [...new Set(resultados.flatMap((r) => r.avisos))]
+if (semValor.length) avisos.unshift(`${semValor.length} débito(s) sem valor informado pela fonte (certidão positiva): o total acima NÃO inclui esses valores.`)
+if (dividas.some((d) => d.processo)) avisos.unshift('Processos judiciais aparecem na lista mas NÃO entram no total (o valor da ação não é necessariamente dívida).')
 if (avisos.length) L.push('## Avisos', '', ...avisos.map((a) => `- ${a}`), '')
 L.push('## Cobertura (o que foi e o que NÃO foi verificado)', '')
-for (const r of resultados) L.push(r.ok ? `- ✅ ${r.nome}: consultada (${r.dividas.length} registro(s))` : `- ❌ ${r.nome}: FALHOU (${r.erro}). Resultado desta fonte é desconhecido.`)
-for (const p of PENDENTES.filter((p) => !p.so || p.so === tipo)) L.push(`- ⚠️ ${p.nome}: NÃO verificada (${p.motivo}). Consulta manual: ${p.manual}`)
+for (const r of resultados) L.push(r.ok ? `- ✅ ${r.nome}: consultada (${r.dividas.length} registro(s)${r.detalhe ? `; ${r.detalhe}` : ''})` : `- ❌ ${r.nome}: FALHOU (${r.erro}). O que falhou tem resultado desconhecido.`)
+for (const p of PENDENTES.filter((p) => !p.so || p.so === tipo)) L.push(`- ⚠️ ${p.nome}: NÃO verificada (${p.motivo})${p.manual && p.manual !== '—' ? `. Consulta manual: ${p.manual}` : ''}`)
 L.push('', '> "Nenhuma dívida" só vale para as fontes marcadas com ✅. As marcadas com ⚠️ ou ❌ podem ter dívidas.')
 
 const out = L.join('\n')

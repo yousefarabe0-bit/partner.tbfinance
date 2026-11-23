@@ -23,7 +23,12 @@ Todo relatório termina com o checklist de **cobertura**:
 | Dívida Ativa da União (PGFN): tributos federais, previdenciário, FGTS | ✅ ativa, grátis | Dados abertos trimestrais (~1,5 GB, baixados em `.cache/` e renovados a cada 30 dias). CNPJ: busca pela raiz e pega todas as filiais. CPF: a base mascara o CPF, por isso use `--nome` |
 | Birôs (Serasa, Boa Vista, SPC, Quod) | ⚠️ precisa de contrato | Negativações, protestos, cheques, ações |
 | Protestos em cartório, todo o Brasil | ✅ ativa, paga (Direct Data, R$ 8,10/consulta) | Cada título com data, valor e cartório. Não traz o credor (só o cartório informa). Token: no ambiente cloud o proxy injeta; fora dele, `DIRECTD_TOKEN` |
-| Dívida ativa estadual e municipal, CNDT, CRF FGTS, processos | ⚠️ precisa de agregador pago | Captcha / um sistema por órgão |
+| Dívida ativa / débitos estaduais, 27 estados | ✅ pronta, paga (Infosimples, ~R$ 7) | SP, RJ, CE e MG trazem a lista com valores; os demais estados dão certidão positiva/negativa (sem valor) |
+| Débitos trabalhistas (CNDT/TST) | ✅ pronta, paga (Infosimples, ~R$ 0,26) | Certidão positiva lista os processos |
+| Processos na Justiça | ✅ pronta, paga (Infosimples, ~R$ 4) | TJ SP/RJ/MG/PR/SC + TRF1/2/3/5/6. Não entram no total (valor da ação ≠ dívida) |
+| Dívida ativa municipal, IPVA/multas, outros TJs | ⚠️ não coberta | Prefeituras e DETRAN exigem inscrição/placa |
 | SCR / Registrato (dívidas bancárias) | ❌ impossível sem o titular | O Banco Central só libera ao titular ou a um banco autorizado por ele |
+
+Infosimples: token no corpo da requisição (`INFOSIMPLES_TOKEN`), sem retentativa automática (alguns erros são cobrados). Respostas 200/612 ficam em cache por 24h.
 
 Para ligar uma fonte paga, crie um conector em `consulta.mjs` (lista `FONTES`) e tire a fonte de `PENDENTES`.
