@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Agente de consulta de dívidas por CPF/CNPJ.
-// Uso: node automation/dividas/consulta.mjs <cpf|cnpj> [--nome "NOME COMPLETO"] [--sem-pagas]
+// Uso: node automation/dividas/consulta.mjs <cpf|cnpj> [--nome "NOME COMPLETO"] [--sem-pagas] [--atualizar]
 //
 // Cada fonte é um conector. O relatório SEMPRE termina com o checklist de cobertura:
 // uma fonte que falhou ou não está contratada aparece como tal, nunca como "sem dívida".
@@ -10,12 +10,19 @@
 //     CNPJ vem completo; CPF vem mascarado (XXX123.456XX), então para CPF o nome é usado para confirmar.
 //   - Protestos em cartório de todo o país (Direct Data, pago por consulta; --sem-pagas pula).
 import { spawn } from 'node:child_process'
-import { mkdir, writeFile, stat } from 'node:fs/promises'
+import { mkdir, writeFile, readFile, stat } from 'node:fs/promises'
 import { createWriteStream } from 'node:fs'
 import { Readable } from 'node:stream'
 import { pipeline } from 'node:stream/promises'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
+
+// O fetch do Node só usa o HTTPS_PROXY (onde o token é injetado) com NODE_USE_ENV_PROXY=1.
+if ((process.env.HTTPS_PROXY || process.env.https_proxy) && !process.env.NODE_USE_ENV_PROXY) {
+  const { spawnSync } = await import('node:child_process')
+  const r = spawnSync(process.execPath, ['--disable-warning=UNDICI-EHPA', ...process.argv.slice(1)], { stdio: 'inherit', env: { ...process.env, NODE_USE_ENV_PROXY: '1' } })
+  process.exit(r.status ?? 1)
+}
 
 const DIR = path.dirname(fileURLToPath(import.meta.url))
 const CACHE = path.join(DIR, '.cache')
@@ -165,12 +172,23 @@ function valorBR(v) {
 }
 
 async function fonteProtestos({ tipo, doc }) {
-  const url = `${DIRECTD}?${tipo === 'CPF' ? 'Cpf' : 'Cnpj'}=${doc}`
-  const res = await fetch(url, { headers: { Authorization: `Bearer ${process.env.DIRECTD_TOKEN || 'proxy-injected'}` }, signal: AbortSignal.timeout(120_000) })
-  const body = await res.json().catch(() => null)
-  const meta = body?.metaDados ?? {}
-  const r = body?.retorno
-  if (!res.ok || !r) throw new Error(`Direct Data HTTP ${res.status}: ${meta.resultado || meta.mensagem || 'sem retorno'}`)
+  // Cada chamada custa: respostas com sucesso ficam guardadas 24h para não pagar duas vezes.
+  const cacheFile = path.join(CACHE, 'protestos', `${doc}.json`)
+  const st = await stat(cacheFile).catch(() => null)
+  let body, avisoCache
+  if (st && Date.now() - st.mtimeMs < 864e5 && !process.argv.includes('--atualizar')) {
+    body = JSON.parse(await readFile(cacheFile, 'utf8'))
+    avisoCache = `Protestos: resultado reaproveitado da consulta de ${body.metaDados?.data} (sem nova cobrança). Use --atualizar para consultar de novo.`
+  } else {
+    const url = `${DIRECTD}?${tipo === 'CPF' ? 'Cpf' : 'Cnpj'}=${doc}`
+    const res = await fetch(url, { headers: { Authorization: `Bearer ${process.env.DIRECTD_TOKEN || 'proxy-injected'}` }, signal: AbortSignal.timeout(120_000) })
+    body = await res.json().catch(() => null)
+    const m = body?.metaDados ?? {}
+    if (!res.ok || !body?.retorno) throw new Error(`Direct Data HTTP ${res.status}: ${m.resultado || m.mensagem || 'sem retorno'}`)
+    await mkdir(path.dirname(cacheFile), { recursive: true })
+    await writeFile(cacheFile, JSON.stringify(body))
+  }
+  const r = body.retorno
   const dividas = []
   for (const d of r.documentos ?? []) {
     for (const c of d.cartorios ?? []) {
@@ -189,11 +207,11 @@ async function fonteProtestos({ tipo, doc }) {
   }
   // Nunca aceitar "tem protesto" sem os títulos: seria uma dívida escondida.
   if (r.constamProtestos && !dividas.length) throw new Error(`a Direct Data indica ${r.numeroTotalProtestos} protesto(s) (${r.valorTotalProtestos}) mas não trouxe os detalhes`)
-  const avisos = []
+  const avisos = avisoCache ? [avisoCache] : []
   const totalApi = valorBR(r.valorTotalProtestos)
   const soma = dividas.reduce((a, x) => a + x.valor, 0)
   if (r.constamProtestos && Math.abs(totalApi - soma) > 0.01) avisos.push(`Protestos: soma dos títulos (${brl(soma)}) difere do total informado pela Direct Data (${brl(totalApi)}). Confira no cartório.`)
-  if (r.observacoes) avisos.push(`Protestos: ${r.observacoes}`)
+  if (r.observacoes && !/^a entidade (n[aã]o )?possui protestos$/i.test(r.observacoes.trim())) avisos.push(`Protestos: ${r.observacoes}`)
   return { dividas, avisos }
 }
 
