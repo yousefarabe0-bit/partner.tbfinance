@@ -23,7 +23,7 @@
 | KPIs | Preço médio por par, custo médio por par, pares por pedido, taxa de troca |
 
 ### Pontos de atenção na coleta
-1. **CMV:** conferir se o custo cadastrado no ERP está atualizado e o que ele inclui (só a fábrica ou também frete e caixa). É preciso saber **quantos pares de cada modelo saíram**, somando os pedidos exportados de cada canal, e multiplicar pelo custo por par.
+1. **CMV:** conferir se o custo cadastrado no ERP está atualizado e o que ele inclui (só a fábrica ou também frete e caixa). O CMV sai do relatório de vendas por item (pares de cada modelo) multiplicado pelo custo por par.
 2. **Estoque:** provavelmente não existe um saldo confiável. Fazer uma **contagem** (mesmo que aproximada) no início do piloto.
 3. **TikTok Shop:** baixar o relatório financeiro/de liquidação, que separa a comissão da plataforma, a comissão de afiliados, o frete e os descontos bancados pela loja.
 4. **Pagamentos à fábrica:** montar a lista de pedidos em aberto (data, pares, valor, sinal pago, saldo, previsão de entrega). Isso vira o fluxo de caixa das próximas semanas.
