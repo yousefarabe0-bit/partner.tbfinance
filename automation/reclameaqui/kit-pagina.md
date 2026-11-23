@@ -12,10 +12,10 @@ respostas rápidas e humanas, e casos resolvidos. Aplicar tudo do **computador o
 | Descrição | texto abaixo, exatamente igual | pronto |
 | Site | https://tbfinance.com.br | pronto |
 | E-mail de atendimento | contato@tbfinance.com.br | pronto |
-| WhatsApp | ? | **falta o Yousef informar** |
-| Telefone | ? | **falta o Yousef informar** |
-| Horário de atendimento | ? (sugestão: seg a sex, 9h às 18h) | **falta o Yousef confirmar** |
-| E-mail das notificações | contato@tbfinance.com.br (hoje pode estar indo para outro Gmail) | **conferir** |
+| WhatsApp | (48) 3194-0420, se for o mesmo número do WhatsApp Business | **confirmar** |
+| Telefone | (48) 3194-0420 | pronto |
+| Horário de atendimento | Segunda a sexta, das 9h às 19h | pronto |
+| E-mail das notificações | contato@tbfinance.com.br | confirmado pelo Yousef em 23/11 |
 
 Descrição:
 
