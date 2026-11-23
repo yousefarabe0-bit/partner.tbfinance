@@ -1,0 +1,24 @@
+{
+ "url": "https://www.reclameaqui.com.br/empresa/tb-finance/",
+ "links": [
+  {
+   "texto": "Cloudflare",
+   "href": "https://www.cloudflare.com/"
+  },
+  {
+   "texto": "Privacidade",
+   "href": "https://www.cloudflare.com/pt-br/privacypolicy/"
+  }
+ ],
+ "campos": [
+  {
+   "tag": "INPUT",
+   "type": "hidden",
+   "name": "cf-turnstile-response",
+   "id": "cf-chl-widget-7sco2_response",
+   "placeholder": "",
+   "label": ""
+  }
+ ],
+ "botoes": []
+}
