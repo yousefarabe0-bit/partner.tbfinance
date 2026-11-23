@@ -1,17 +1,19 @@
-name: Reclame Aqui – agente diário
+name: Reclame Aqui – robô diário
 
-# Entra na conta da TB Finance no Reclame Aqui, responde reclamações novas e mantém o perfil em dia.
-# Configuração e primeiros passos: automation/reclameaqui/README.md
+# Entra na conta da TB Finance no Reclame Aqui, publica as respostas que o Claude escreveu (respostas.json),
+# mantém o perfil em dia e coleta as reclamações novas para o Claude responder. Não usa API paga.
+# O Claude dispara este workflow pela tarefa agendada diária; o horário abaixo é só reserva.
+# Detalhes: automation/reclameaqui/README.md
 on:
   schedule:
-    - cron: '23 12 * * *' # todo dia ~9h20 (Brasília)
+    - cron: '37 11 * * *' # ~8h37 (Brasília), reserva
   workflow_dispatch:
     inputs:
       modo:
-        description: 'auto = publica | rascunho = só escreve | explorar = só tira capturas para calibrar'
+        description: 'auto = publica, atualiza perfil e coleta | rascunho = só coleta | explorar = só capturas para calibrar'
         type: choice
         options: [auto, rascunho, explorar]
-        default: rascunho
+        default: auto
 
 permissions:
   contents: write
@@ -21,7 +23,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  agente:
+  robo:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -30,47 +32,38 @@ jobs:
         with:
           node-version: 22
 
-      - name: Instalar navegador e SDK
+      - name: Instalar navegador
         run: |
-          npm install --no-save playwright@1 @anthropic-ai/sdk
+          npm install --no-save playwright@1
           npx playwright install --with-deps chromium
 
-      - name: Rodar agente
+      - name: Rodar robô
         env:
           RA_EMAIL: ${{ secrets.RA_EMAIL }}
           RA_PASSWORD: ${{ secrets.RA_PASSWORD }}
           RA_STORAGE_STATE: ${{ secrets.RA_STORAGE_STATE }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           RA_MODE: ${{ inputs.modo || vars.RA_MODE || 'auto' }}
         run: node automation/reclameaqui/agent.mjs
 
-      # O repositório é público: capturas e respostas só saem daqui criptografadas com a senha do Reclame Aqui.
-      - name: Criptografar relatório e capturas
-        if: always()
-        env:
-          RA_PASSWORD: ${{ secrets.RA_PASSWORD }}
-        run: |
-          [ -d automation/reclameaqui/saida ] || exit 0
-          tar czf - -C automation/reclameaqui saida | openssl enc -aes-256-cbc -pbkdf2 -salt -pass env:RA_PASSWORD -out reclameaqui-relatorio.tar.gz.enc
-          rm -rf automation/reclameaqui/saida
-
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: reclameaqui-relatorio
-          path: reclameaqui-relatorio.tar.gz.enc
-          retention-days: 14
-          if-no-files-found: ignore
-
-      - name: Registrar respostas publicadas
+      # Repositório público: o que veio do painel só entra trancado (chave pública; só o Claude abre).
+      - name: Trancar no cofre
         if: always()
         run: |
-          F="automation/reclameaqui/respondidas.json automation/reclameaqui/imagens-enviadas.txt"
+          cd automation/reclameaqui
+          [ -d saida ] || exit 0
+          mkdir -p caixa && tar czf /tmp/entrada.tgz saida
+          node cofre.mjs selar /tmp/entrada.tgz caixa/entrada.enc
+          rm -rf saida /tmp/entrada.tgz
+
+      - name: Salvar no repositório
+        if: always()
+        run: |
+          F="automation/reclameaqui/caixa automation/reclameaqui/respondidas.json automation/reclameaqui/imagens-enviadas.txt"
           if [ -n "$(git status --porcelain $F)" ]; then
             git config user.name "reclameaqui-bot"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add $F
-            git commit -m "chore(reclameaqui): registra respostas [skip ci]"
+            git commit -m "chore(reclameaqui): coleta do dia [skip ci]"
             git pull --rebase
             git push
           fi

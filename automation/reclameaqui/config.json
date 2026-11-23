@@ -1,7 +1,6 @@
 {
-  "_comentario": "URLs e seletores do painel da empresa no Reclame Aqui. Rode o workflow com modo 'explorar' na primeira vez e ajuste aqui com base nas capturas.",
+  "_comentario": "URLs e seletores do painel da empresa no Reclame Aqui. Calibrados a partir de uma rodada no modo 'explorar'.",
   "modo": "auto",
-  "modelo": "claude-opus-5-5",
   "maxRespostasPorDia": 20,
   "urls": {
     "login": "https://www.reclameaqui.com.br/area-da-empresa/",
