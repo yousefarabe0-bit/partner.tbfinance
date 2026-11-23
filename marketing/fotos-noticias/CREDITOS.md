@@ -32,3 +32,4 @@
 | hq-carteira.jpg | Carteira de trabalho | Marcello Casal Jr/ABr | CC BY 3.0 BR | File:Carteiradetrabalho.jpg |
 | hq-amodei.jpg | Dario Amodei | TechCrunch | CC BY 2.0 | File:Dario Amodei at TechCrunch Disrupt 2023 01.jpg |
 | hq-dolar.jpg | Celular com ChatGPT sobre notas de dólar | Jernej Furman | CC BY 2.0 | File:Smartphone with ChatGPT text on the US dollar banknotes background (52916923766).jpg |
+| hq-reais.jpg | Nota de R$ 20 | Oleg Yunakov | CC BY-SA 4.0 | File:20 Brazilian Real banknote featuring a Golden Lion Tamarin monkey.jpg |

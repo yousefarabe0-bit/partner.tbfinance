@@ -4,90 +4,107 @@
  "cheia": true,
  "copiar": [
   "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-carteira.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-reais.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-compra-online.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-pagando-cartao.jpg",
   "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-cofrinho.jpg",
-  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-pagando-cartao.jpg"
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-maquininha.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-contrato.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-cartoes.jpg"
  ],
  "slides": [
   {
    "tipo": "capa",
-   "foto": "hq-carteira.jpg",
+   "foto": "hq-reais.jpg",
    "h": 1350,
-   "pos": "center center",
-   "brilho": 0.85,
+   "pos": "60% center",
+   "brilho": 0.75,
    "kicker": "13º SALÁRIO",
-   "titulo": "Qual é a primeira coisa que você vai fazer com o seu 13º? *Faça as contas antes de gastar.*",
-   "fs": 70,
-   "credito": "Foto: Marcello Casal Jr/Agência Brasil (CC BY 3.0 BR)"
+   "titulo": "Qual é a primeira coisa que você vai fazer com o seu 13º?",
+   "fs": 88,
+   "credito": "Foto: Oleg Yunakov (CC BY-SA 4.0)"
   },
   {
    "tipo": "texto",
+   "foto": "hq-carteira.jpg",
+   "pos": "center center",
+   "fade": 34,
+   "brilho": 0.8,
    "kicker": "O DINHEIRO",
-   "titulo": "R$ 399,1 bilhões",
-   "paragrafos": [
-    "É quanto o 13º deve colocar no bolso de 99,7 milhões de brasileiros em 2026, segundo o Dieese. A 1ª parcela cai até 30/11, três dias depois da Black Friday."
-   ],
-   "escuro": true,
-   "fonte": "Fontes: Dieese (13/11/2026); CNC/Peic (out/2026); Banco Central, juros do rotativo (jun/2026); Copom (04/11/2026)."
+   "titulo": "Vai cair na conta de 99,7 milhões de brasileiros",
+   "fonte": "Fontes: Dieese (13/11/2026); CNC/Peic (out/2026); Banco Central (jun/2026); Copom (04/11/2026). Foto: Marcello Casal Jr/Agência Brasil (CC BY 3.0 BR).",
+   "numero": "R$ 399 bi",
+   "numero_legenda": "até 30/11, a 1ª parcela"
   },
   {
    "tipo": "texto",
+   "foto": "hq-cartoes.jpg",
+   "pos": "center 0%",
+   "fade": 34,
+   "brilho": 0.8,
    "kicker": "O PROBLEMA",
-   "titulo": "O dinheiro já chega *com dono*",
-   "paragrafos": [
-    "Em outubro, 81,6% das famílias tinham dívidas, e o cartão de crédito é o vilão mais comum. Antes de decidir o que comprar, decida o que pagar."
-   ],
-   "escuro": true,
-   "fonte": "Fontes: Dieese (13/11/2026); CNC/Peic (out/2026); Banco Central, juros do rotativo (jun/2026); Copom (04/11/2026)."
+   "titulo": "Das famílias já estão endividadas",
+   "fonte": "Fontes: Dieese (13/11/2026); CNC/Peic (out/2026); Banco Central (jun/2026); Copom (04/11/2026). Foto: $5000 (CC BY-SA 4.0).",
+   "numero": "81,6%",
+   "numero_legenda": "antes do 13º chegar"
   },
   {
    "tipo": "texto",
-   "kicker": "CONTA 1",
-   "titulo": "R$ 1.000 no rotativo viram *cerca de R$ 2.000 em 5 meses*",
-   "paragrafos": [
-    "Com o rotativo a 442,4% ao ano (média do Banco Central em junho), os juros passam de 15% ao mês. Em cinco meses, a dívida praticamente dobra."
-   ],
    "foto": "hq-pagando-cartao.jpg",
    "pos": "70% center",
-   "fade": 22,
-   "fonte": "Fontes: Dieese (13/11/2026); CNC/Peic (out/2026); Banco Central, juros do rotativo (jun/2026); Copom (04/11/2026). Foto: Hloom Templates (CC BY 2.0)."
+   "fade": 34,
+   "brilho": 0.8,
+   "kicker": "CONTA 1",
+   "titulo": "R$ 1.000 esquecidos no rotativo viram",
+   "fonte": "Fontes: Dieese (13/11/2026); CNC/Peic (out/2026); Banco Central (jun/2026); Copom (04/11/2026). Foto: Hloom Templates (CC BY 2.0).",
+   "numero": "R$ 2.000",
+   "numero_legenda": "em só 5 meses, com juros de 442,4% ao ano"
   },
   {
    "tipo": "texto",
-   "kicker": "CONTA 2",
-   "titulo": "R$ 3.000 por ano, por 10 anos, viram *cerca de R$ 57 mil*",
-   "paragrafos": [
-    "Investindo R$ 3.000 de cada 13º a 13,75% ao ano (a Selic atual), você aporta R$ 30 mil e chega perto de R$ 57 mil antes do IR. Simulação: o rendimento real varia."
-   ],
-   "escuro": true,
-   "fonte": "Fontes: Dieese (13/11/2026); CNC/Peic (out/2026); Banco Central, juros do rotativo (jun/2026); Copom (04/11/2026)."
-  },
-  {
-   "tipo": "texto",
-   "kicker": "A COMPARAÇÃO",
-   "titulo": "Quitar dívida cara *rende mais que investir*",
-   "paragrafos": [
-    "O investimento rende cerca de 1% ao mês. O rotativo cobra mais de 15%. Enquanto existir dívida cara, pagá-la é o melhor retorno que o seu 13º pode ter."
-   ],
-   "escuro": true,
-   "fonte": "Fontes: Dieese (13/11/2026); CNC/Peic (out/2026); Banco Central, juros do rotativo (jun/2026); Copom (04/11/2026)."
-  },
-  {
-   "tipo": "texto",
-   "kicker": "NO SEU BOLSO",
-   "titulo": "A ordem certa para o 13º",
-   "lista": [
-    "Dívidas de juros altos: tente acordo à vista com desconto",
-    "Contas de janeiro: IPVA, IPTU, matrícula e material",
-    "Reserva de emergência",
-    "Só depois: investimentos e compras planejadas"
-   ],
    "foto": "hq-cofrinho.jpg",
-   "pos": "center 0%",
-   "fade": 14,
-   "fonte": "Fontes: Dieese (13/11/2026); CNC/Peic (out/2026); Banco Central, juros do rotativo (jun/2026); Copom (04/11/2026). Foto: Ken Teegardin (CC BY-SA 2.0)."
+   "pos": "center 10%",
+   "fade": 34,
+   "brilho": 0.8,
+   "kicker": "CONTA 2",
+   "titulo": "R$ 3.000 de cada 13º, investidos por 10 anos, viram",
+   "fonte": "Fontes: Dieese (13/11/2026); CNC/Peic (out/2026); Banco Central (jun/2026); Copom (04/11/2026). Foto: Ken Teegardin (CC BY-SA 2.0).",
+   "numero": "R$ 57 mil",
+   "numero_legenda": "a 13,75% ao ano, antes do IR (simulação)"
+  },
+  {
+   "tipo": "texto",
+   "foto": "hq-maquininha.jpg",
+   "pos": "center 30%",
+   "fade": 34,
+   "brilho": 0.8,
+   "kicker": "A COMPARAÇÃO",
+   "titulo": "Investir rende ~1% ao mês. O rotativo cobra",
+   "fonte": "Fontes: Dieese (13/11/2026); CNC/Peic (out/2026); Banco Central (jun/2026); Copom (04/11/2026). Foto: Basile Morin (CC BY-SA 4.0).",
+   "numero": "15%",
+   "numero_legenda": "ao mês. Quitar vem primeiro."
+  },
+  {
+   "tipo": "texto",
+   "foto": "hq-contrato.jpg",
+   "pos": "center center",
+   "fade": 12,
+   "brilho": 0.8,
+   "kicker": "A ORDEM CERTA",
+   "titulo": "Antes de gastar:",
+   "fonte": "Fontes: Dieese (13/11/2026); CNC/Peic (out/2026); Banco Central (jun/2026); Copom (04/11/2026). Foto: Blogtrepreneur (CC BY 2.0).",
+   "lista": [
+    "1. Dívidas de juros altos (acordo à vista)",
+    "2. Contas de janeiro",
+    "3. Reserva de emergência",
+    "4. Só depois, compras"
+   ]
   },
   {
    "tipo": "cta",
+   "foto": "hq-reais.jpg",
+   "pos": "30% center",
+   "brilho": 0.6,
    "kicker": "RESPONDE AQUI",
    "titulo": "E você, o que vai fazer com o seu 13º?",
    "palavra": "PLANILHA",
