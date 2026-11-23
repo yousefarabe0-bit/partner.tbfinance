@@ -10,6 +10,25 @@
 
 ---
 
+## ⚡ Versão mínima: amostra para validar com o CEO
+
+Para montar uma **amostra de 1 página** e perguntar ao CEO "é isso que você precisa?", bastam **8 itens**, com **totais por mês** (nada de relatório detalhado). Período: **set e out/2026** (2 meses permitem comparar).
+
+| # | Dado | Vira |
+|---|---|---|
+| 1 | Faturamento por canal (site, ML, TikTok, outros), com descontos e devoluções | Receita por canal |
+| 2 | Pares vendidos por modelo + custo por par de cada modelo | CMV e **margem por par** |
+| 3 | Tarifas por canal: comissão ML, comissão TikTok + **afiliados**, taxa do gateway do site | Margem por canal |
+| 4 | Frete pago pela loja (envios e trocas) | Margem por canal |
+| 5 | Marketing por canal (ads + creators) | Margem após marketing |
+| 6 | Impostos do mês (guia) + regime tributário | Receita líquida |
+| 7 | Despesas fixas do mês (folha, pró-labore, aluguel, sistemas, outras), só o total de cada | EBITDA e ponto de equilíbrio |
+| 8 | Saldo bancário hoje + contas a pagar das próximas 8 semanas (**inclui a fábrica**) + saldos a receber dos canais | **Alerta de caixa** |
+
+**O que sai da amostra:** DRE por canal, margem dos principais modelos, ponto de equilíbrio e posição de caixa das próximas semanas. O restante da lista (balanço, DFC, estoque por numeração, KPIs) entra só se o CEO aprovar o serviço completo.
+
+---
+
 ## A. Informações gerais (responder uma vez)
 
 | # | Item | Prioridade |
