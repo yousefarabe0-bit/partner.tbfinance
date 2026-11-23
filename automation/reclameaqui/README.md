@@ -1,4 +1,12 @@
-# Reclame Aqui da TB Finance (sem API paga)
+# Reclame Aqui da TB Finance
+
+> **Como funciona hoje (desde 23/11/2026):** o Reclame Aqui bloqueia robôs vindos de servidores (Cloudflare), então
+> nada é publicado automaticamente. Todo dia ~9h43 a tarefa agendada do Claude lê os avisos do Reclame Aqui no
+> contato@tbfinance.com.br, escreve as respostas seguindo `diretrizes.md` e manda por e-mail
+> ("Reclame Aqui · resposta pronta para colar"). O Yousef só cola e envia pelo painel. Sem reclamação nova, ninguém é incomodado.
+> O robô abaixo continua aqui para o dia em que houver acesso (computador do Yousef ou integração oficial HugMe).
+
+## Robô (pausado)
 
 Funciona como o Instagram: o **Claude escreve** (pela assinatura, na tarefa agendada diária) e o **robô do GitHub publica**.
 
