@@ -3,8 +3,11 @@
 ```bash
 node automation/dividas/consulta.mjs 12.345.678/0001-90
 node automation/dividas/consulta.mjs 123.456.789-09 --nome "NOME COMPLETO DO TITULAR"
-node automation/dividas/consulta.mjs 12.345.678/0001-90 --sem-pagas   # pula as fontes pagas
+node automation/dividas/consulta.mjs 12.345.678/0001-90 --pagas   # inclui as fontes PAGAS (cobra)
+node automation/dividas/consulta.mjs 12.345.678/0001-90 --pagas --atualizar   # ignora o resultado guardado de hoje e cobra de novo
 ```
+
+**Fontes pagas só rodam com `--pagas`, e só quando o dono da conta pedir.** Sem a flag, nada é cobrado. Resultados pagos ficam guardados 24h para não cobrar duas vezes.
 
 O relatório sai na tela e fica salvo em `automation/dividas/relatorios/` (fora do git, porque tem dados pessoais).
 

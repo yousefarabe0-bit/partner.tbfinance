@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Agente de consulta de dívidas por CPF/CNPJ.
-// Uso: node automation/dividas/consulta.mjs <cpf|cnpj> [--nome "NOME COMPLETO"] [--sem-pagas] [--atualizar]
+// Uso: node automation/dividas/consulta.mjs <cpf|cnpj> [--nome "NOME COMPLETO"] [--pagas] [--atualizar]
 //
 // Cada fonte é um conector. O relatório SEMPRE termina com o checklist de cobertura:
 // uma fonte que falhou ou não está contratada aparece como tal, nunca como "sem dívida".
@@ -8,7 +8,7 @@
 // Fontes ativas hoje:
 //   - PGFN (Dívida Ativa da União: tributos federais, previdenciário, FGTS) via dados abertos.
 //     CNPJ vem completo; CPF vem mascarado (XXX123.456XX), então para CPF o nome é usado para confirmar.
-//   - Protestos em cartório de todo o país (Direct Data, pago por consulta; --sem-pagas pula).
+//   - Protestos em cartório de todo o país (Direct Data, pago por consulta; só roda com --pagas).
 import { spawn } from 'node:child_process'
 import { mkdir, writeFile, readFile, stat } from 'node:fs/promises'
 import { createWriteStream } from 'node:fs'
@@ -234,15 +234,16 @@ const nome = iNome >= 0 ? args[iNome + 1] : undefined
 const raw = args.find((a, i) => !a.startsWith('--') && (iNome < 0 || i !== iNome + 1))
 const doc = digits(raw ?? '')
 const tipo = doc.length === 11 ? 'CPF' : doc.length === 14 ? 'CNPJ' : null
-if (!tipo) { console.error('Uso: consulta.mjs <cpf|cnpj> [--nome "NOME"] [--sem-pagas]'); process.exit(2) }
+if (!tipo) { console.error('Uso: consulta.mjs <cpf|cnpj> [--nome "NOME"] [--pagas] [--atualizar]'); process.exit(2) }
 if (!(tipo === 'CPF' ? cpfValido(doc) : cnpjValido(doc))) { console.error(`${tipo} inválido (dígito verificador não confere): ${raw}`); process.exit(2) }
 
-const SEM_PAGAS = args.includes('--sem-pagas')
+// Fontes pagas só rodam com --pagas (pedido explícito do dono da conta). Sem a flag, nada é cobrado.
+const SEM_PAGAS = !args.includes('--pagas')
 const FONTES = [
   { nome: 'Dívida Ativa da União (PGFN): tributos federais, previdenciário e FGTS', run: fontePgfn },
   { nome: 'Protestos em cartório, todo o Brasil (IEPTB/CENPROT via Direct Data, R$ 8,10)', run: fonteProtestos, paga: true },
 ].filter((f) => !(SEM_PAGAS && f.paga))
-if (SEM_PAGAS) PENDENTES.unshift({ nome: 'Protestos em cartório (Direct Data)', motivo: 'pulada com --sem-pagas', manual: 'https://www.pesquisaprotesto.com.br' })
+if (SEM_PAGAS) PENDENTES.unshift({ nome: 'Protestos em cartório (Direct Data)', motivo: 'fonte paga (R$ 8,10), só roda com --pagas', manual: 'https://www.pesquisaprotesto.com.br' })
 const resultados = await Promise.all(FONTES.map(async (f) => {
   try { return { ...f, ok: true, ...(await f.run({ tipo, doc, nome })) } }
   catch (e) { return { ...f, ok: false, erro: e.message, dividas: [], avisos: [] } }
