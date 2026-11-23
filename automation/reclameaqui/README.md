@@ -21,7 +21,22 @@ A resposta sai cerca de 1 dia depois da reclamação chegar.
 | `caixa/capturas/` | Capturas de tela da calibração (modo explorar) ou de erros. |
 | `config.json` | URLs e seletores do painel. |
 
-## O que precisa no GitHub
+## Rodando no computador do Yousef (padrão)
+O Reclame Aqui bloqueia servidores (Cloudflare), então o robô roda no seu computador, com o seu Google Chrome.
+Na pasta do repositório, uma vez:
+
+```bash
+npm install --no-save playwright@1
+```
+
+```bash
+node automation/reclameaqui/agent.mjs --login
+```
+
+Entre no painel na janela que abrir e feche. O login fica guardado em `~/.tbfinance-reclameaqui`.
+Depois disso o Claude roda `node automation/reclameaqui/agent.mjs` todo dia pelo Remote Control.
+
+## No GitHub (bloqueado pela Cloudflare hoje)
 Secrets `RA_EMAIL` e `RA_PASSWORD` (login da empresa no Reclame Aqui). Nada mais.
 
 ### Se o Reclame Aqui pedir captcha ou código por e-mail

@@ -14,6 +14,7 @@
 //   explorar  só navega e salva capturas/HTML/mapa dos campos em saida/ para calibrar o config.json
 import { readFileSync, writeFileSync, mkdirSync, existsSync, appendFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
+import { homedir } from 'node:os'
 import { fileURLToPath } from 'node:url'
 import { createHash } from 'node:crypto'
 import { chromium } from 'playwright'
@@ -167,11 +168,27 @@ async function sincronizarPerfil(page) {
 }
 
 // ---------- execução ----------
-const browser = await chromium.launch()
+// No computador do Yousef (padrão fora do GitHub): usa o Google Chrome instalado, com janela, e um perfil
+// próprio que guarda o login. Na primeira vez: `node automation/reclameaqui/agent.mjs --login` e entrar à mão.
+const LOCAL = !process.env.GITHUB_ACTIONS
 const contextOpts = { locale: 'pt-BR', timezoneId: 'America/Sao_Paulo', viewport: { width: 1366, height: 900 } }
-if (process.env.RA_STORAGE_STATE) contextOpts.storageState = JSON.parse(Buffer.from(process.env.RA_STORAGE_STATE, 'base64').toString('utf8'))
-const context = await browser.newContext(contextOpts)
-const page = await context.newPage()
+let browser, context
+if (LOCAL) {
+  const perfilDir = process.env.RA_PERFIL_DIR || join(homedir(), '.tbfinance-reclameaqui')
+  context = await chromium.launchPersistentContext(perfilDir, { ...contextOpts, channel: process.env.RA_CANAL || 'chrome', headless: false })
+} else {
+  if (process.env.RA_STORAGE_STATE) contextOpts.storageState = JSON.parse(Buffer.from(process.env.RA_STORAGE_STATE, 'base64').toString('utf8'))
+  browser = await chromium.launch()
+  context = await browser.newContext(contextOpts)
+}
+const page = context.pages()[0] || await context.newPage()
+if (process.argv.includes('--login')) {
+  // abre o painel e espera a pessoa entrar (e passar pela verificação) e fechar a janela
+  await page.goto(config.urls.login).catch(() => {})
+  console.log('Faça o login no Reclame Aqui na janela do Chrome e depois feche a janela.')
+  await new Promise((ok) => context.on('close', ok))
+  process.exit(0)
+}
 page.setDefaultTimeout(20000)
 let falhou = false
 try {
@@ -193,7 +210,8 @@ try {
   relatorio.erros.push(e.message)
   await capturar(page, 'erro-geral', true)
 } finally {
-  await browser.close()
+  await context.close()
+  if (browser) await browser.close()
   // entrada.json vai para caixa/ pelo workflow
   writeFileSync(join(out, 'entrada.json'), JSON.stringify(relatorio, null, 1))
   const resumo = [`## Reclame Aqui – ${relatorio.data.slice(0, 10)} (modo: ${MODE})`, '',
