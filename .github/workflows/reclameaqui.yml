@@ -5,8 +5,7 @@ name: Reclame Aqui – robô diário
 # O Claude dispara este workflow pela tarefa agendada diária; o horário abaixo é só reserva.
 # Detalhes: automation/reclameaqui/README.md
 on:
-  schedule:
-    - cron: '37 11 * * *' # ~8h37 (Brasília), reserva
+  # Agendamento pausado: o Reclame Aqui bloqueia o GitHub com a verificação anti-robô da Cloudflare (23/11/2026).
   workflow_dispatch:
     inputs:
       modo:
