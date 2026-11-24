@@ -23,10 +23,15 @@ const accounts = JSON.parse(await readFile(path.join(DIR, 'accounts.json'), 'utf
 const out = { generatedAt: new Date().toISOString(), since: SINCE.toISOString(), accounts: {} }
 for (const [alias, cfg] of Object.entries(accounts)) {
   const token = process.env[`IG_${cfg.env}_TOKEN`]
-  const userId = process.env[`IG_${cfg.env}_USER_ID`]
+  let userId = process.env[`IG_${cfg.env}_USER_ID`]
   const acc = (out.accounts[alias] = { handle: cfg.handle, posts: [] })
-  if (!token || !userId) { acc.error = 'token ou user id ausente'; continue }
+  if (!token) { acc.error = 'token ausente'; continue }
   try {
+    if (!userId) {
+      const pages = await get('me/accounts', token, { fields: 'instagram_business_account{id,username}', limit: 100 })
+      userId = (pages.data || []).find((p) => p.instagram_business_account?.username?.toLowerCase() === cfg.handle.toLowerCase())?.instagram_business_account?.id
+      if (!userId) throw new Error('token não enxerga a conta')
+    }
     Object.assign(acc, await get(userId, token, { fields: 'followers_count,media_count' }))
     let page = await get(`${userId}/media`, token, { fields: 'id,caption,media_type,media_product_type,timestamp,permalink,like_count,comments_count', limit: 50 })
     const media = []
