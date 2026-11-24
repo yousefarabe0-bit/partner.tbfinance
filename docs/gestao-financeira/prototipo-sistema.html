@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Protótipo — Painel Financeiro do Cliente (TB Finance)</title>
+<style>
+  :root{--primary:#E8440A;--dark:#111;--surface:#F8F8F7;--border:#E5E5E3;--muted:#6B7280;--ok:#16A34A;--warn:#D97706;--err:#DC2626;--orange-light:#FFF2EE}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--surface);color:var(--dark)}
+  .wrap{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+  aside{background:var(--dark);color:#fff;padding:24px 16px}
+  .logo{font-weight:800;font-size:20px;margin-bottom:28px}.logo span{color:var(--primary)}
+  nav a{display:block;padding:10px 12px;border-radius:10px;color:#bbb;text-decoration:none;font-size:14px;margin-bottom:4px}
+  nav a.on{background:var(--primary);color:#fff;font-weight:600}
+  main{padding:24px 28px}
+  .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+  h1{font-size:22px}.sub{color:var(--muted);font-size:13px;margin-top:2px}
+  .pill{background:#fff;border:1px solid var(--border);border-radius:10px;padding:8px 14px;font-size:14px;font-weight:600}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+  .card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px}
+  .k-label{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+  .k-val{font-size:24px;font-weight:800;margin-top:6px}
+  .k-delta{font-size:12px;margin-top:4px;font-weight:600}
+  .up{color:var(--ok)}.down{color:var(--err)}
+  .row{display:grid;grid-template-columns:1.3fr 1fr;gap:12px;margin-bottom:16px}
+  h3{font-size:15px;margin-bottom:12px}
+  .alert{display:flex;gap:10px;padding:10px 12px;border-radius:10px;font-size:13px;margin-bottom:8px;line-height:1.4}
+  .a-err{background:#FDECEC}.a-warn{background:#FFF6E5}.a-ok{background:#EAF7EE}
+  .tag{font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;white-space:nowrap;height:fit-content}
+  .a-err .tag{background:var(--err);color:#fff}.a-warn .tag{background:var(--warn);color:#fff}.a-ok .tag{background:var(--ok);color:#fff}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:right;color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;padding:6px 8px;border-bottom:1px solid var(--border)}
+  th:first-child,td:first-child{text-align:left}
+  td{text-align:right;padding:8px;border-bottom:1px solid var(--border)}
+  tr.b td{font-weight:700;background:var(--orange-light)}
+  .bar{height:8px;border-radius:4px;background:var(--primary)}
+  .legend{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-top:8px}
+  .dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+  .src{font-size:11px;color:var(--muted);margin-top:18px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <aside>
+    <div class="logo">TB <span>Finance</span></div>
+    <nav>
+      <a class="on" href="#">Visão geral</a>
+      <a href="#">DRE</a>
+      <a href="#">Canais</a>
+      <a href="#">Fluxo de caixa</a>
+      <a href="#">Balanço e DFC</a>
+      <a href="#">KPIs</a>
+      <a href="#">Orçado x Realizado</a>
+      <a href="#">Plano de ação</a>
+      <a href="#">Relatórios (PDF)</a>
+    </nav>
+  </aside>
+  <main>
+    <div class="top">
+      <div><h1>Loja Exemplo Ltda.</h1><div class="sub">Painel financeiro · atualizado em 10/11/2026 pela equipe TB Finance</div></div>
+      <div class="pill">Outubro / 2026 ▾</div>
+    </div>
+
+    <div class="grid4" id="kpis"></div>
+
+    <div class="row">
+      <div class="card">
+        <h3>Alertas do mês</h3>
+        <div id="alerts"></div>
+      </div>
+      <div class="card">
+        <h3>Margem por canal (após marketing)</h3>
+        <table id="canais"></table>
+        <div class="sub" style="margin-top:10px">A Shopee traz 19% da receita, mas só 7% da margem.</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="card">
+        <h3>Caixa projetado — próximas 13 semanas</h3>
+        <svg id="fluxo" viewBox="0 0 640 220" width="100%"></svg>
+        <div class="legend"><span><i class="dot" style="background:var(--primary)"></i>Saldo final da semana</span><span><i class="dot" style="background:var(--err)"></i>Caixa mínimo (R$ 100 mil)</span></div>
+      </div>
+      <div class="card">
+        <h3>DRE resumida</h3>
+        <table id="dre"></table>
+      </div>
+    </div>
+    <div class="src">Protótipo · os dados vêm da aba <b>_API</b> da planilha do cliente no Google Sheets</div>
+  </main>
+</div>
+<script>
+// Em produção, estes dados vêm da aba _API da planilha do cliente (Google Sheets API).
+const api = {
+  out: {receita_liquida:800000, margem_contribuicao_pct:.414, ebitda:71000, ebitda_pct:.089, lucro_liquido:40000, caixa:105000, cac:65, ltv_cac:2.5, ciclo:67, mer:7.7},
+  set: {receita_liquida:700000, margem_contribuicao_pct:.43, ebitda:75000, ebitda_pct:.107, lucro_liquido:45000, caixa:150000, cac:61, ltv_cac:2.8, ciclo:null, mer:8.9},
+  canais: [["Site Próprio",400000,114000,.285],["Mercado Livre",250000,72500,.29],["Shopee",150000,14500,.097]],
+  fluxo: [163,106,29,-8,107,136,115,227,201,314,217,195,268],
+  dre: [["Receita líquida",800000,1],["(−) CMV",-326000],["(−) Despesas variáveis",-143000],["Margem de contribuição",331000,1],["(−) Marketing",-130000],["(−) Despesas fixas",-130000],["EBITDA",71000,1],["(−) Depreciação, juros e IR",-31000],["Lucro líquido",40000,1]]
+};
+const R = v => (v<0?"−":"")+"R$ "+Math.abs(Math.round(v)).toLocaleString("pt-BR");
+const P = v => (v*100).toFixed(1).replace(".",",")+"%";
+const k = [
+  ["Receita líquida", R(api.out.receita_liquida), api.out.receita_liquida/api.set.receita_liquida-1],
+  ["Margem de contribuição", P(api.out.margem_contribuicao_pct), api.out.margem_contribuicao_pct-api.set.margem_contribuicao_pct, "pp"],
+  ["EBITDA", R(api.out.ebitda)+" · "+P(api.out.ebitda_pct), api.out.ebitda/api.set.ebitda-1],
+  ["Lucro líquido", R(api.out.lucro_liquido), api.out.lucro_liquido/api.set.lucro_liquido-1],
+  ["Caixa no fim do mês", R(api.out.caixa), api.out.caixa/api.set.caixa-1],
+  ["CAC", R(api.out.cac), -(api.out.cac/api.set.cac-1), null, "+6,1% vs set"],
+  ["LTV ÷ CAC", api.out.ltv_cac.toFixed(1).replace(".",",")+"x", api.out.ltv_cac-api.set.ltv_cac, "x"],
+  ["Ciclo financeiro", api.out.ciclo+" dias", null, null, "estoque: 83 dias"]
+];
+document.getElementById("kpis").innerHTML = k.map(([l,v,d,u,txt])=>{
+  let delta = txt || (d==null ? "" : u==="pp" ? (d>0?"+":"")+(d*100).toFixed(1).replace(".",",")+" pp vs set" : u==="x" ? (d>0?"+":"")+d.toFixed(1).replace(".",",")+"x vs set" : (d>0?"+":"")+(d*100).toFixed(1).replace(".",",")+"% vs set");
+  const cls = d==null ? "" : d>=0 ? "up" : "down";
+  return `<div class="card"><div class="k-label">${l}</div><div class="k-val">${v}</div><div class="k-delta ${txt&&l==="CAC"?"down":cls}">${delta}</div></div>`;
+}).join("");
+const alerts = [
+  ["a-err","Caixa","O saldo fica abaixo do mínimo na semana de 16/11 e negativo em 23/11 (−R$ 8 mil). Ação: dividir o pedido de Natal com o fornecedor."],
+  ["a-warn","Margem","O CMV subiu de 38,0% para 40,8% da receita. A receita cresceu 14%, mas o EBITDA caiu 5%."],
+  ["a-warn","Marketing","O marketing subiu de 14,0% para 16,3% da receita. LTV/CAC em 2,5x (referência: 3x ou mais)."],
+  ["a-warn","Estoque","Ciclo financeiro de 67 dias. Cada dia a menos de estoque libera cerca de R$ 11 mil de caixa."],
+  ["a-ok","Endividamento","Dívida líquida de 0,3x o EBITDA anual. Confortável."]
+];
+document.getElementById("alerts").innerHTML = alerts.map(([c,t,x])=>`<div class="alert ${c}"><span class="tag">${t}</span><span>${x}</span></div>`).join("");
+document.getElementById("canais").innerHTML = "<tr><th>Canal</th><th>Receita líq.</th><th>Margem</th><th style='width:30%'></th></tr>" +
+  api.canais.map(([n,rl,m,p])=>`<tr><td>${n}</td><td>${R(rl)}</td><td><b>${P(p)}</b></td><td><div class="bar" style="width:${p/0.3*100}%;${p<0.15?'background:var(--err)':''}"></div></td></tr>`).join("");
+document.getElementById("dre").innerHTML = "<tr><th>Outubro</th><th>R$</th><th>% RL</th></tr>" +
+  api.dre.map(([n,v,b])=>`<tr class="${b?'b':''}"><td>${n}</td><td>${R(v)}</td><td>${P(Math.abs(v)/800000)}</td></tr>`).join("");
+// gráfico do fluxo
+(() => {
+  const svg = document.getElementById("fluxo"), W=640,H=220,pad=34, max=350, min=-50;
+  const y = v => pad + (max - v)/(max-min)*(H-2*pad);
+  const bw = (W-2*pad)/13;
+  let s = `<line x1="${pad}" x2="${W-pad}" y1="${y(0)}" y2="${y(0)}" stroke="#ccc"/>`;
+  api.fluxo.forEach((v,i)=>{
+    const x = pad + i*bw + 6, top = v>=0 ? y(v) : y(0), h = Math.abs(y(v)-y(0));
+    s += `<rect x="${x}" y="${top}" width="${bw-12}" height="${h}" rx="4" fill="${v<100?'#DC2626':'#E8440A'}" opacity="${v<100?1:.85}"/>`;
+    s += `<text x="${x+(bw-12)/2}" y="${v>=0?top-5:top+h+12}" font-size="10" text-anchor="middle" fill="#333">${v}</text>`;
+    s += `<text x="${x+(bw-12)/2}" y="${H-8}" font-size="10" text-anchor="middle" fill="#888">S${i+1}</text>`;
+  });
+  s += `<line x1="${pad}" x2="${W-pad}" y1="${y(100)}" y2="${y(100)}" stroke="#DC2626" stroke-dasharray="5 4"/>`;
+  s += `<text x="${pad}" y="14" font-size="10" fill="#888">R$ mil</text>`;
+  svg.innerHTML = s;
+})();
+</script>
+</body>
+</html>
