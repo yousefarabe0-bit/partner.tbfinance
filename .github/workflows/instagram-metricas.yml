@@ -1,0 +1,31 @@
+name: Instagram – métricas
+
+# Lê alcance, views, curtidas, salvamentos e tempo assistido dos posts recentes (API oficial).
+on:
+  workflow_dispatch:
+    inputs:
+      since:
+        description: 'Data inicial (AAAA-MM-DD)'
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  metrics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Ler métricas
+        env:
+          IG_PESSOAL_TOKEN: ${{ secrets.IG_PESSOAL_TOKEN }}
+          IG_PESSOAL_USER_ID: ${{ secrets.IG_PESSOAL_USER_ID }}
+          IG_EMPRESA_TOKEN: ${{ secrets.IG_EMPRESA_TOKEN }}
+          IG_EMPRESA_USER_ID: ${{ secrets.IG_EMPRESA_USER_ID }}
+          METRICS_SINCE: ${{ inputs.since }}
+        run: node automation/instagram/metrics.mjs
