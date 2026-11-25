@@ -105,6 +105,30 @@
     ]
   },
   {
+    "id": "2026-11-25-x-noticia-1",
+    "type": "post",
+    "publishAt": "2026-11-25T10:00:00-03:00",
+    "text": "O Dow Jones fechou acima de 50 mil pontos pela 1ª vez ontem. No mesmo dia, Nvidia e AMD caíram cerca de 9%.\n\nEm 3 dias: pânico, euforia e queda de novo. Bolsa é para dinheiro de longo prazo. Quem paga 15% ao mês no rotativo não tem investimento que compense."
+  },
+  {
+    "id": "2026-11-25-x-noticia-2",
+    "type": "post",
+    "publishAt": "2026-11-25T12:00:00-03:00",
+    "text": "Últimos dias do Mutirão da Febraban com o Banco Central: até 30/11, mais de 160 instituições renegociam cartão, cheque especial e consignado em atraso.\n\nDica: chegue sabendo quanto cabe por mês. Quem negocia sem número aceita a primeira parcela que aparece."
+  },
+  {
+    "id": "2026-11-25-x-noticia-3",
+    "type": "post",
+    "publishAt": "2026-11-25T15:00:00-03:00",
+    "text": "A ação da Anthropic fechou ontem a US$ 81,91, abaixo dos US$ 83 do IPO. Cinco dias atrás, abriu a US$ 111,50.\n\nO maior IPO da história devolveu a euforia em menos de uma semana. Dinheiro da parcela do mês nunca deveria estar em aposta de curto prazo."
+  },
+  {
+    "id": "2026-11-25-x-noticia-4",
+    "type": "post",
+    "publishAt": "2026-11-25T19:00:00-03:00",
+    "text": "O dólar caiu pelo 2º dia e fechou a R$ 5,91. Ainda assim, segue bem acima dos R$ 5,55 que o mercado projeta para o fim do ano (Focus).\n\nCompra internacional na Black Friday? Calcule com o dólar de hoje mais IOF, não com o de dois meses atrás."
+  },
+  {
     "id": "2026-11-26-x-fio-kodak-camera-digital",
     "publishAt": "2026-11-26T09:00:00-03:00",
     "type": "thread",

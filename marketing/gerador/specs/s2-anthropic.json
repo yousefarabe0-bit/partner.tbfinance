@@ -28,7 +28,7 @@
    "foto": "hq-nasdaq-tower.jpg",
    "pos": "center 8%",
    "fade": 24,
-   "fonte": "Fontes: NPR e TimesLive (19/11/2026); Korea JoongAng Daily (nov/2026). Não é recomendação de investimento. Foto: Nielsoncaetanosalmeron (CC BY 4.0)."
+   "fonte": "Fontes: NPR e TimesLive (19/11/2026). Não é recomendação de investimento. Foto: Nielsoncaetanosalmeron (CC BY 4.0)."
   },
   {
    "tipo": "texto",
@@ -40,17 +40,17 @@
     "Valor de ~US$ 1,5 trilhão ao preço do IPO"
    ],
    "escuro": true,
-   "fonte": "Fontes: NPR e TimesLive (19/11/2026); Korea JoongAng Daily (nov/2026). Não é recomendação de investimento."
+   "fonte": "Fontes: NPR e TimesLive (19/11/2026); Korea JoongAng Daily (nov/2026); CNBC e Bloomberg (24/11/2026). Não é recomendação de investimento."
   },
   {
    "tipo": "texto",
    "kicker": "O DIA",
-   "titulo": "Euforia na abertura, *ajuste no fechamento*",
+   "titulo": "Euforia na estreia, *queda em 5 dias*",
    "paragrafos": [
-    "A ação abriu +34% e fechou o dia +17%, enquanto a Nasdaq acumulava queda de mais de 11% desde outubro. O mercado paga hoje por resultados que ainda vão acontecer."
+    "Em 19/11, a ação abriu a US$ 111,50 (+34%). Em 24/11, fechou a US$ 81,91, abaixo dos US$ 83 do IPO. O mercado tinha pago adiantado por resultados que ainda vão acontecer."
    ],
    "escuro": true,
-   "fonte": "Fontes: NPR e TimesLive (19/11/2026); Korea JoongAng Daily (nov/2026). Não é recomendação de investimento."
+   "fonte": "Fontes: NPR e TimesLive (19/11/2026); Korea JoongAng Daily (nov/2026); CNBC e Bloomberg (24/11/2026). Não é recomendação de investimento."
   },
   {
    "tipo": "texto",
@@ -60,7 +60,7 @@
     "Cada parcela vende hoje um pedaço do seu salário de amanhã. Funciona se a renda vier como prometido. Planeje com o cenário realista, não com o otimista."
    ],
    "escuro": true,
-   "fonte": "Fontes: NPR e TimesLive (19/11/2026); Korea JoongAng Daily (nov/2026). Não é recomendação de investimento."
+   "fonte": "Fontes: NPR e TimesLive (19/11/2026); Korea JoongAng Daily (nov/2026); CNBC e Bloomberg (24/11/2026). Não é recomendação de investimento."
   },
   {
    "tipo": "cta",
