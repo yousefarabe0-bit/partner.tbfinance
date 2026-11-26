@@ -98,8 +98,10 @@
     "publishedAt": "2026-11-26T14:02:32.843Z"
   },
   "2026-11-26-th-noticia-2": {
-    "attempts": 1,
-    "lastError": "me/threads_publish: The requested resource does not exist",
-    "lastAttemptAt": "2026-11-26T18:02:18.358Z"
+    "ids": [
+      "17942130225122558"
+    ],
+    "url": "https://www.threads.com/@yousefameroficial/post/DgNtCboFpIU",
+    "publishedAt": "2026-11-26T18:03:08.417Z"
   }
 }
