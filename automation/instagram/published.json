@@ -135,8 +135,8 @@
     "publishedAt": "2026-11-26T15:03:33.707Z"
   },
   "2026-11-26-tb-dolar:empresa": {
-    "attempts": 1,
-    "lastError": "Graph API 17841400985931087/media_publish: Media ID is not available (code 9007)",
-    "lastAttemptAt": "2026-11-26T22:03:43.650Z"
+    "mediaId": "17916642162565610",
+    "permalink": "https://www.instagram.com/p/DgOI2WWjLEQ/",
+    "publishedAt": "2026-11-26T22:06:09.169Z"
   }
 }
