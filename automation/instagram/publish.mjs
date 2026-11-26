@@ -338,9 +338,18 @@ async function uploadReelFromDrive(userId, token, item, params) {
 async function publish(post, account, creds) {
   const container = await createContainer(post, account, creds)
   await waitUntilReady(container.id, creds.token)
-  const published = await graph('POST', `${creds.userId}/media_publish`, creds.token, {
-    creation_id: container.id,
-  })
+  // O Instagram às vezes responde "Media ID is not available" (9007) logo depois do FINISHED: espera e tenta de novo.
+  let published
+  for (let tryN = 1; ; tryN++) {
+    try {
+      published = await graph('POST', `${creds.userId}/media_publish`, creds.token, { creation_id: container.id })
+      break
+    } catch (e) {
+      if (tryN >= 5 || !/code 9007/.test(e.message)) throw e
+      log(`   mídia ainda não disponível, tentando publicar de novo em ${tryN * 15}s...`)
+      await sleep(tryN * 15000)
+    }
+  }
   let permalink
   try {
     ;({ permalink } = await graph('GET', published.id, creds.token, { fields: 'permalink' }))
