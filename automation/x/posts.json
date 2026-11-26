@@ -142,6 +142,30 @@
     ]
   },
   {
+    "id": "2026-11-26-x-noticia-1",
+    "type": "post",
+    "publishAt": "2026-11-26T10:00:00-03:00",
+    "text": "O Banco Central e o CMN aprovaram ontem novas regras: quem entrar no rotativo do cartão em 3 meses dentro de 6 terá o limite reduzido aos poucos, sem novos aumentos, até quitar 6 faturas seguidas.\n\nO rotativo virou sinal vermelho oficial. Saia dele antes da regra valer."
+  },
+  {
+    "id": "2026-11-26-x-noticia-2",
+    "type": "post",
+    "publishAt": "2026-11-26T12:00:00-03:00",
+    "text": "Outra regra nova do CMN: crédito sem garantia fica restrito para quem tem atraso de 90 dias ou mais, e a contratação só vale por canal oficial do banco (app, internet banking ou agência).\n\nMenos golpe de empréstimo por WhatsApp. E mais motivo para negociar o atraso agora."
+  },
+  {
+    "id": "2026-11-26-x-noticia-3",
+    "type": "post",
+    "publishAt": "2026-11-26T15:00:00-03:00",
+    "text": "O dólar caiu 1,6% ontem e fechou a R$ 5,82, com o Banco Central vendendo US$ 2 bilhões em leilões de linha. O Ibovespa subiu 1,58%.\n\nNa véspera da Black Friday, o câmbio deu uma trégua. Mas trégua não é tendência: compra em dólar parcelada continua sendo aposta no câmbio."
+  },
+  {
+    "id": "2026-11-26-x-noticia-4",
+    "type": "post",
+    "publishAt": "2026-11-26T19:00:00-03:00",
+    "text": "Amanhã é Black Friday. Pela CNDL/SPC, 57% de quem pretende comprar ainda está pagando parcelas de compras anteriores.\n\nAntes de clicar, some o que já sai do seu salário em parcelas todo mês. Se a soma passa de 30% da renda, o desconto não compensa."
+  },
+  {
     "id": "2026-11-27-x-fio-inflacao-estilo-de-vida",
     "publishAt": "2026-11-27T09:00:00-03:00",
     "type": "thread",
