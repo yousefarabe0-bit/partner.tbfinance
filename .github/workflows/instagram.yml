@@ -102,4 +102,5 @@ jobs:
               git pull --rebase && git push && break
               echo "push falhou (tentativa $i), tentando de novo"; sleep $((i*10))
             done
+            if git status -sb | grep -q ahead; then echo "::error::registro não foi enviado"; exit 1; fi
           fi
