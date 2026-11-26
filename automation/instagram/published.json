@@ -133,5 +133,10 @@
     "mediaId": "18118060088029139",
     "permalink": "https://www.instagram.com/p/DgNYe3dF2qy/",
     "publishedAt": "2026-11-26T15:03:33.707Z"
+  },
+  "2026-11-26-tb-dolar:empresa": {
+    "attempts": 1,
+    "lastError": "Graph API 17841400985931087/media_publish: Media ID is not available (code 9007)",
+    "lastAttemptAt": "2026-11-26T22:03:43.650Z"
   }
 }
