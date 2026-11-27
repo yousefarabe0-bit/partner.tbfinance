@@ -179,6 +179,30 @@
     ]
   },
   {
+    "id": "2026-11-27-x-noticia-1",
+    "type": "post",
+    "publishAt": "2026-11-27T10:00:00-03:00",
+    "text": "O Ibovespa subiu 6,07% ontem, a maior alta diária desde o 1º turno da eleição, e o dólar caiu para R$ 5,74, movido pela expectativa sobre o próximo ministro da Fazenda.\n\nUma notícia mexe 6% num dia. Por isso, dinheiro de curto prazo não fica na bolsa."
+  },
+  {
+    "id": "2026-11-27-x-noticia-2",
+    "type": "post",
+    "publishAt": "2026-11-27T12:00:00-03:00",
+    "text": "A prévia da inflação de novembro (IPCA-15) veio em 0,22%, abaixo do esperado. Em 12 meses, 4,64%.\n\nMas a média esconde o carrinho: passagem aérea caiu 9,6%, enquanto tomate subiu 38,9% e carne 3,7%. Seu orçamento sente a inflação do que você compra, não a média."
+  },
+  {
+    "id": "2026-11-27-x-noticia-3",
+    "type": "post",
+    "publishAt": "2026-11-27T15:00:00-03:00",
+    "text": "Hoje é Black Friday. Pelo Procon-SP, quase 7 em cada 10 compradores já se sentiram enganados na data.\n\nAntes de pagar: confira o histórico do preço, o site oficial da loja e o valor total parcelado. Desconto de verdade aguenta essas três perguntas."
+  },
+  {
+    "id": "2026-11-27-x-noticia-4",
+    "type": "post",
+    "publishAt": "2026-11-27T19:00:00-03:00",
+    "text": "Mercado Livre, Shopee e Amazon lideram as buscas no Reclame Aqui nesta Black Friday.\n\nConsultar a reputação é o mínimo. O passo que quase ninguém dá: perguntar se a compra cabe no mês de janeiro, quando chegam IPVA, IPTU e matrícula."
+  },
+  {
     "id": "2026-11-28-x-fio-confisco-collor",
     "publishAt": "2026-11-28T09:00:00-03:00",
     "type": "thread",
