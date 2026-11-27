@@ -1,0 +1,74 @@
+{
+ "tag": "YOUSEF AMER · @YOUSEFAMEROFICIAL",
+ "data": "NOV · 2026",
+ "cheia": true,
+ "copiar": [
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-congresso.jpg",
+  "/home/user/partner.tbfinance/marketing/fotos-noticias/hq-reais.jpg"
+ ],
+ "slides": [
+  {
+   "tipo": "capa",
+   "foto": "hq-congresso.jpg",
+   "h": 1350,
+   "pos": "center center",
+   "brilho": 0.8,
+   "kicker": "NOVO MINISTRO DA FAZENDA",
+   "titulo": "Um banqueiro vai comandar a economia em 2027. *O que muda no seu bolso?*",
+   "fs": 76,
+   "credito": "Foto: Jardelsliumba (CC BY-SA 4.0)"
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O FATO",
+   "titulo": "Trabuco na Fazenda",
+   "paragrafos": [
+    "Em 26/11, o governo anunciou Luiz Carlos Trabuco, presidente do Conselho do Bradesco, como ministro da Fazenda a partir de janeiro de 2027. Ele está no banco desde 1969 e já presidiu a Febraban."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Gazeta do Povo e Tribuna de Minas (26-27/11/2026); Bom Dia Mercado (26/11/2026); SBT News e Diário do Comércio (27/11/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "A REAÇÃO",
+   "titulo": "O mercado *comemorou*",
+   "lista": [
+    "Ibovespa +6,07% em 26/11, a maior alta diária desde o 1º turno",
+    "Dólar caiu para R$ 5,74",
+    "Ações do Bradesco +13,9% em dois dias"
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Gazeta do Povo e Tribuna de Minas (26-27/11/2026); Bom Dia Mercado (26/11/2026); SBT News e Diário do Comércio (27/11/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "O DESAFIO",
+   "titulo": "Euforia não é *resultado*",
+   "paragrafos": [
+    "O trabalho continua o mesmo: conter o crescimento dos gastos, fazer o ajuste fiscal e estabilizar a dívida pública. Um dia de bolsa em alta não diz nada sobre o desempenho no cargo."
+   ],
+   "escuro": true,
+   "fonte": "Fontes: Gazeta do Povo e Tribuna de Minas (26-27/11/2026); Bom Dia Mercado (26/11/2026); SBT News e Diário do Comércio (27/11/2026)."
+  },
+  {
+   "tipo": "texto",
+   "kicker": "NO SEU BOLSO",
+   "titulo": "O juro do país cai devagar. *O da sua dívida não espera*",
+   "paragrafos": [
+    "Se o ajuste der certo, a Selic pode cair em 2027. Mas o rotativo segue acima de 400% ao ano. Esperar Brasília sai caro."
+   ],
+   "foto": "hq-reais.jpg",
+   "pos": "60% center",
+   "fade": 20,
+   "brilho": 0.8,
+   "fonte": "Fontes: BC (juros do rotativo, 2026). Foto: Oleg Yunakov (CC BY-SA 4.0)."
+  },
+  {
+   "tipo": "cta",
+   "kicker": "NÃO ESPERE BRASÍLIA",
+   "titulo": "Seu ajuste fiscal começa em casa.",
+   "palavra": "PLANILHA",
+   "assinatura": "Yousef Amer · fundador da @tbfinance_"
+  }
+ ]
+}
