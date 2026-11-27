@@ -40,13 +40,23 @@ ul.l li:before{{content:'→';position:absolute;left:0;color:#E8440A;font-weight
 </style></head><body{cls}>{top(spec)}{body}<div class="pg">{n}/{total}</div></body></html>'''
 
 
+
+def fundo_capa(spec):
+    """Slides sem foto usam a foto da capa escurecida e desfocada, para não ficar fundo preto chapado."""
+    capa = spec['slides'][0].get('foto') if spec.get('cheia') else None
+    if not capa:
+        return ''
+    return (f'<div style="position:absolute;inset:-40px;background:url({capa}) center/cover;filter:blur(14px) brightness(.32) saturate(.8)"></div>'
+            '<div class="grain"></div>')
+
+
 def slide_html(spec, s, n, total):
     k = s['tipo']
     src = f'<div class="src">{esc(s["fonte"])}</div>' if s.get('fonte') else ''
     if k == 'capa':
         foto = s.get('foto')
         pos = s.get('pos', 'center 20%')
-        bg = f'<div class="bg" style="position:absolute;left:0;right:0;top:0;height:{s.get("h", 900)}px;background:url({foto}) {pos}/cover;filter:contrast(1.06) saturate(.92) brightness({s.get("brilho", 1)})"></div><div class="grain"></div><div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,15,15,.5) 0%,rgba(15,15,15,0) 18%,rgba(15,15,15,0) 38%,rgba(15,15,15,.92) 56%,#0F0F0F 66%)"></div>' if foto else '<img src="' + LOGO_LIGHT.replace('logo-tb-light', 'seta') + '" style="position:absolute;right:-60px;top:330px;width:560px;opacity:.10">'
+        bg = f'<div class="bg" style="position:absolute;left:0;right:0;top:0;height:1350px;background:url({foto}) {pos}/cover;filter:contrast(1.06) saturate(.92) brightness({s.get("brilho", 1)})"></div><div class="grain"></div><div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,15,15,.45) 0%,rgba(15,15,15,0) 16%,rgba(15,15,15,0) 36%,rgba(15,15,15,.62) 58%,rgba(15,15,15,.82) 100%)"></div>' if foto else '<img src="' + LOGO_LIGHT.replace('logo-tb-light', 'seta') + '" style="position:absolute;right:-60px;top:330px;width:560px;opacity:.10">'
         who = f'<div style="position:absolute;left:72px;top:{s.get("who_top", 560)}px;font-size:22px;font-weight:700;color:#fff;background:rgba(0,0,0,.55);padding:8px 14px;border-radius:10px;z-index:2">{esc(s["quem"])}</div>' if s.get('quem') else ''
         body = f'''{bg}{who}<div style="position:absolute;left:72px;right:72px;bottom:130px"><div class="kick" style="color:#FF6B3D">{esc(s["kicker"])}</div>
 <h1 style="color:#fff;font-size:{s.get("fs", 80)}px">{esc(s["titulo"])}</h1></div>
@@ -60,7 +70,7 @@ def slide_html(spec, s, n, total):
         if s.get('foto') and s.get('cheia', spec.get('cheia')):
             # Foto em tela cheia (padrão G4): degradê escuro só na metade de baixo, texto ancorado embaixo.
             foto = (f'<div style="position:absolute;inset:0;background:url({s["foto"]}) {s.get("pos", "center 30%")}/cover;filter:contrast(1.06) saturate(.92) brightness({s.get("brilho", 1)})"></div>'
-                    f'<div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,15,15,.55) 0%,rgba(15,15,15,0) 14%,rgba(15,15,15,0) {s.get("fade", 30)}%,rgba(15,15,15,.88) {s.get("fade", 30) + 18}%,#0F0F0F {s.get("fade", 30) + 30}%)"></div>'
+                    f'<div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,15,15,.55) 0%,rgba(15,15,15,0) 14%,rgba(15,15,15,0) {s.get("fade", 30)}%,rgba(15,15,15,.66) {s.get("fade", 30) + 22}%,rgba(15,15,15,.84) 100%)"></div>'
                     '<div class="grain"></div>')
             dark = True
         elif s.get('foto'):
@@ -75,12 +85,16 @@ def slide_html(spec, s, n, total):
         pos = f'top:{wrap_top}px' if (s.get('foto') or not dark) else 'top:50%;transform:translateY(-50%)'
         if s.get('foto') and s.get('cheia', spec.get('cheia')):
             pos = 'top:auto;bottom:110px'
+        if not foto and dark:
+            foto = fundo_capa(spec)
         body = f'{foto}<div class="wrap" style="{pos}"><div class="kick">{esc(s["kicker"])}</div><h2{h2c}>{esc(s["titulo"])}</h2>{big}{ps}{lst}{card}</div>{src}'
         return page(spec, n, total, body, dark=dark)
     if k == 'cta':
         foto = s.get('foto')
         ph = f'<div style="position:absolute;left:0;right:0;top:0;height:640px;background:url({foto}) {s.get("pos", "center 30%")}/cover;filter:brightness({s.get("brilho", 1)})"></div><div style="position:absolute;left:0;right:0;top:0;height:640px;background:linear-gradient(180deg,rgba(15,15,15,.5),rgba(15,15,15,0) 25%,rgba(15,15,15,.35) 70%,#0F0F0F)"></div>' if foto else ''
         wrap_pos = 'top:590px' if foto else 'top:50%;transform:translateY(-55%)'
+        if not foto:
+            ph = fundo_capa(spec)
         palavra = s['palavra']
         body = f'''{ph}<div class="wrap" style="{wrap_pos}"><div class="kick">{esc(s["kicker"])}</div>
 <h1 style="color:#fff;font-size:{s.get("fs", 76 if not foto else 68)}px">{esc(s["titulo"])}</h1>
