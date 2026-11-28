@@ -216,6 +216,30 @@
     ]
   },
   {
+    "id": "2026-11-28-x-noticia-1",
+    "type": "post",
+    "publishAt": "2026-11-28T10:00:00-03:00",
+    "text": "O dólar caiu 4% ontem e fechou a R$ 5,52. Na semana, -7%. Na segunda, tinha passado de R$ 6.\n\nEm cinco dias, a mesma viagem ficou 7% mais barata. Câmbio não avisa antes de mudar. Por isso, nada de dívida em dólar contando com o câmbio de hoje."
+  },
+  {
+    "id": "2026-11-28-x-noticia-2",
+    "type": "post",
+    "publishAt": "2026-11-28T12:00:00-03:00",
+    "text": "O desemprego caiu para 5,1% no trimestre até outubro e igualou a mínima da série do IBGE. A renda média chegou a R$ 3.812.\n\nCom emprego firme, este é o melhor momento para montar a reserva e quitar dívida cara. É na hora boa que se prepara para a ruim."
+  },
+  {
+    "id": "2026-11-28-x-noticia-3",
+    "type": "post",
+    "publishAt": "2026-11-28T15:00:00-03:00",
+    "text": "Parcial da Black Friday: o e-commerce faturou R$ 2,7 bilhões até as 15h de sexta, alta de 5,6% sobre 2025 (Neotrust). A própria Neotrust já fala em avanço mais moderado que o previsto.\n\nO consumidor está mais cauteloso. E isso é boa notícia para o bolso dele."
+  },
+  {
+    "id": "2026-11-28-x-noticia-4",
+    "type": "post",
+    "publishAt": "2026-11-28T19:00:00-03:00",
+    "text": "O Ibovespa teve a melhor semana desde o 1º turno: +6,1%. Mas ontem chegou a 183 mil pontos e fechou em 176,6 mil, em leve queda.\n\nSubir 6% numa semana também significa poder cair 6% na outra. Dinheiro que tem data para ser usado não mora na bolsa."
+  },
+  {
     "id": "2026-11-29-x-fio-nokia",
     "publishAt": "2026-11-29T09:00:00-03:00",
     "type": "thread",
