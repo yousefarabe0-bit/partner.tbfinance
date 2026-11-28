@@ -29,3 +29,15 @@ jobs:
           IG_EMPRESA_USER_ID: ${{ secrets.IG_EMPRESA_USER_ID }}
           METRICS_SINCE: ${{ inputs.since }}
         run: node automation/instagram/metrics.mjs
+      - name: Métricas das 4 redes
+        env:
+          IG_PESSOAL_TOKEN: ${{ secrets.IG_PESSOAL_TOKEN }}
+          IG_EMPRESA_TOKEN: ${{ secrets.IG_EMPRESA_TOKEN }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+          LINKEDIN_TOKEN: ${{ secrets.LINKEDIN_TOKEN }}
+          METRICS_SINCE: ${{ inputs.since }}
+        run: node automation/metrics/redes.mjs
